@@ -12,7 +12,8 @@ class ConnectionStringBuilder
         // 2. The port
         // 3. The database name
         fun createString(fileName: String) : String {
-            val data = File(fileName).readLines()
+            val path = System.getProperty("user.dir") + "/AcademicInfo/" + fileName
+            val data = File(path).readLines()
             return "jdbc:postgresql://${data[0]}:${data[1]}/${data[2]}"
         }
     }
