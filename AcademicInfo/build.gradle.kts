@@ -11,14 +11,12 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-    compileOnly("org.ktorm:ktorm-support-postgresql:3.4.1")
-    implementation("org.postgresql:postgresql:42.2.18")
-
+    implementation("org.ktorm:ktorm-core:3.4.1")
+    implementation("org.ktorm:ktorm-support-postgresql:3.4.1")
+    implementation("org.postgresql:postgresql:42.3.3")
 }
 
 tasks.test {
