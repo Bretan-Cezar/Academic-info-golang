@@ -2,10 +2,11 @@ import org.ktorm.database.Database
 import org.ktorm.dsl.from
 import org.ktorm.dsl.select
 import domain.Users
+import domain.ConnectionStringBuilder
 
 fun main(args: Array<String>) {
     val database = Database.connect(
-        "jdbc:postgresql://localhost:5432/AcademicInfo",
+        ConnectionStringBuilder.createString("databaseinfo.txt"),
         user = "formula1",
         password = "formula1"
     )
