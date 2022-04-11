@@ -22,7 +22,7 @@ class ConnectionStringBuilder
             val port = props.getProperty("database.port")
             val name = props.getProperty("database.name")
 
-            return "jdbc:postgresql://${host}:${port}/${name}"
+            return "jdbc:postgresql://$host:$port/$name"
         }
     }
 }
