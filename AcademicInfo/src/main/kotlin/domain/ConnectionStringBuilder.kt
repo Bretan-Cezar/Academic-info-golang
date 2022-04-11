@@ -1,6 +1,8 @@
 package domain
 
 import java.io.File
+import java.io.FileInputStream
+import java.util.Properties
 
 
 class ConnectionStringBuilder
@@ -11,10 +13,16 @@ class ConnectionStringBuilder
         // 1. The host ip
         // 2. The port
         // 3. The database name
-        fun createString(fileName: String) : String {
-            val path = System.getProperty("user.dir") + "/AcademicInfo/" + fileName
-            val data = File(path).readLines()
-            return "jdbc:postgresql://${data[0]}:${data[1]}/${data[2]}"
+        fun createString() : String {
+//            val path = System.getProperty("user.dir") + "/AcademicInfo/" + fileName
+//            val data = File(path).readLines()
+            val props = Properties()
+            props.load(FileInputStream("gradle.properties"))
+            val host = props.getProperty("database.host")
+            val port = props.getProperty("database.port")
+            val name = props.getProperty("database.name")
+
+            return "jdbc:postgresql://${host}:${port}/${name}"
         }
     }
 }

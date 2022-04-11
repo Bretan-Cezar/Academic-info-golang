@@ -6,9 +6,9 @@ import domain.ConnectionStringBuilder
 
 fun main(args: Array<String>) {
     val database = Database.connect(
-        ConnectionStringBuilder.createString("databaseinfo.txt"),
-        user = "nwvqlqktmqxjcx",
-        password = "e9c7dcff6424739a06c799da942397a93476ef3b124280b9b2b56c3bda69206b"
+        ConnectionStringBuilder.createString(),
+        user = "uggzmunmxiudlk",
+        password = "442041d90e73cc1457c7817557b193560d379205ea68cb6fa1f5964978cd5c42"
     )
 
 //    for (row in database.from(Users).select())
