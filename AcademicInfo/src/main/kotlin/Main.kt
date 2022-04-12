@@ -5,14 +5,8 @@ import org.slf4j.LoggerFactory
 
 fun main(args: Array<String>) {
     // TODO ORM Classes listed below
-    // Optionals_Selection
     // Contract_Curriculum_Distribution
-    // Curriculum - mock only
     // Contract_Optionals_Distribution
-    // Optionals_Group - mock only
-    // Grade
-
-    println(System.getProperty("java.class.path"))
 
     val database = Database.connect(
         ConnectionStringBuilder.createString(),
