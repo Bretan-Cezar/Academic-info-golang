@@ -22,7 +22,7 @@ function App() {
 		);
 	}
 
-	if (userData.status === 'fail') {
+	if (userData.message === "Unauthorized user") {
 		document.title = "AcademicInfo Login";
 		return (
 			<>
@@ -35,7 +35,7 @@ function App() {
 	}
 
 	// let userType = userData.user_type
-	let userType = userData.username;
+	let userType = "student";
 
 	switch (userType) {
 		case "student":

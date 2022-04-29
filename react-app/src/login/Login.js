@@ -5,34 +5,36 @@ function LoginForm({ set }) {
 	const [username, setUsername] = React.useState("");
 	const [password, setPassword] = React.useState("");
 
-	let url = "http://localhost:1337/login?q=react";
+	let url = "http://localhost:1337/http://localhost:8080/auth/login";
 
-	/*
 	async function submitHandler(event) {
 		event.preventDefault();
 
 		const submit_data = { username: username, password: password };
 
-		url += "&username=" + submit_data.username + "&password=" + submit_data.password;
-
 		// const received_data = { status: "ok/fail", user_type: "admin/chief_of_dept/student/teacher", user_id: ..., full_name: ... };
 
-		const response = await fetch(url);
-		const received_data = response.json();
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "origin" },
+			body: JSON.stringify(submit_data),
+		};
 
-		console.log(received_data);
-		set(received_data);
+		fetch(url, requestOptions)
+			.then((response) => response.json())
+			.then((data) => {
+				set(data);
+				console.log(data);
+			});
 	}
 
-	 */
+	// function submitHandler(event) {
+	// 	event.preventDefault();
 
-	function submitHandler(event) {
-		event.preventDefault();
-
-		const data = { status: "ok", username: username, password: password };
-		set(data);
-		console.log(data);
-	}
+	// 	const data = { status: "ok", username: username, password: password };
+	// 	set(data);
+	// 	console.log(data);
+	// }
 
 	return (
 		<>
