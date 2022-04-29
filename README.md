@@ -40,3 +40,19 @@
 - View the list of students from each group ordered by their professional results.
 - View the list of students from each year ordered by their professional results or complying with some criteria
 - Print the documents
+
+-----
+
+# Database diagram
+[Academic App DB Diagram](https://github.com/AlexandraBledea/Formula1/files/8469727/AcademicApp.DB.Diagram.drawio.pdf)
+- https://drive.google.com/file/d/1Ax792DPeE-QlW0R1jgwKBd014ebrr9T3/view
+
+# Usecase diagram
+[Academic App UseCase Diagram](https://github.com/AlexandraBledea/Formula1/files/8469826/UseCase.Diagram.-.ISS.drawio.pdf)
+- https://drive.google.com/file/d/1lBfSPNTleZbgF5qerDnmEaore4S2bqrW/view?usp=sharing
+
+# Architecture diagram
+[Academic App Architecture Diagram](https://github.com/AlexandraBledea/Formula1/files/8469737/ArchitectureDiagram.drawio.pdf)
+- https://drive.google.com/file/d/1O8OLDIsi9P-aoy68qjzI0iJphpd3xXf4/view
+
+-----

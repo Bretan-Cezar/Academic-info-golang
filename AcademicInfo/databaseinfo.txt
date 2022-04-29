@@ -1,3 +1,0 @@
-ec2-3-230-122-20.compute-1.amazonaws.com
-5432
-decd4tlp9m1k6v
