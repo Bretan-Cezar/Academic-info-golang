@@ -22,7 +22,7 @@ function App() {
 		);
 	}
 
-	if (userData.message === "Unauthorized user") {
+	if (userData.status === "Unauthorized user") {
 		document.title = "AcademicInfo Login";
 		return (
 			<>

@@ -20,11 +20,21 @@ function LoginForm({ set }) {
 			body: JSON.stringify(submit_data),
 		};
 
-		fetch(url, requestOptions)
-			.then((response) => response.json())
+		const loginRequest = new Request(url, requestOptions);
+
+		let token = "";
+
+		fetch(loginRequest)
+			.then((response) => {
+				token = response.headers.get("authorization");
+				return response.json();
+			})
 			.then((data) => {
-				set(data);
-				console.log(data);
+				if (data.message === "Successful") {
+					set({ status: data.message, username: data.username, auth_token: token });
+				} else {
+					set({ status: data.message, username: "", auth_token: "" });
+				}
 			});
 	}
 
