@@ -21,5 +21,4 @@ class UserController(
     fun getUser(@RequestBody profileDto: ProfileDTO): ResponseEntity<Any> {
         return ResponseEntity.ok(userService.loadUserByUsername(profileDto.username))
     }
-
 }

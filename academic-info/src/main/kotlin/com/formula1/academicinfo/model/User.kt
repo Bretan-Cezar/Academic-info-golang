@@ -39,6 +39,7 @@ class User : UserDetails {
     var teacher: Teacher? = null
 
     @OneToOne(mappedBy = "studentUser", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
     var student: Student? = null
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> = mutableListOf(
