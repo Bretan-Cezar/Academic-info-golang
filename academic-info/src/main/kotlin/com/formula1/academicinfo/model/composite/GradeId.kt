@@ -5,7 +5,7 @@ import javax.persistence.Embeddable
 import java.io.Serializable
 
 @Embeddable
-class GradeId(
+data class GradeId(
 
     @Column(name = "student_id", nullable = false)
     var studentId: Int = 0,

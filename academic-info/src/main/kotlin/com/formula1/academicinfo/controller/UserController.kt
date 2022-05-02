@@ -1,5 +1,6 @@
 package com.formula1.academicinfo.controller
 
+import com.formula1.academicinfo.dtos.ProfileDTO
 import com.formula1.academicinfo.dtos.UserDto
 import com.formula1.academicinfo.service.UserService
 import org.springframework.http.ResponseEntity
@@ -17,8 +18,8 @@ class UserController(
     }
 
     @GetMapping("getUser")
-    fun getUser(@RequestBody userDto: UserDto): ResponseEntity<Any> {
-        return ResponseEntity.ok(userService.getUser(userDto.userId))
+    fun getUser(@RequestBody profileDto: ProfileDTO): ResponseEntity<Any> {
+        return ResponseEntity.ok(userService.loadUserByUsername(profileDto.username))
     }
 
 }

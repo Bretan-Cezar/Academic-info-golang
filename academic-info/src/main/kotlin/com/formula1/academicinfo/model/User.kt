@@ -1,6 +1,7 @@
 package com.formula1.academicinfo.model
 
 import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import java.time.LocalDate
 import javax.persistence.*
@@ -40,7 +41,8 @@ class User : UserDetails {
     @OneToOne(mappedBy = "studentUser", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var student: Student? = null
 
-    override fun getAuthorities(): MutableCollection<out GrantedAuthority> = mutableListOf()
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority> = mutableListOf(
+        SimpleGrantedAuthority(Roles.USER.value))
 
     override fun getPassword(): String = password
 
@@ -60,5 +62,9 @@ class User : UserDetails {
 
     fun setUsername(newUsername : String) {
         username = newUsername
+    }
+
+    enum class Roles(val value: String) {
+        USER("USER")
     }
 }

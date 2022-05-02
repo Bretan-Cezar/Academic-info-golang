@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
 
 @Service
-class UserServiceImpl(private val userRepository: UserRepository) : UserDetailsService, UserService {
+class UserServiceImpl(private val userRepository: UserRepository) : UserService {
 
     override fun save(user : User) : User {
         return userRepository.save(user)

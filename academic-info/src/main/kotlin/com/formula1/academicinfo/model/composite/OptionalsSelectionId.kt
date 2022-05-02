@@ -5,7 +5,7 @@ import javax.persistence.Embeddable
 import java.io.Serializable
 
 @Embeddable
-class OptionalsSelectionId(
+data class OptionalsSelectionId(
 
     @Column(name = "student_id", nullable = false)
     var studentId: Int = 0,
