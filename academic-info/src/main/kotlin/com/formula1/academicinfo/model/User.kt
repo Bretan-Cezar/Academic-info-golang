@@ -33,6 +33,13 @@ class User : UserDetails {
 
     @Column(name = "username")
     private var username: String = ""
+
+    @OneToOne(mappedBy = "teacherUser", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    var teacher: Teacher? = null
+
+    @OneToOne(mappedBy = "studentUser", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    var student: Student? = null
+
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> = mutableListOf()
 
     override fun getPassword(): String = password
