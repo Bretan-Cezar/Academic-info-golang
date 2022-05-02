@@ -5,7 +5,7 @@ function LoginForm({ set }) {
 	const [username, setUsername] = React.useState("");
 	const [password, setPassword] = React.useState("");
 
-	let url = "http://localhost:1337/http://localhost:8080/auth/login";
+	let url = "http://localhost:1337/http://localhost:8090/auth/login";
 
 	async function submitHandler(event) {
 		event.preventDefault();

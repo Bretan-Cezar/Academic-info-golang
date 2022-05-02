@@ -2,68 +2,71 @@ import React from "react";
 import "./ViewProfile.css";
 import { UserContext } from "../App";
 
-let url = 'localhost:1337/view_curriculum?q=react';
-
 function ViewProfile() {
+	let [profile, setProfile] = React.useState("");
 
-    let [profile, setProfile] = React.useState("");
+	const userData = React.useContext(UserContext);
 
-    const userData = React.useContext(UserContext);
+	//let profile = {};
 
-    React.useEffect(() => {
+	React.useEffect(() => {
+		let url = "http://localhost:1337/http://localhost:8090/user/getUser/";
+		url += userData.username;
 
-        url += "&user_id=" + userData.user_id + "&full_name=" + userData.full_name;
+		const requestOptions = {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "origin",
+				Authorization: "Bearer " + userData.auth_token,
+			},
+		};
 
-        // data = {full_name: ..., cnp: ..., dob: "YYYY-MM-DD", email: ..., phone_no: ...}
+		const profileRequest = new Request(url, requestOptions);
 
-        /*
-        fetch(url)
-            .then(response => response.json())
-            .then(data => setProfile(data));
+		fetch(profileRequest)
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				// console.log({ fullName: data.fullName, cnp: data.cnp, dateOfBirth: data.dateOfBirth, email: data.email, phoneNumber: data.phoneNumber });
+				setProfile({ fullName: data.fullName, cnp: data.cnp, dateOfBirth: data.dateOfBirth, email: data.email, phoneNumber: data.phoneNumber });
+			});
 
-         */
+		// Example data
+		// setProfile({full_name: "Bretan Cezar-Alexandru", cnp: "5020110125775", dob: "2002-01-10", email: "cezar.bretan@gmail.com", phone_no: "+40734584843"});
+	}, [userData]);
 
-        // Example data
-        setProfile({full_name: "Bretan Cezar-Alexandru", cnp: "5020110125775", dob: "2002-01-10", email: "cezar.bretan@gmail.com", phone_no: "+40734584843"});
+	return (
+		<>
+			<div className="Profile-container">
+				<div className="Profile-field">
+					<p>Full Name: </p>
+					<span>{profile.fullName}</span>
+				</div>
 
+				<div className="Profile-field">
+					<p>CNP: </p>
+					<span>{profile.cnp}</span>
+				</div>
 
-    }, [userData.user_id, userData.full_name]);
+				<div className="Profile-field">
+					<p>Date of Birth: </p>
+					<span>{profile.dateOfBirth}</span>
+				</div>
 
-    return (
-        <>
+				<div className="Profile-field">
+					<p>E-mail: </p>
+					<span>{profile.email}</span>
+				</div>
 
-            <div className="Profile-container">
-
-                <div className="Profile-field">
-                    <p>Full Name: </p>
-                    <span>{profile.full_name}</span>
-                </div>
-
-                <div className="Profile-field">
-                    <p>CNP: </p>
-                    <span>{profile.cnp}</span>
-                </div>
-
-                <div className="Profile-field">
-                    <p>Date of Birth: </p>
-                    <span>{profile.dob}</span>
-                </div>
-
-                <div className="Profile-field">
-                    <p>E-mail: </p>
-                    <span>{profile.email}</span>
-                </div>
-
-                <div className="Profile-field">
-                    <p>Phone Number: </p>
-                    <span>{profile.phone_no}</span>
-                </div>
-
-            </div>
-
-        </>
-    );
-
+				<div className="Profile-field">
+					<p>Phone Number: </p>
+					<span>{profile.phoneNumber}</span>
+				</div>
+			</div>
+		</>
+	);
 }
 
 export default ViewProfile;
