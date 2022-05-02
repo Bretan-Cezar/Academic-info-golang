@@ -1,7 +1,7 @@
 package com.formula1.academicinfo.security
 
 import com.formula1.academicinfo.security.jwtutils.TokenManager
-import com.formula1.academicinfo.service.UserService
+import com.formula1.academicinfo.service.UserServiceImpl
 import io.jsonwebtoken.ExpiredJwtException
 import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component
-class JwtFilter(private val userService: UserService,
+class JwtFilter(private val userService: UserServiceImpl,
                 private val tokenManager: TokenManager) : OncePerRequestFilter() {
 
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse,

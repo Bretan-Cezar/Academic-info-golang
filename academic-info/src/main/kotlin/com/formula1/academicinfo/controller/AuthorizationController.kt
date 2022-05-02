@@ -5,7 +5,7 @@ import com.formula1.academicinfo.dtos.RegisterDTO
 import com.formula1.academicinfo.model.User
 import com.formula1.academicinfo.security.jwtutils.JwtRequestModel
 import com.formula1.academicinfo.security.jwtutils.TokenManager
-import com.formula1.academicinfo.service.UserService
+import com.formula1.academicinfo.service.UserServiceImpl
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("auth")
-class AuthorizationController(private val userService: UserService,
+class AuthorizationController(private val userService: UserServiceImpl,
                               private val authenticationManager: AuthenticationManager,
                               private val tokenManager: TokenManager,
                               private val passwordEncoder: PasswordEncoder) {
