@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param
 import org.springframework.transaction.annotation.Transactional
 
 interface UserRepository : JpaRepository<User, Long> {
+
     @Query("SELECT u from User u WHERE u.userId=:id")
     fun findUserById(@Param("id") id: Int): User?
 
@@ -18,4 +19,6 @@ interface UserRepository : JpaRepository<User, Long> {
     @Transactional
     @Query("UPDATE User u set u.email=:email WHERE u.userId=:id")
     fun update(@Param("email") email: String, @Param("id") id: Int): Int
+
+    fun findByUsername(username: String): User?
 }
