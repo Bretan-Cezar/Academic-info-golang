@@ -1,33 +1,25 @@
 import React from "react";
 import "./Student.css";
-import "../view_curriculum/ViewCurriculum"
+import "../view_curriculum/ViewCurriculum";
 import ViewCurriculum from "../view_curriculum/ViewCurriculum";
 import ViewProfile from "../view_profile/ViewProfile";
 
-function StudentFeatureSelector( {feature_name} ) {
-
+function StudentFeatureSelector({ feature_name }) {
 	switch (feature_name) {
-
 		case "view_curriculum": {
-
-			return <ViewCurriculum />
+			return <ViewCurriculum />;
 		}
 
 		case "view_profile": {
-
-			return <ViewProfile />
+			return <ViewProfile />;
 		}
 
 		default: {
-
 		}
-
 	}
 }
 
-
-function Student({setUserData}) {
-
+function Student({ setUserData }) {
 	const [feature, setFeature] = React.useState("");
 
 	return (
@@ -35,7 +27,7 @@ function Student({setUserData}) {
 			<header className="App-header">
 				<p>AcademicInfo - Student Section</p>
 			</header>
-            <div className="App-content">
+			<div className="App-main">
 				<div className="Sidebar">
 					<div className="Sidebar-item">
 						<p>Home</p>
@@ -62,9 +54,9 @@ function Student({setUserData}) {
 						<p>Logout</p>
 					</div>
 				</div>
-
+				<div className="Content">
 					<StudentFeatureSelector feature_name={feature} />
-
+				</div>
 			</div>
 		</>
 	);

@@ -38,14 +38,6 @@ function LoginForm({ set }) {
 			});
 	}
 
-	// function submitHandler(event) {
-	// 	event.preventDefault();
-
-	// 	const data = { status: "ok", username: username, password: password };
-	// 	set(data);
-	// 	console.log(data);
-	// }
-
 	return (
 		<>
 			<form onSubmit={submitHandler}>

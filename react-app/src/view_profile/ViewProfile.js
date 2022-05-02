@@ -7,8 +7,6 @@ function ViewProfile() {
 
 	const userData = React.useContext(UserContext);
 
-	//let profile = {};
-
 	React.useEffect(() => {
 		let url = "http://localhost:1337/http://localhost:8090/user/getUser/";
 		url += userData.username;
@@ -29,7 +27,6 @@ function ViewProfile() {
 				return response.json();
 			})
 			.then((data) => {
-				// console.log({ fullName: data.fullName, cnp: data.cnp, dateOfBirth: data.dateOfBirth, email: data.email, phoneNumber: data.phoneNumber });
 				setProfile({ fullName: data.fullName, cnp: data.cnp, dateOfBirth: data.dateOfBirth, email: data.email, phoneNumber: data.phoneNumber });
 			});
 

@@ -4,7 +4,6 @@
 }
 
 .Auth-error-msg {
-
 	position: absolute;
 	top: 38%;
 	left: 12%;
@@ -28,11 +27,17 @@
 	padding-left: 5%;
 }
 
-.App-content {
+.App-main {
+	height: 88vh;
+	display: flex;
+	flex-direction: row;
+}
 
-    height: 88vh;
-    display: flex;
-    flex-direction: row;
+.Content {
+	width: 84vw;
+	height: 88vh;
+	display: flex;
+	flex-direction: column;
 }
 
 .Sidebar {

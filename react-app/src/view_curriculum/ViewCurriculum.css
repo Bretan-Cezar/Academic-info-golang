@@ -1,91 +1,94 @@
+.Curriculum-selector {
+	position: relative;
+	top: 4%;
+	left: 10%;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 16px;
+
+	width: 50%;
+	height: 5%;
+}
+
+.Curriculum-selector > option {
+	font-family: inherit;
+	font-size: inherit;
+}
+
 .Curriculum-table {
-
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    width: 70%;
-    /*position: relative;*/
-    /*top: 10%;*/
-    margin: auto;
-    border-style: solid;
-    border-color: blueviolet;
-    border-width: 4px;
-
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	width: 70%;
+	/*position: relative;*/
+	/*top: 10%;*/
+	margin: auto;
+	border-style: solid;
+	border-color: blueviolet;
+	border-width: 4px;
 }
 
 .Curriculum-table-head-item {
-
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    border-style: solid;
-    border-color: #576f9b;
-    border-top-width: 0;
-    border-left-width: 2px;
-    border-right-width: 0;
-    border-bottom-width: 4px;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border-style: solid;
+	border-color: #576f9b;
+	border-top-width: 0;
+	border-left-width: 2px;
+	border-right-width: 0;
+	border-bottom-width: 4px;
 }
 
 .Curriculum-table-head-item:first-child {
-
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    border-style: solid;
-    border-color: #576f9b;
-    border-top-width: 0;
-    border-left-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 4px;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border-style: solid;
+	border-color: #576f9b;
+	border-top-width: 0;
+	border-left-width: 0;
+	border-right-width: 0;
+	border-bottom-width: 4px;
 }
 
 .Curriculum-table > tbody > tr:nth-child(even) {
-
-    background-color: #CCCCCC;
+	background-color: #cccccc;
 }
 
 .Curriculum-table > tbody > tr:nth-child(odd) {
-
-    background-color: #EEEEEE;
+	background-color: #eeeeee;
 }
 
 .Curriculum-table-body-item {
-
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    border-style: solid;
-    border-color: #576f9b;
-    border-top-width: 0;
-    border-left-width: 2px;
-    border-right-width: 0;
-    border-bottom-width: 2px;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border-style: solid;
+	border-color: #576f9b;
+	border-top-width: 0;
+	border-left-width: 2px;
+	border-right-width: 0;
+	border-bottom-width: 2px;
 }
 
 .Curriculum-table > tbody > tr > .Curriculum-table-body-item:first-child {
-
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    border-style: solid;
-    border-color: #576f9b;
-    border-top-width: 0;
-    border-left-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 2px;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border-style: solid;
+	border-color: #576f9b;
+	border-top-width: 0;
+	border-left-width: 0;
+	border-right-width: 0;
+	border-bottom-width: 2px;
 }
 
-
 .Curriculum-table > tbody > tr:last-child > .Curriculum-table-body-item {
-
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    border-style: solid;
-    border-color: #576f9b;
-    border-top-width: 0;
-    border-left-width: 2px;
-    border-right-width: 0;
-    border-bottom-width: 0;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border-style: solid;
+	border-color: #576f9b;
+	border-top-width: 0;
+	border-left-width: 2px;
+	border-right-width: 0;
+	border-bottom-width: 0;
 }
 
 .Curriculum-table > tbody > tr:last-child > .Curriculum-table-body-item:first-child {
-
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    border-style: solid;
-    border-color: #576f9b;
-    border-top-width: 0;
-    border-left-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border-style: solid;
+	border-color: #576f9b;
+	border-top-width: 0;
+	border-left-width: 0;
+	border-right-width: 0;
+	border-bottom-width: 0;
 }
-
-
