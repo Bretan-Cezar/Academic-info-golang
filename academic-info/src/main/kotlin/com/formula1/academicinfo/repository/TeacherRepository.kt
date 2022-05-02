@@ -1,5 +1,5 @@
-package com.example.demo.repository
-import com.example.demo.domain.Teacher
+package com.formula1.academicinfo.repository
+import com.formula1.academicinfo.model.Teacher
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param

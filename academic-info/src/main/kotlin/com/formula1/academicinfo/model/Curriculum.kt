@@ -1,5 +1,4 @@
 package com.formula1.academicinfo.model
-import com.example.demo.domain.*
 import javax.persistence.*
 
 @Entity
