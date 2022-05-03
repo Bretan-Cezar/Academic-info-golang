@@ -41,9 +41,12 @@ class TeacherServiceImpl(
 
                 this.optionalsDisciplineRepository.save(optionalDiscipline)
             }
+            else {
+                return "You don't have permission to propose optionals!"
+            }
         }
         else {
-            return "There already exists an optional with the given name"
+            return "There already exists an optional with the given name!"
         }
         return "Optional added successfully!"
     }
