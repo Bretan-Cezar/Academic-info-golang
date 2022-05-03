@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
 interface OptionalDisciplineRepository: JpaRepository<OptionalDiscipline, Int> {
-    @Query("SELECT d FROM OptionalDiscipline d WHERE d.optionalDisciplineCurriculum=:cid")
-    fun getOptionalDisciplinesByCurriculumId(@Param("cid") id: Int): List<OptionalDiscipline>
+//    @Query("SELECT d FROM OptionalDiscipline d WHERE d.optionalDisciplineCurriculum=:cid")
+//    fun getOptionalDisciplinesByCurriculumId(@Param("cid") id: Int): List<OptionalDiscipline>
 }

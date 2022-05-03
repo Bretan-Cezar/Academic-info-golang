@@ -1,5 +1,4 @@
 package com.formula1.academicinfo.model
-import com.formula1.academicinfo.model.Curriculum
 import javax.persistence.*
 
 @Entity
@@ -14,13 +13,8 @@ class OptionalDiscipline(){
     @Column(name = "max_attendants", nullable = false)
     var maxAttendants: Int = 0
 
-    @ManyToOne
-    @JoinColumn(name = "curriculum_id", nullable = false)
-    var optionalDisciplineCurriculum: Curriculum? = null
-
-    @ManyToOne
-    @JoinColumn(name = "optional_group_id", nullable = false)
-    var optionalDisciplineGroup: OptionalsGroup? = null
+    @Column(name = "approved", nullable = false)
+    var approved: Boolean = false
 
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinColumn(name = "optional_discipline_id")
@@ -28,8 +22,5 @@ class OptionalDiscipline(){
 
     @OneToMany(mappedBy = "optionalsSelectionDiscipline")
     var optionalsSelections: MutableSet<OptionalsSelection> = mutableSetOf()
-
-    @ManyToMany(mappedBy = "optionalDisciplines", fetch = FetchType.LAZY)
-    var students: MutableSet<Student> = mutableSetOf();
 
 }

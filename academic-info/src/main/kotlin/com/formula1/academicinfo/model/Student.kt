@@ -22,24 +22,13 @@ class Student(){
     @Column(name = "funding_level", nullable = false)
     var fundingLevel: String = ""
 
-//    @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY)
-//    @JsonIgnoreProperties("students")
-
-    @ManyToMany
-    @JoinTable(name = "contract_curriculum_distribution", joinColumns = [JoinColumn(name = "student_id")], inverseJoinColumns = [JoinColumn(name = "curriculum_id")])
-    var curriculums: MutableSet<Curriculum> = mutableSetOf()
-
-//    @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY)
-//    @JsonIgnoreProperties("students")
-
-    @ManyToMany
-    @JoinTable(name = "contract_optionals_distribution", joinColumns = [JoinColumn(name = "student_id")], inverseJoinColumns = [JoinColumn(name="optional_discipline_id")])
-    var optionalDisciplines: MutableSet<OptionalDiscipline> = mutableSetOf();
-
     @OneToMany(mappedBy = "optionalsSelectionStudent")
     var optionalsSelections: MutableSet<OptionalsSelection> = mutableSetOf()
 
     @OneToMany(mappedBy = "gradeStudent")
     var grades: MutableSet<Grade> = mutableSetOf()
+
+    @OneToMany(mappedBy = "studentYos")
+    var yearsOfStudyStudent: MutableSet<YearOfStudy> = mutableSetOf()
 
 }

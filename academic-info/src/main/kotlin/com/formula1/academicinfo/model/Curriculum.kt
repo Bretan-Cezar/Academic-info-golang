@@ -10,21 +10,11 @@ class Curriculum(){
     @Column(name = "curriculum_id", nullable = false)
     var curriculumId: Int = 0
 
-    @ManyToOne
-    @JoinColumn(name = "specialization_id", nullable = false)
-    var specCurriculum: Specialization? = null
-
-    @ManyToOne
-    @JoinColumn(name = "year_of_study_id", nullable = false)
-    var yosCurriculum: YearOfStudy? = null
-
-    @OneToMany(mappedBy = "optionalDisciplineCurriculum")
-    var optionalDisciplines: MutableSet<OptionalDiscipline> = mutableSetOf()
-
-    @OneToMany(mappedBy = "mandatoryDisciplineCurriculum")
-    var mandatoryDisciplines: MutableSet<MandatoryDiscipline> = mutableSetOf()
+    @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @JoinColumn(name = "year_of_study_id")
+    var curriculumYos: YearOfStudy? = null
 
     @ManyToMany(mappedBy = "curriculums", fetch = FetchType.LAZY)
-    var students: MutableSet<Student> = mutableSetOf()
+    var disciplines: MutableSet<Discipline> = mutableSetOf()
 
 }

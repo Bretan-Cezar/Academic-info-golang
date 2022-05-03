@@ -33,7 +33,4 @@ class Faculty(){
     @OneToMany(mappedBy = "facultyYos")
     var yos: MutableSet<YearOfStudy> = mutableSetOf()
 
-    @OneToMany(mappedBy = "facultySpec")
-    var specializations: MutableSet<Specialization> = mutableSetOf()
-
 }

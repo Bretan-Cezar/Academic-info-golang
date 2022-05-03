@@ -1,4 +1,5 @@
 package com.formula1.academicinfo.model
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -10,7 +11,9 @@ class Teacher(){
     var teacherId: Int = 0
 
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @MapsId
     @JoinColumn(name ="teacher_id")
+    @JsonIgnore
     var teacherUser: User? = null
 
     @Column(name = "degree", nullable = false)
