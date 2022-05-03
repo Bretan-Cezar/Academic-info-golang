@@ -23,9 +23,11 @@ class Student(){
     var optionalsSelections: MutableSet<OptionalsSelection> = mutableSetOf()
 
     @OneToMany(mappedBy = "gradeStudent")
+    @JsonIgnore
     var grades: MutableSet<Grade> = mutableSetOf()
 
     @OneToMany(mappedBy = "studentYos")
+    @JsonIgnore
     var yearsOfStudyStudent: MutableSet<YearOfStudy> = mutableSetOf()
 
 }

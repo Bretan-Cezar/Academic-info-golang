@@ -26,7 +26,6 @@ class TeacherServiceImpl(
         if(disciplineRepository.findDisciplineByDisciplineName(disciplineName) == null) {
             if (teacher.degree == "lecturer") {
                 val discipline = Discipline()
-//                return discipline.disciplineId.toString()
                 discipline.isOptional = true
                 discipline.creditCount = creditCount
                 discipline.disciplineName = disciplineName

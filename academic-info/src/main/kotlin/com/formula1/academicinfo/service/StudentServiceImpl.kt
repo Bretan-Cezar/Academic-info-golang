@@ -1,9 +1,6 @@
 package com.formula1.academicinfo.service
 
-import com.formula1.academicinfo.model.Curriculum
-import com.formula1.academicinfo.model.Discipline
-import com.formula1.academicinfo.model.OptionalDiscipline
-import com.formula1.academicinfo.model.Teacher
+import com.formula1.academicinfo.model.*
 import com.formula1.academicinfo.repository.OptionalDisciplineRepository
 import com.formula1.academicinfo.repository.StudentRepository
 import com.formula1.academicinfo.repository.TeacherRepository
@@ -42,16 +39,14 @@ class StudentServiceImpl (
 //
 //        return disciplines
 //    }
+
     override fun getOptionalDisciplines(username: String): MutableSet<Discipline> {
         val user = this.userRepository.findUserByUsername(username)
 
         val student = this.studentRepository.getStudentByStudentId(user.userId)
 
-        println("****************STUDENT ID${student.studentId}")
-
+        // We assume that the student is enrolled into a faculty already
         val facultyId = student.yearsOfStudyStudent.iterator().next().facultyYos?.facultyId;
-
-        println("****************FACULTY ID$facultyId")
 
         val teacherList: MutableSet<Teacher> = facultyId?.let { teacherRepository.findTeachersByFacultyId(it) }!!
 
@@ -61,6 +56,18 @@ class StudentServiceImpl (
                 optionals.add(optional)
 
         return optionals
+    }
+
+    override fun getSpecializations(username: String): MutableSet<YearOfStudy> {
+        val user = this.userRepository.findUserByUsername(username)
+
+        val student = this.studentRepository.getStudentByStudentId(user.userId)
+
+        val yearsOfStudy = mutableSetOf<YearOfStudy>()
+        for(yos in student.yearsOfStudyStudent)
+            yearsOfStudy.add(yos)
+
+        return yearsOfStudy
     }
 
 }

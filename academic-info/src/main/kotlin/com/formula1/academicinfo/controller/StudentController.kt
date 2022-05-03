@@ -20,8 +20,12 @@ class StudentController(
 
     @GetMapping("getOptionals/{username}")
     fun getOptionals(@PathVariable("username") username: String): ResponseEntity<Any>{
-        return ResponseEntity.ok(studentService)
+        return ResponseEntity.ok(studentService.getOptionalDisciplines(username))
     }
 
+    @GetMapping("getSpecializations/{username}")
+    fun getSpecializations(@PathVariable("username") username: String): ResponseEntity<Any>{
+        return ResponseEntity.ok(studentService.getSpecializations(username))
+    }
 
 }

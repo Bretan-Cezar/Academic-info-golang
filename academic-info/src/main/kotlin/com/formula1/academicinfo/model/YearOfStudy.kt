@@ -1,5 +1,6 @@
 package com.formula1.academicinfo.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.formula1.academicinfo.model.Curriculum
 import javax.persistence.*
 
@@ -30,6 +31,7 @@ class YearOfStudy(){
     var facultyYos: Faculty? = null
 
     @OneToOne(mappedBy = "curriculumYos", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @JsonIgnore
     var curriculum: Curriculum? = null
 
     @ManyToOne

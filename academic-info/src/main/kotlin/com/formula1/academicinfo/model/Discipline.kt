@@ -1,4 +1,5 @@
 package com.formula1.academicinfo.model
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -24,9 +25,11 @@ class Discipline()
     var teacherDiscipline: Teacher? = null
 
     @OneToOne(mappedBy = "optionalDiscipline", cascade = [CascadeType.ALL], fetch = FetchType.LAZY )
+    @JsonIgnore
     var optionalDiscipline: OptionalDiscipline? = null
 
     @OneToMany(mappedBy = "gradeDiscipline")
+    @JsonIgnore
     var grades: MutableSet<Grade> = mutableSetOf()
 
     @ManyToMany
