@@ -2,8 +2,6 @@ import React from "react";
 import "./ViewCurriculum.css";
 import { UserContext } from "../App";
 
-let url = "localhost:1337/view_curriculum?q=react";
-
 function Discipline({ curr_discipline, index }) {
 	return (
 		<React.Fragment>
@@ -17,10 +15,10 @@ function Discipline({ curr_discipline, index }) {
 	);
 }
 
-function Curriculum({ curr_curriculum, index }) {
+function Curriculum({ value, index }) {
 	return (
 		<React.Fragment>
-			<option>{curr_curriculum.specialisation + " - year " + curr_curriculum.yearOfStudy}</option>
+			<option value={value}>{value.specialisation + " - year " + value.yearOfStudy}</option>
 		</React.Fragment>
 	);
 }
@@ -28,44 +26,58 @@ function Curriculum({ curr_curriculum, index }) {
 function DisciplineList({ discipline_array }) {
 	return (
 		<>
-			{discipline_array.map((discipline, i) => (
-				<Discipline curr_discipline={discipline} index={i} />
+			{discipline_array.map((discipline) => (
+				<tr>
+					<td className="Curriculum-table-body-item">{discipline.discipline_type}</td>
+					<td className="Curriculum-table-body-item">{discipline.discipline_name}</td>
+					<td className="Curriculum-table-body-item">{discipline.teacher_name}</td>
+					<td className="Curriculum-table-body-item">{discipline.credit_count}</td>
+				</tr>
 			))}
 		</>
 	);
 }
 
-async function curriculumSelectHandler({ event, setOption, setCurriculum }) {
-	console.log(event.target.value);
-	setOption(event.target.value);
-}
+// function CurriculumList({ curriculum_list, setCurriculum }) {
+// 	let [selectedOption, setOption] = React.useState(-1);
 
-function CurriculumList({ curriculum_array, setCurriculum }) {
-	let [selectedOption, setOption] = React.useState("Select");
-
-	return (
-		<>
-			<select
-				className="Curriculum-selector"
-				onChange={(e) => {
-					curriculumSelectHandler(e, setOption, setCurriculum);
-				}}
-				value={selectedOption}
-			>
-				{curriculum_array.map((curriculum, i) => (
-					<Curriculum curr_curriculum={curriculum} index={i} />
-				))}
-			</select>
-		</>
-	);
-}
+// 	return (
+// 		<>
+// 			<select
+// 				className="Curriculum-selector"
+// 				onChange={(e) => {
+// 					curriculumSelectHandler(e, setOption, setCurriculum);
+// 				}}
+// 				value={selectedOption.value}
+// 			>
+// 				<option value="-1">--Select--</option>
+// 				{curriculum_list.map((curriculum) => (
+// 					<option key={curriculum.id} value={curriculum.id}>
+// 						{curriculum.specialisation + " - year " + curriculum.yearOfStudy}
+// 					</option>
+// 				))}
+// 			</select>
+// 		</>
+// 	);
+// }
 
 function ViewCurriculum() {
-	let [curriculums, setCurriculums] = React.useState([]);
-	let [selectedCurriculum, setSelected] = React.useState({});
-	let [disciplines, setDisciplines] = React.useState([]);
-
 	const userData = React.useContext(UserContext);
+
+	let curriculumsList;
+	/*
+  	fetch(url)
+  	.then(response => response.json())
+  	.then(data => curriculumsList(data));
+  */
+
+	curriculumsList = [
+		{ id: 120, specialisation: "Computer Science in English", yearOfStudy: 1 },
+		{ id: 121, specialisation: "Computer Science in English", yearOfStudy: 2 },
+	];
+
+	let [selectedCurriculum, setSelectedCurriculum] = React.useState(-1);
+	let [disciplines, setDisciplines] = React.useState([]);
 
 	React.useEffect(() => {
 		let url = "http://localhost:1337/http://localhost:8090/user/getCurriculum/";
@@ -73,46 +85,48 @@ function ViewCurriculum() {
 
 		// data = [{discipline_type: mandatory/optional, discipline_name: ..., teacher_name: ..., credit_count: ...}, ...]
 
-		if (true /*curriculums === []*/) {
-			/*
-            fetch(url)
-            .then(response => response.json())
-            .then(data => setCurriculums(data));
-            */
-			setCurriculums([
-				{ specialisation: "Computer Science in English", yearOfStudy: 1 },
-				{ specialisation: "Computer Science in English", yearOfStudy: 2 },
+		/*
+      	url += "/" + { selectedCurriculum };
+      	fetch(url)
+      	.then(response => response.json())
+      	.then(data => setDisciplines(data))
+        */
+
+		console.log(selectedCurriculum);
+
+		if (selectedCurriculum == 120) {
+			console.log("120");
+			setDisciplines([
+				{ discipline_type: "mandatory", discipline_name: "Systems For Design & Implementation", teacher_name: "Dr. Gaceanu", credit_count: 6 },
+				{ discipline_type: "optional", discipline_name: "A/V Data Processing", teacher_name: "Forest", credit_count: 4 },
 			]);
+		} else if (selectedCurriculum == 121) {
+			console.log("121");
+			setDisciplines([
+				{ discipline_type: "mandatory", discipline_name: "Data Structures & Algorithms", teacher_name: "Zsu", credit_count: 5 },
+				{ discipline_type: "optional", discipline_name: "C Programming", teacher_name: "Grebla", credit_count: 3 },
+			]);
+		} else {
+			setDisciplines([]);
 		}
-
-		if (selectedCurriculum !== {}) {
-			/*
-
-            url += "/" + {selectedCurriculum.yearOfStudy};
-            fetch(url)
-            .then(response => response.json())
-            .then(data => setDisciplines(data))
-            
-             */
-
-			if (selectedCurriculum.yearOfStudy == 2) {
-				setDisciplines([
-					{ discipline_type: "mandatory", discipline_name: "Systems For Design & Implementation", teacher_name: "Dr. Gaceanu", credit_count: 6 },
-					{ discipline_type: "optional", discipline_name: "A/V Data Processing", teacher_name: "Forest", credit_count: 4 },
-				]);
-			} else {
-				setDisciplines([
-					{ discipline_type: "mandatory", discipline_name: "Data Structures & Algorithms", teacher_name: "Zsu", credit_count: 5 },
-					{ discipline_type: "optional", discipline_name: "C Programming", teacher_name: "Grebla", credit_count: 3 },
-				]);
-			}
-		}
-	}, [userData.user_id, userData.full_name]);
+	}, [userData.user_id, userData.full_name, selectedCurriculum]);
 
 	return (
 		<>
-			<CurriculumList curriculum_array={curriculums} setCurriculum={setSelected} />
-
+			<select
+				className="Curriculum-selector"
+				onChange={(e) => {
+					setSelectedCurriculum(e.target.value);
+				}}
+				value={selectedCurriculum}
+			>
+				<option value="-1">--Select--</option>
+				{curriculumsList.map((curriculum) => (
+					<option key={curriculum.id} value={curriculum.id}>
+						{curriculum.specialisation + " - year " + curriculum.yearOfStudy}
+					</option>
+				))}
+			</select>
 			<table cellSpacing="0" cellPadding="12" className="Curriculum-table">
 				<thead>
 					<tr>
