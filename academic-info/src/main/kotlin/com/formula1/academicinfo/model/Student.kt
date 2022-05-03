@@ -19,9 +19,6 @@ class Student(){
     @Column(name = "group", nullable = false)
     var group: String = ""
 
-    @Column(name = "funding_level", nullable = false)
-    var fundingLevel: String = ""
-
     @OneToMany(mappedBy = "optionalsSelectionStudent")
     var optionalsSelections: MutableSet<OptionalsSelection> = mutableSetOf()
 
