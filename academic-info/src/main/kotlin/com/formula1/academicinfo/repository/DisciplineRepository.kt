@@ -9,4 +9,7 @@ interface DisciplineRepository: JpaRepository<Discipline, Int> {
     @Query("SELECT count(d) > 0 FROM Discipline d WHERE d.disciplineId=:did")
     fun existsDisciplineByDisciplineId(@Param("did") id: Int): Boolean
 
+    @Query("SELECT d FROM Discipline d WHERE d.disciplineName=:uName")
+    fun findDisciplineByDisciplineName(@Param("uName") name: String): Discipline?
+
 }

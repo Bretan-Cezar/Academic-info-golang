@@ -3,17 +3,17 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "optional_discipline")
-class OptionalDiscipline(){
+class OptionalDiscipline() {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+//    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name = "optional_discipline_id", nullable = false)
     var oDisciplineId: Int = 0
 
-    @Column(name = "max_attendants", nullable = false)
+    @Column(name = "max_attendants")
     var maxAttendants: Int = 0
 
-    @Column(name = "approved", nullable = false)
+    @Column(name = "approved")
     var approved: Boolean = false
 
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)

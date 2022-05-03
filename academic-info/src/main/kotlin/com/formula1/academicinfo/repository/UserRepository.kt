@@ -13,7 +13,7 @@ interface UserRepository : JpaRepository<User, Long> {
     fun findUserById(@Param("id") id: Int): User?
 
     @Query("SELECT u from User u WHERE u.username=:uName")
-    fun findUserByUsername(@Param("uName") username: String): User?
+    fun findUserByUsername(@Param("uName") username: String): User
 
     @Modifying(clearAutomatically = true)
     @Transactional
