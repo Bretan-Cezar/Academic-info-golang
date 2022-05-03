@@ -1,5 +1,6 @@
 package com.formula1.academicinfo.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -28,9 +29,13 @@ class Faculty(){
     var teacherFaculty: Teacher? = null
 
     @OneToMany(mappedBy = "facultyTeacher")
+    // ??
+    @JsonIgnore
     var teachers: MutableSet<Teacher> = mutableSetOf()
 
     @OneToMany(mappedBy = "facultyYos")
+    // ??
+    @JsonIgnore
     var yos: MutableSet<YearOfStudy> = mutableSetOf()
 
 }

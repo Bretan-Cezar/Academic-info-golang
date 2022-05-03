@@ -11,7 +11,7 @@ class Teacher(){
     var teacherId: Int = 0
 
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @MapsId
+//    @MapsId
     @JoinColumn(name ="teacher_id")
     @JsonIgnore
     var teacherUser: User? = null
@@ -27,6 +27,8 @@ class Teacher(){
     var facultyTeacher: Faculty? = null
 
     @OneToMany(mappedBy = "teacherDiscipline")
+    // ??
+    @JsonIgnore
     var disciplines: MutableSet<Discipline> = mutableSetOf()
 
 }

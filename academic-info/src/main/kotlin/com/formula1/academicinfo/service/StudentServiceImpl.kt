@@ -1,6 +1,7 @@
 package com.formula1.academicinfo.service
 
 import com.formula1.academicinfo.model.Curriculum
+import com.formula1.academicinfo.model.Discipline
 import com.formula1.academicinfo.model.OptionalDiscipline
 import com.formula1.academicinfo.model.Teacher
 import com.formula1.academicinfo.repository.OptionalDisciplineRepository
@@ -41,21 +42,25 @@ class StudentServiceImpl (
 //
 //        return disciplines
 //    }
-    override fun getOptionalDisciplines(username: String): MutableSet<OptionalDiscipline> {
+    override fun getOptionalDisciplines(username: String): MutableSet<Discipline> {
         val user = this.userRepository.findUserByUsername(username)
 
         val student = this.studentRepository.getStudentByStudentId(user.userId)
 
+        println("****************STUDENT ID${student.studentId}")
+
         val facultyId = student.yearsOfStudyStudent.iterator().next().facultyYos?.facultyId;
 
-        var teacherList = mutableSetOf<Teacher>()
-        teacherList = facultyId?.let { teacherRepository.findTeachersByFacultyId(it) }!!
+        println("****************FACULTY ID$facultyId")
 
-//        var optionals = mutableSetOf<Dis>()
+        val teacherList: MutableSet<Teacher> = facultyId?.let { teacherRepository.findTeachersByFacultyId(it) }!!
 
-        val list = mutableSetOf<OptionalDiscipline>()
+        val optionals = mutableSetOf<Discipline>()
+        for(teacher in teacherList)
+            for(optional in teacher.disciplines)
+                optionals.add(optional)
 
-        return list
+        return optionals
     }
 
 }
