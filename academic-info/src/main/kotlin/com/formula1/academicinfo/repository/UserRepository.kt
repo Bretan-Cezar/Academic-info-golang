@@ -17,8 +17,9 @@ interface UserRepository : JpaRepository<User, Long> {
 
     @Modifying(clearAutomatically = true)
     @Transactional
-    @Query("UPDATE User u set u.email=:email WHERE u.userId=:id")
-    fun update(@Param("email") email: String, @Param("id") id: Int): Int
+    @Query("UPDATE User u set u.email = :email, u.phoneNumber = :phone_number WHERE u.username=:username")
+    fun update(@Param("email") email: String, @Param("phone_number") phoneNumber: String,
+               @Param("username") username: String): Int
 
     fun findByUsername(username: String): User?
 }

@@ -4,6 +4,7 @@ import com.formula1.academicinfo.security.jwtutils.TokenManager
 import com.formula1.academicinfo.service.UserServiceImpl
 import io.jsonwebtoken.ExpiredJwtException
 import org.springframework.http.HttpHeaders
+import org.springframework.security.access.AuthorizationServiceException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
@@ -43,12 +44,10 @@ class JwtFilter(private val userService: UserServiceImpl,
         }
         catch (e : IllegalArgumentException) {
             logger.error("Unable to get JWT Token")
-            filterChain.doFilter(request, response)
-            return
+            throw AuthorizationServiceException("JWT Token not found")
         } catch (e : ExpiredJwtException) {
             logger.error("JWT Token has expired")
-            filterChain.doFilter(request, response)
-            return
+            throw AuthorizationServiceException("Token has expired")
         }
 
         if (SecurityContextHolder.getContext().authentication == null) {

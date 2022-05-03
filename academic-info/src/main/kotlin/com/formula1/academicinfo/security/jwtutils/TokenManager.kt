@@ -10,7 +10,7 @@ import java.util.*
 
 @Component
 class TokenManager : Serializable {
-    val validity = 30 * 60 * 60
+    val validity = 60 * 60 * 60 * 24 * 7
 
     @Value("\${secret}")
     var jwtSecret: String = ""

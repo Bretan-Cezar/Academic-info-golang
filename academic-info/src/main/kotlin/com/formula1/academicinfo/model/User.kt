@@ -65,6 +65,10 @@ class User : UserDetails {
         username = newUsername
     }
 
+    fun getUserId() {
+
+    }
+
     enum class Roles(val value: String) {
         USER("USER")
     }
