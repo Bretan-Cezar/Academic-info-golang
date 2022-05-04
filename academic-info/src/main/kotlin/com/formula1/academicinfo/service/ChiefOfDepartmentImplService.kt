@@ -24,18 +24,20 @@ class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: Op
 
         for(t in teachers)
             for(discipline in t.disciplines) {
-                val optional =
-                    this.optionalsDisciplineRepository.getOptionalDisciplineByODisciplineId(discipline.disciplineId)
-                if (!optional.approved) {
+                if (discipline.isOptional) {
+                    val optional =
+                        this.optionalsDisciplineRepository.getOptionalDisciplineByODisciplineId(discipline.disciplineId)
+                    if (!optional.approved) {
 
-                    val o = OptionalDisciplineChiefDto()
-                    val u = this.userRepository.findUserById(t.teacherId)
-                    o.teacherName = u.fullName
-                    o.creditCount = discipline.creditCount
-                    o.oDisciplineId = discipline.disciplineId
-                    o.disciplineName = discipline.disciplineName
+                        val o = OptionalDisciplineChiefDto()
+                        val u = this.userRepository.findUserById(t.teacherId)
+                        o.teacherName = u.fullName
+                        o.creditCount = discipline.creditCount
+                        o.oDisciplineId = discipline.disciplineId
+                        o.disciplineName = discipline.disciplineName
 
-                    optionals.add(o)
+                        optionals.add(o)
+                    }
                 }
             }
 

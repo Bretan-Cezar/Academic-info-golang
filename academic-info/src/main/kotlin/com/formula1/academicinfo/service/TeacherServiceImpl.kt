@@ -93,23 +93,25 @@ class TeacherServiceImpl(
 
     override fun addGrade(disciplineId: Int, studentId: Int, value: Int): String {
 
-        return if(value >= 4){
+        if(value >= 4){
             if(value <= 10){
 
-                val stud = this.studentRepository.getStudentByStudentId(studentId)
-//                if(stud.grades.d)
+                return if(this.gradeRepository.existsGradeById(GradeId(studentId, disciplineId))){
+                    "You cannot assign a grade for this student! It already has one!"
+                } else{
 
-                val grade = Grade()
-                grade.gradeId = GradeId(studentId, disciplineId)
-                grade.value = value
-                this.gradeRepository.save(grade)
+                    val grade = Grade()
+                    grade.gradeId = GradeId(studentId, disciplineId)
+                    grade.value = value
+                    this.gradeRepository.save(grade)
 
-                "Grade added successfully!"
+                    "Grade added successfully!"
+                }
             } else {
-                "Invalid grade!"
+                return "Invalid grade!"
             }
         } else{
-            "Invalid grade!"
+            return "Invalid grade!"
         }
     }
 

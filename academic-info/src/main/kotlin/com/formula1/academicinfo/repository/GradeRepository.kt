@@ -9,4 +9,7 @@ interface GradeRepository: JpaRepository<Grade, Int> {
 
     @Query("SELECT g FROM Grade g WHERE g.gradeId=:gid")
     fun findGradeByGradeId(@Param("gid") gid: GradeId): Grade?
+
+    @Query("SELECT count(g) > 0 FROM Grade g WHERE g.gradeId=:gid")
+    fun existsGradeById(@Param("gid") gid: GradeId): Boolean
 }

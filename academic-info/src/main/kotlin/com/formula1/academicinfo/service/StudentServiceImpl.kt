@@ -50,19 +50,21 @@ class StudentServiceImpl (
         val optionals = mutableSetOf<OptionalDisciplineDto>()
         for(teacher in teacherList)
             for(optional in teacher.disciplines) {
-                val optionalDiscipline = optionalDisciplineRepository.getOptionalDisciplineByODisciplineId(optional.disciplineId)
-                if(optionalDiscipline.approved){
-                    val o = OptionalDisciplineDto()
-                    val u = this.userRepository.findUserById(teacher.teacherId)
-                    val opt = this.optionalDisciplineRepository.getOptionalDisciplineByODisciplineId(optional.disciplineId)
+                if(optional.isOptional){
+                    val optionalDiscipline = optionalDisciplineRepository.getOptionalDisciplineByODisciplineId(optional.disciplineId)
+                    if(optionalDiscipline.approved){
+                        val o = OptionalDisciplineDto()
+                        val u = this.userRepository.findUserById(teacher.teacherId)
+                        val opt = this.optionalDisciplineRepository.getOptionalDisciplineByODisciplineId(optional.disciplineId)
 
-                    o.disciplineName = optional.disciplineName
-                    o.oDisciplineId = optional.disciplineId
-                    o.creditCount = optional.creditCount
-                    o.teacherName = u.fullName
-                    o.maxAttendants = opt.maxAttendants
+                        o.disciplineName = optional.disciplineName
+                        o.oDisciplineId = optional.disciplineId
+                        o.creditCount = optional.creditCount
+                        o.teacherName = u.fullName
+                        o.maxAttendants = opt.maxAttendants
 
-                    optionals.add(o)
+                        optionals.add(o)
+                    }
                 }
             }
 
