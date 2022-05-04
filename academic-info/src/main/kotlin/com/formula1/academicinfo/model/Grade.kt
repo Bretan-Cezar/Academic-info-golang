@@ -25,12 +25,12 @@ class Grade(){
 
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "student_id", nullable = false)
     @MapsId("studentId")
     var gradeStudent: Student = Student()
 
     @ManyToOne
     @MapsId("disciplineId")
-    @JoinColumn(name = "discipline_id")
+    @JoinColumn(name = "discipline_id", nullable = false)
     var gradeDiscipline: Discipline = Discipline()
 }

@@ -27,6 +27,7 @@ class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: Op
                 if (discipline.isOptional) {
                     val optional =
                         this.optionalsDisciplineRepository.getOptionalDisciplineByODisciplineId(discipline.disciplineId)
+
                     if (!optional.approved) {
 
                         val o = OptionalDisciplineChiefDto()

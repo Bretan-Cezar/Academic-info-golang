@@ -33,7 +33,7 @@ class TeacherController(
         return ResponseEntity.ok(teacherService.getStudentsForDiscipline(username, disciplineId))
     }
 
-    @PostMapping("addGrade/")
+    @PostMapping("addGrade")
     fun addGrade(@RequestBody addGradeDto: AddGradeDto): ResponseEntity<Any>{
         return ResponseEntity.ok(this.teacherService.addGrade(addGradeDto.disciplineId, addGradeDto.studentId, addGradeDto.value))
     }
