@@ -2,27 +2,6 @@ import React from "react";
 import "./ViewCurriculum.css";
 import { UserContext } from "../App";
 
-function Discipline({ curr_discipline, index }) {
-	return (
-		<React.Fragment>
-			<tr>
-				<td className="Curriculum-table-body-item">{curr_discipline.discipline_type}</td>
-				<td className="Curriculum-table-body-item">{curr_discipline.discipline_name}</td>
-				<td className="Curriculum-table-body-item">{curr_discipline.teacher_name}</td>
-				<td className="Curriculum-table-body-item">{curr_discipline.credit_count}</td>
-			</tr>
-		</React.Fragment>
-	);
-}
-
-function Curriculum({ value, index }) {
-	return (
-		<React.Fragment>
-			<option value={value}>{value.specialisation + " - year " + value.yearOfStudy}</option>
-		</React.Fragment>
-	);
-}
-
 function DisciplineList({ discipline_array }) {
 	return (
 		<>
@@ -38,38 +17,10 @@ function DisciplineList({ discipline_array }) {
 	);
 }
 
-// function CurriculumList({ curriculum_list, setCurriculum }) {
-// 	let [selectedOption, setOption] = React.useState(-1);
-
-// 	return (
-// 		<>
-// 			<select
-// 				className="Curriculum-selector"
-// 				onChange={(e) => {
-// 					curriculumSelectHandler(e, setOption, setCurriculum);
-// 				}}
-// 				value={selectedOption.value}
-// 			>
-// 				<option value="-1">--Select--</option>
-// 				{curriculum_list.map((curriculum) => (
-// 					<option key={curriculum.id} value={curriculum.id}>
-// 						{curriculum.specialisation + " - year " + curriculum.yearOfStudy}
-// 					</option>
-// 				))}
-// 			</select>
-// 		</>
-// 	);
-// }
-
 function ViewCurriculum() {
 	const userData = React.useContext(UserContext);
 
 	let curriculumsList;
-	/*
-  	fetch(url)
-  	.then(response => response.json())
-  	.then(data => curriculumsList(data));
-  */
 
 	curriculumsList = [
 		{ id: 120, specialisation: "Computer Science in English", yearOfStudy: 1 },

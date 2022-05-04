@@ -1,4 +1,4 @@
-.Profile-cont {
+.Optional-container {
 	display: flex;
 	flex-direction: column;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -12,10 +12,10 @@
 	border-color: blueviolet;
 	border-width: 2px;
 	width: 90%;
-	height: 75%;
+	height: 45%;
 }
 
-.Profile-cont > form {
+.Optional-container > form {
 	position: relative;
 	top: 0%;
 	left: 0%;
@@ -24,7 +24,7 @@
 	height: 100%;
 }
 
-.Profile-cont > form > button {
+.Optional-container > form > button {
 	display: flex;
 	flex-direction: row;
 	margin: 16px;
@@ -32,21 +32,21 @@
 	align-self: end;
 }
 
-.Profile-cont > form > button > p {
+.Optional-container > form > button > p {
 	margin: auto;
 }
 
-.Profile-f {
+.Optional-field {
 	display: flex;
 	flex-direction: row;
 	margin: 16px;
 }
 
-.Profile-f > p {
+.Optional-field > p {
 	margin: 20px;
 }
 
-.Profile-f > span {
+.Optional-field > span {
 	margin: 8px;
 	padding: 10px;
 	border-style: solid;
@@ -55,7 +55,7 @@
 	border-radius: 10px;
 }
 
-.Profile-f > input {
+.Optional-field > input {
 	font-size: 1.5rem;
 	margin-top: auto;
 	margin-bottom: auto;

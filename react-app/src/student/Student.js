@@ -4,6 +4,7 @@ import "../view_curriculum/ViewCurriculum";
 import ViewCurriculum from "../view_curriculum/ViewCurriculum";
 import ViewProfile from "../view_profile/ViewProfile";
 import ModifyProfile from "../modify_profile/ModifyProfile";
+import ViewOptionals from "../view_optionals/ViewOptionals";
 
 function StudentFeatureSelector({ feature_name }) {
 	switch (feature_name) {
@@ -17,6 +18,10 @@ function StudentFeatureSelector({ feature_name }) {
 
 		case "modify_profile": {
 			return <ModifyProfile />;
+		}
+
+		case "view_optionals": {
+			return <ViewOptionals />;
 		}
 		default: {
 		}
@@ -45,7 +50,7 @@ function Student({ setUserData }) {
 					<div className="Sidebar-item" onClick={() => setFeature("view_curriculum")}>
 						<p>View Curriculum</p>
 					</div>
-					<div className="Sidebar-item">
+					<div className="Sidebar-item" onClick={() => setFeature("view_optionals")}>
 						<p>View Optionals</p>
 					</div>
 					<div className="Sidebar-item">
