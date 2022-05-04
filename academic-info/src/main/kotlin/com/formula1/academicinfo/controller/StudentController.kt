@@ -23,14 +23,24 @@ class StudentController(
         return ResponseEntity.ok(studentService.getOptionalDisciplines(username, facultyId))
     }
 
-    @GetMapping("getSpecializations/{username}")
-    fun getSpecializations(@PathVariable("username") username: String): ResponseEntity<Any>{
-        return ResponseEntity.ok(studentService.getSpecializations(username))
+    @GetMapping("getSpecializations/{username}/{facultyId}")
+    fun getSpecializations(@PathVariable("username") username: String, @PathVariable("facultyId") facultyId: Int): ResponseEntity<Any>{
+        return ResponseEntity.ok(studentService.getSpecializations(username, facultyId))
     }
 
     @GetMapping("getFaculties/{username}")
     fun getFaculties(@PathVariable("username") username: String): ResponseEntity<Any>{
         return ResponseEntity.ok(studentService.getFaculties(username))
+    }
+
+    @GetMapping("getFacultiesAndSpecializations/{username}")
+    fun getFacultiesAndSpecializations(@PathVariable("username") username: String): ResponseEntity<Any>{
+        return ResponseEntity.ok(studentService.getFacultiesAndSpecializations(username))
+    }
+
+    @GetMapping("getGrades/{username}/{yosId}")
+    fun getGrades(@PathVariable("username") username: String, @PathVariable("yosId") yosId: Int): ResponseEntity<Any>{
+        return ResponseEntity.ok(studentService.getGrades(username, yosId))
     }
 
 }

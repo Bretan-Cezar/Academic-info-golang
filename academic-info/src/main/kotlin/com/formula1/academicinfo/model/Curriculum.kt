@@ -12,9 +12,9 @@ class Curriculum(){
 
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinColumn(name = "year_of_study_id")
-    var curriculumYos: YearOfStudy? = null
+    var curriculumYos: YearOfStudy = YearOfStudy()
 
-    @ManyToMany(mappedBy = "curriculums", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "curriculums")
     var disciplines: MutableSet<Discipline> = mutableSetOf()
 
 }

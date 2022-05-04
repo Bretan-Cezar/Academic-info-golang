@@ -1,11 +1,11 @@
 package com.formula1.academicinfo.dtos
 class GradeDto {
 
-    val student_id: Int = 0
+    var disciplineName: String = ""
 
-    val discipline_id: Int = 0
+    var creditCount: Int = 0
 
-//    val gradeId: GradeId? = null
+    var value: String = ""
 
-    val value: Int = 0
+    var isOptional: Boolean = false
 }

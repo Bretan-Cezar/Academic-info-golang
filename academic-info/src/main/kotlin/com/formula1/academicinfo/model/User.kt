@@ -5,6 +5,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import java.time.LocalDate
 import javax.persistence.*
+import javax.validation.constraints.Email
+import javax.validation.constraints.Pattern
 
 @Entity
 @Table(name = "users")
@@ -26,9 +28,11 @@ class User : UserDetails {
     @Column(name = "date_of_birth")
     var dateOfBirth: LocalDate = LocalDate.now()
 
+//    @Pattern(regexp = "(^[A-Za-z](.*)([@])(.+)(\\\\.)(.+))")
     @Column(name = "email")
     var email: String = ""
 
+//    @Pattern(regexp = "(\\+40)7[0-9]{8}")
     @Column(name = "phone_number")
     var phoneNumber: String = ""
 

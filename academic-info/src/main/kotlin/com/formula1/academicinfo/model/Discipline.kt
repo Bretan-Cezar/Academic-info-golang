@@ -17,7 +17,7 @@ class Discipline()
     @Column(name = "credit_count", nullable = false)
     var creditCount: Int = 0
 
-    @Column(name = "is_optional", nullable = false)
+    @Column(name = "is_optional")
     var isOptional: Boolean = false
 
     @ManyToOne

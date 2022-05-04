@@ -28,7 +28,7 @@ class YearOfStudy(){
 
     @ManyToOne
     @JoinColumn(name = "faculty_id", nullable = false)
-    var facultyYos: Faculty? = null
+    var facultyYos: Faculty = Faculty()
 
     @OneToOne(mappedBy = "curriculumYos", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JsonIgnore
