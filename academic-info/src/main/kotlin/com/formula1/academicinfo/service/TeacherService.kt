@@ -6,4 +6,6 @@ import com.formula1.academicinfo.model.OptionalDiscipline
 
 interface TeacherService {
     fun proposeOptional(disciplineName: String, creditCount: Int, username: String):String
+
+    fun getOptionals(username: String): MutableSet<Discipline>
 }

@@ -18,14 +18,19 @@ class StudentController(
     private val tokenManager: TokenManager
 ) {
 
-    @GetMapping("getOptionals/{username}")
-    fun getOptionals(@PathVariable("username") username: String): ResponseEntity<Any>{
-        return ResponseEntity.ok(studentService.getOptionalDisciplines(username))
+    @GetMapping("getOptionals/{username}/{facultyId}")
+    fun getOptionals(@PathVariable("username") username: String, @PathVariable("facultyId") facultyId: Int): ResponseEntity<Any>{
+        return ResponseEntity.ok(studentService.getOptionalDisciplines(username, facultyId))
     }
 
     @GetMapping("getSpecializations/{username}")
     fun getSpecializations(@PathVariable("username") username: String): ResponseEntity<Any>{
         return ResponseEntity.ok(studentService.getSpecializations(username))
+    }
+
+    @GetMapping("getFaculties/{username}")
+    fun getFaculties(@PathVariable("username") username: String): ResponseEntity<Any>{
+        return ResponseEntity.ok(studentService.getFaculties(username))
     }
 
 }

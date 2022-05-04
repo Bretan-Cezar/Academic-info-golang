@@ -2,10 +2,7 @@ package com.formula1.academicinfo.service
 
 import com.formula1.academicinfo.model.Discipline
 import com.formula1.academicinfo.model.OptionalDiscipline
-import com.formula1.academicinfo.repository.DisciplineRepository
-import com.formula1.academicinfo.repository.OptionalDisciplineRepository
-import com.formula1.academicinfo.repository.TeacherRepository
-import com.formula1.academicinfo.repository.UserRepository
+import com.formula1.academicinfo.repository.*
 import org.springframework.stereotype.Service
 
 @Service
@@ -14,7 +11,8 @@ class TeacherServiceImpl(
     private val optionalsDisciplineRepository: OptionalDisciplineRepository,
     private val disciplineRepository: DisciplineRepository,
     private val teacherRepository: TeacherRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val facultyRepository: FacultyRepository
 
 ): TeacherService {
     override fun proposeOptional(disciplineName: String, creditCount: Int, username: String): String {
@@ -48,6 +46,27 @@ class TeacherServiceImpl(
             return "There already exists an optional with the given name!"
         }
         return "Optional added successfully!"
+    }
+
+    override fun getOptionals(username: String): MutableSet<Discipline> {
+        //TODO
+        val user = this.userRepository.findUserByUsername(username)
+
+        val teacher = this.teacherRepository.findTeacherByTeacherId(user.userId)
+
+        val facultyId = teacher.faculty?.facultyId
+
+        val faculty = facultyId?.let { facultyRepository.getFacultiesByFacultyId(it) }
+
+        val chiefOfDepartmentId = faculty?.teacherFaculty?.teacherId
+
+        if(chiefOfDepartmentId == teacher.teacherId){
+
+
+
+        }
+
+        return mutableSetOf()
     }
 
 }

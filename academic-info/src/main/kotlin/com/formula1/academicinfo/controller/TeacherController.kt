@@ -22,4 +22,9 @@ class TeacherController(
         return ResponseEntity.ok(teacherService.proposeOptional(proposeOptionalDto.disciplineName, proposeOptionalDto.creditCount, username))
     }
 
+    @GetMapping("getOptionals/{username}")
+    fun getOptionals(@PathVariable("username") username: String): ResponseEntity<Any>{
+        return ResponseEntity.ok(teacherService.getOptionals(username))
+    }
+
 }

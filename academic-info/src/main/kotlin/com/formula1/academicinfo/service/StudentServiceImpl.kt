@@ -40,20 +40,19 @@ class StudentServiceImpl (
 //        return disciplines
 //    }
 
-    override fun getOptionalDisciplines(username: String): MutableSet<Discipline> {
+    override fun getOptionalDisciplines(username: String, facultyId: Int): MutableSet<Discipline> {
         val user = this.userRepository.findUserByUsername(username)
 
         val student = this.studentRepository.getStudentByStudentId(user.userId)
-
-        // We assume that the student is enrolled into a faculty already
-        val facultyId = student.yearsOfStudyStudent.iterator().next().facultyYos?.facultyId;
-
-        val teacherList: MutableSet<Teacher> = facultyId?.let { teacherRepository.findTeachersByFacultyId(it) }!!
+        val teacherList: MutableSet<Teacher> = teacherRepository.findTeachersByFacultyId(facultyId)
 
         val optionals = mutableSetOf<Discipline>()
         for(teacher in teacherList)
-            for(optional in teacher.disciplines)
-                optionals.add(optional)
+            for(optional in teacher.disciplines) {
+                val optionalDiscipline = optionalDisciplineRepository.getOptionalDisciplineByODisciplineId(optional.disciplineId)
+                if(optionalDiscipline.approved)
+                    optionals.add(optional)
+            }
 
         return optionals
     }
@@ -70,6 +69,17 @@ class StudentServiceImpl (
         return yearsOfStudy
     }
 
+    override fun getFaculties(username: String): MutableSet<Faculty> {
+        val user = this.userRepository.findUserByUsername(username)
+
+        val student = this.studentRepository.getStudentByStudentId(user.userId)
+
+        val faculties = mutableSetOf<Faculty>()
+        for(yos in student.yearsOfStudyStudent)
+            yos.facultyYos?.let { faculties.add(it) }
+
+        return faculties
+    }
 }
 
 
