@@ -12,4 +12,7 @@ interface DisciplineRepository: JpaRepository<Discipline, Int> {
     @Query("SELECT d FROM Discipline d WHERE d.disciplineName=:uName")
     fun findDisciplineByDisciplineName(@Param("uName") name: String): Discipline?
 
+    @Query("SELECT d FROM Discipline d WHERE d.disciplineId=:id")
+    fun findDisciplineByDisciplineId(@Param("id") id: Int): Discipline
+
 }

@@ -1,8 +1,10 @@
 package com.formula1.academicinfo.service
 
-import com.formula1.academicinfo.dtos.OptionalDisciplineChiefDto
+import com.formula1.academicinfo.dtos.StudentDto
 import com.formula1.academicinfo.model.Discipline
+import com.formula1.academicinfo.model.Grade
 import com.formula1.academicinfo.model.OptionalDiscipline
+import com.formula1.academicinfo.model.composite.GradeId
 import com.formula1.academicinfo.repository.*
 import org.springframework.stereotype.Service
 
@@ -13,7 +15,8 @@ class TeacherServiceImpl(
     private val disciplineRepository: DisciplineRepository,
     private val teacherRepository: TeacherRepository,
     private val userRepository: UserRepository,
-    private val facultyRepository: FacultyRepository
+    private val gradeRepository: GradeRepository,
+    private val studentRepository: StudentRepository
 
 ): TeacherService {
     override fun proposeOptional(disciplineName: String, creditCount: Int, username: String): String {
@@ -48,4 +51,66 @@ class TeacherServiceImpl(
         }
         return "Optional added successfully!"
     }
+
+    override fun getDisciplines(username: String): MutableSet<Discipline> {
+        val user = this.userRepository.findUserByUsername(username)
+
+        val teacher = this.teacherRepository.findTeacherByTeacherId(user.userId)
+
+        return teacher.disciplines
+
+    }
+
+    override fun getStudentsForDiscipline(username: String, disciplineId: Int): MutableSet<StudentDto> {
+        val user = this.userRepository.findUserByUsername(username)
+
+        val teacher = this.teacherRepository.findTeacherByTeacherId(user.userId)
+
+        val discipline = this.disciplineRepository.findDisciplineByDisciplineId(disciplineId)
+
+        val curriculums = discipline.curriculums
+
+        val result = mutableSetOf<StudentDto>()
+
+        for(c in curriculums){
+            val u = this.userRepository.findUserById(c.curriculumYos.studentYos.studentId)
+
+            /// daca vrem sa afisam doar studentii fara note de la acea materie
+//            val stud = this.studentRepository.getStudentByStudentId(u.userId)
+
+//            if(stud.grades.size == 0) {
+                val s = StudentDto()
+                s.studentId = u.userId
+                s.studentName = u.fullName
+                s.group = u.student?.group.toString()
+
+                result.add(s)
+//            }
+        }
+
+        return result
+    }
+
+    override fun addGrade(disciplineId: Int, studentId: Int, value: Int): String {
+
+        return if(value >= 4){
+            if(value <= 10){
+
+                val stud = this.studentRepository.getStudentByStudentId(studentId)
+//                if(stud.grades.d)
+
+                val grade = Grade()
+                grade.gradeId = GradeId(studentId, disciplineId)
+                grade.value = value
+                this.gradeRepository.save(grade)
+
+                "Grade added successfully!"
+            } else {
+                "Invalid grade!"
+            }
+        } else{
+            "Invalid grade!"
+        }
+    }
+
 }

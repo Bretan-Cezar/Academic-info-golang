@@ -25,6 +25,7 @@ class Faculty(){
     var phoneNumber: String = ""
 
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "chief_teacher_id")
     var teacherFaculty: Teacher? = null
 

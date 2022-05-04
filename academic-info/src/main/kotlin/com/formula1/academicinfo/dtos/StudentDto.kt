@@ -4,8 +4,8 @@ class StudentDto {
 
     var studentId: Int = 0
 
-    var group: String = ""
+    var studentName: String = ""
 
-    var fundingLevel: String = ""
+    var group: String = ""
 
 }

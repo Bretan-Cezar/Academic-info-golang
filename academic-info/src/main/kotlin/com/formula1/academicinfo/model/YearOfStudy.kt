@@ -36,6 +36,6 @@ class YearOfStudy(){
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
-    var studentYos: Student? = null
+    var studentYos: Student = Student()
 
 }

@@ -21,6 +21,7 @@ class Discipline()
     var isOptional: Boolean = false
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "teacher_id")
     var teacherDiscipline: Teacher? = null
 
@@ -33,6 +34,7 @@ class Discipline()
     var grades: MutableSet<Grade> = mutableSetOf()
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "curriculum_discipline_distribution", joinColumns = [JoinColumn(name = "discipline_id")], inverseJoinColumns = [JoinColumn(name = "curriculum_id")])
     var curriculums: MutableSet<Curriculum> = mutableSetOf()
 }

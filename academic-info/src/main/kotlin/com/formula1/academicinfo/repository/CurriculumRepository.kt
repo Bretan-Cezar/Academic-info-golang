@@ -10,4 +10,5 @@ interface CurriculumRepository: JpaRepository<Curriculum, Int> {
 
     @Query("SELECT c FROM Curriculum c WHERE c.curriculumYos.yosId=:yosId")
     fun findCurriculumByCurriculumYos(@Param("yosId") yosId: Int): Curriculum
+
 }
