@@ -2,17 +2,32 @@ import React from "react";
 import "./ViewOptionals.css";
 import { UserContext } from "../App";
 
+function OptionalsList({ optionals_array }) {
+	return (
+		<>
+			{optionals_array.map((optional) => (
+				<tr>
+					<td className="Optionals-table-body-item">{optional.disciplineName}</td>
+					<td className="Optionals-table-body-item">{optional.teacherDiscipline.teacherId}</td>
+					<td className="Optionals-table-body-item">{optional.creditCount}</td>
+					<td className="Optionals-table-body-item">{optional.maxAttendants}</td>
+				</tr>
+			))}
+		</>
+	);
+}
+
 function ViewOptionals() {
 	const userData = React.useContext(UserContext);
 
-	let [specList, setSpecList] = React.useState([]);
-	let [selectedSpec, setSelectedSpec] = React.useState(-1);
-	let [optionals, setOptionals] = React.useState([]);
+	let [facultyList, setFacultyList] = React.useState([]);
+	let [selectedFaculty, setSelectedFaculty] = React.useState(-1);
+	let [optionalsList, setOptionalsList] = React.useState([]);
 
 	React.useEffect(() => {
-		let urlSpec = "http://localhost:1337/http://localhost:8090/student/getSpecializations/" + userData.username;
+		let urlF = "http://localhost:1337/http://localhost:8090/student/getFaculties/" + userData.username;
 
-		const specRequestOptions = {
+		const fRequestOptions = {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -21,32 +36,67 @@ function ViewOptionals() {
 			},
 		};
 
-		const specRequest = new Request(urlSpec, specRequestOptions);
-		fetch(specRequest)
+		const fRequest = new Request(urlF, fRequestOptions);
+		fetch(fRequest)
 			.then((response) => response.json())
 			.then((data) => {
-				setSpecList(data);
+				setFacultyList(data);
 			});
-	}, [userData]);
+
+		if (selectedFaculty != -1) {
+			let urlO = "http://localhost:1337/http://localhost:8090/student/getOptionals/" + userData.username + "/" + selectedFaculty;
+
+			const oRequestOptions = {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					"Access-Control-Allow-Origin": "origin",
+					Authorization: "Bearer " + userData.auth_token,
+				},
+			};
+
+			const oRequest = new Request(urlO, oRequestOptions);
+			fetch(oRequest)
+				.then((response) => response.json())
+				.then((data) => {
+					setOptionalsList(data);
+				});
+		} else {
+			setOptionalsList([]);
+		}
+	}, [userData, selectedFaculty]);
 
 	return (
 		<>
 			<select
-				className="Specialisation-selector"
+				className="Faculty-selector"
 				onChange={(e) => {
-					setSelectedSpec(e.target.value);
+					setSelectedFaculty(e.target.value);
 				}}
-				value={selectedSpec}
+				value={selectedFaculty}
 			>
 				<option value="-1">--Select--</option>
-				{specList.map((spec) => {
+				{facultyList.map((f) => {
 					return (
-						<option key={spec.yosId} value={spec.yosId}>
-							{spec.facultyYos.facultyName + " - specialization " + spec.specialization + ", year " + spec.yearNo}
+						<option key={f.facultyId} value={f.facultyId}>
+							{f.facultyId + " - " + f.facultyName}
 						</option>
 					);
 				})}
 			</select>
+			<table cellSpacing="0" cellPadding="12" className="Optionals-table">
+				<thead>
+					<tr>
+						<td className="Optionals-table-head-item">Name</td>
+						<td className="Optionals-table-head-item">Teacher</td>
+						<td className="Optionals-table-head-item">Credits</td>
+						<td className="Optionals-table-head-item">Max. Attendants</td>
+					</tr>
+				</thead>
+				<tbody>
+					<OptionalsList optionals_array={optionalsList} />
+				</tbody>
+			</table>
 		</>
 	);
 }

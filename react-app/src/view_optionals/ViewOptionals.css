@@ -1,4 +1,4 @@
-.Specialisation-selector {
+.Faculty-selector {
 	position: relative;
 	top: 4%;
 	left: 10%;
@@ -7,4 +7,83 @@
 
 	width: 50%;
 	height: 5%;
+}
+
+.Optionals-table {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	width: 70%;
+	/*position: relative;*/
+	/*top: 10%;*/
+	margin: auto;
+	border-style: solid;
+	border-color: blueviolet;
+	border-width: 4px;
+}
+
+.Optionals-table-head-item {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border-style: solid;
+	border-color: #576f9b;
+	border-top-width: 0;
+	border-left-width: 2px;
+	border-right-width: 0;
+	border-bottom-width: 4px;
+}
+
+.Optionals-table-head-item:first-child {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border-style: solid;
+	border-color: #576f9b;
+	border-top-width: 0;
+	border-left-width: 0;
+	border-right-width: 0;
+	border-bottom-width: 4px;
+}
+
+.Optionals-table > tbody > tr:nth-child(even) {
+	background-color: #cccccc;
+}
+
+.Optionals-table > tbody > tr:nth-child(odd) {
+	background-color: #eeeeee;
+}
+
+.Optionals-table-body-item {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border-style: solid;
+	border-color: #576f9b;
+	border-top-width: 0;
+	border-left-width: 2px;
+	border-right-width: 0;
+	border-bottom-width: 2px;
+}
+
+.Optionals-table > tbody > tr > .Optionals-table-body-item:first-child {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border-style: solid;
+	border-color: #576f9b;
+	border-top-width: 0;
+	border-left-width: 0;
+	border-right-width: 0;
+	border-bottom-width: 2px;
+}
+
+.Optionals-table > tbody > tr:last-child > .Optionals-table-body-item {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border-style: solid;
+	border-color: #576f9b;
+	border-top-width: 0;
+	border-left-width: 2px;
+	border-right-width: 0;
+	border-bottom-width: 0;
+}
+
+.Optionals-table > tbody > tr:last-child > .Optionals-table-body-item:first-child {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	border-style: solid;
+	border-color: #576f9b;
+	border-top-width: 0;
+	border-left-width: 0;
+	border-right-width: 0;
+	border-bottom-width: 0;
 }
