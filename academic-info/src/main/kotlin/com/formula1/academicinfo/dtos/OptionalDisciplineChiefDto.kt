@@ -1,10 +1,9 @@
 package com.formula1.academicinfo.dtos
-class OptionalDisciplineDto {
+
+class OptionalDisciplineChiefDto {
     var oDisciplineId: Int = 0
 
     var disciplineName: String = ""
-
-    var maxAttendants: Int = 0
 
     var creditCount: Int = 0
 

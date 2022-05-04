@@ -14,13 +14,13 @@ class Teacher(){
 //    @MapsId
     @JoinColumn(name ="teacher_id")
     @JsonIgnore
-    var teacherUser: User? = null
+    var teacherUser: User = User()
 
     @Column(name = "degree", nullable = false)
     var degree: String = ""
 
     @OneToOne(mappedBy = "teacherFaculty", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var faculty: Faculty? = null
+    var faculty: Faculty = Faculty()
 
     @ManyToOne
     @JoinColumn(name="faculty_id", nullable=false)

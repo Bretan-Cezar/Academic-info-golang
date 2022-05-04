@@ -1,5 +1,6 @@
 package com.formula1.academicinfo.service
 
+import com.formula1.academicinfo.dtos.OptionalDisciplineChiefDto
 import com.formula1.academicinfo.model.Discipline
 import com.formula1.academicinfo.model.OptionalDiscipline
 import com.formula1.academicinfo.repository.*
@@ -47,26 +48,4 @@ class TeacherServiceImpl(
         }
         return "Optional added successfully!"
     }
-
-    override fun getOptionals(username: String): MutableSet<Discipline> {
-        //TODO
-        val user = this.userRepository.findUserByUsername(username)
-
-        val teacher = this.teacherRepository.findTeacherByTeacherId(user.userId)
-
-        val facultyId = teacher.faculty?.facultyId
-
-        val faculty = facultyId?.let { facultyRepository.getFacultiesByFacultyId(it) }
-
-        val chiefOfDepartmentId = faculty?.teacherFaculty?.teacherId
-
-        if(chiefOfDepartmentId == teacher.teacherId){
-
-
-
-        }
-
-        return mutableSetOf()
-    }
-
 }

@@ -6,7 +6,5 @@ import org.springframework.data.repository.query.Param
 
 interface FacultyRepository: JpaRepository<Faculty, Int> {
 
-    @Query("SELECT f FROM Faculty f where f.facultyId=:id")
-    fun getFacultiesByFacultyId(@Param("id") id: Int):Faculty
 
 }

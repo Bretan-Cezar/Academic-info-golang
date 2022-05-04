@@ -14,7 +14,7 @@ class Student(){
     @MapsId
     @JoinColumn(name = "student_id")
     @JsonIgnore
-    var studentUser: User? = null
+    var studentUser: User = User()
 
     @Column(name = "group", nullable = false)
     var group: String = ""

@@ -1,5 +1,6 @@
 package com.formula1.academicinfo.service
 
+import com.formula1.academicinfo.dtos.OptionalDisciplineDto
 import com.formula1.academicinfo.model.*
 import com.formula1.academicinfo.repository.OptionalDisciplineRepository
 import com.formula1.academicinfo.repository.StudentRepository
@@ -40,18 +41,27 @@ class StudentServiceImpl (
 //        return disciplines
 //    }
 
-    override fun getOptionalDisciplines(username: String, facultyId: Int): MutableSet<Discipline> {
-        val user = this.userRepository.findUserByUsername(username)
+    override fun getOptionalDisciplines(username: String, facultyId: Int): MutableSet<OptionalDisciplineDto> {
 
-        val student = this.studentRepository.getStudentByStudentId(user.userId)
         val teacherList: MutableSet<Teacher> = teacherRepository.findTeachersByFacultyId(facultyId)
 
-        val optionals = mutableSetOf<Discipline>()
+        val optionals = mutableSetOf<OptionalDisciplineDto>()
         for(teacher in teacherList)
             for(optional in teacher.disciplines) {
                 val optionalDiscipline = optionalDisciplineRepository.getOptionalDisciplineByODisciplineId(optional.disciplineId)
-                if(optionalDiscipline.approved)
-                    optionals.add(optional)
+                if(optionalDiscipline.approved){
+                    val o = OptionalDisciplineDto()
+                    val u = this.userRepository.findUserById(teacher.teacherId)
+                    val opt = this.optionalDisciplineRepository.getOptionalDisciplineByODisciplineId(optional.disciplineId)
+
+                    o.disciplineName = optional.disciplineName
+                    o.oDisciplineId = optional.disciplineId
+                    o.creditCount = optional.creditCount
+                    o.teacherName = u.fullName
+                    o.maxAttendants = opt.maxAttendants
+
+                    optionals.add(o)
+                }
             }
 
         return optionals

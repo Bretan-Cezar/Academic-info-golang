@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 interface UserRepository : JpaRepository<User, Long> {
 
     @Query("SELECT u from User u WHERE u.userId=:id")
-    fun findUserById(@Param("id") id: Int): User?
+    fun findUserById(@Param("id") id: Int): User
 
     @Query("SELECT u from User u WHERE u.username=:uName")
     fun findUserByUsername(@Param("uName") username: String): User
