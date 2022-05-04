@@ -4,6 +4,7 @@ import com.formula1.academicinfo.dtos.FacultyandSpecializationDto
 import com.formula1.academicinfo.dtos.GradeDto
 import com.formula1.academicinfo.dtos.OptionalDisciplineDto
 import com.formula1.academicinfo.model.*
+import com.formula1.academicinfo.model.composite.GradeId
 import com.formula1.academicinfo.repository.*
 import org.springframework.stereotype.Service
 
@@ -13,7 +14,8 @@ class StudentServiceImpl (
     private val userRepository: UserRepository,
     private val optionalDisciplineRepository: OptionalDisciplineRepository,
     private val teacherRepository: TeacherRepository,
-    private val curriculumRepository: CurriculumRepository
+    private val curriculumRepository: CurriculumRepository,
+    private val gradeRepository: GradeRepository
 
         ): StudentService{
     //    override fun getMandatoryDisciplinesByStudentId(id: Int): List<MandatoryDiscipline> {
@@ -126,49 +128,39 @@ class StudentServiceImpl (
 
         val curriculum = this.curriculumRepository.findCurriculumByCurriculumYos(yosId)
 
-//        val gg = GradeDto()
-//        gg.disciplineName = curriculum.curriculumId.toString()
-//
-//        val r = mutableSetOf<GradeDto>()
-//        r.add(gg)
-//        return r
-
-        val r = mutableSetOf<GradeDto>()
         val result = mutableSetOf<GradeDto>()
 
-        val ggg =GradeDto()
-        ggg.creditCount = student.grades.size
-
-            r.add(ggg)
-        return r
-
         for(discipline in curriculum.disciplines){
-            val gg = GradeDto()
-            gg.disciplineName = discipline.disciplineName
-            gg.creditCount = curriculum.disciplines.size
-            r.add(gg)
-
             for(grade in student.grades)
             {
-                val g = GradeDto()
-
-                g.isOptional = discipline.isOptional
-                g.creditCount = discipline.creditCount
-                g.disciplineName = discipline.disciplineName
-
                 if(grade.gradeDiscipline.disciplineId == discipline.disciplineId){
+                    val g = GradeDto()
+
+                    g.isOptional = discipline.isOptional
+                    g.creditCount = discipline.creditCount
+                    g.disciplineName = discipline.disciplineName
                     g.value = grade.value.toString()
+
+                    result.add(g)
                 }
-                else {
-                    g.value = "-"
-                }
-                result.add(g)
             }
+
         }
 
-        return r
+        return result
+
     }
 
 }
 
 
+
+//val grade = this.gradeRepository.findGradeByGradeId(GradeId(student.studentId, discipline.disciplineId))
+//val g = GradeDto()
+//
+//g.isOptional = discipline.isOptional
+//g.creditCount = discipline.creditCount
+//g.disciplineName = discipline.disciplineName
+//if (grade != null) {
+//    g.value = grade.value.toString()
+//}

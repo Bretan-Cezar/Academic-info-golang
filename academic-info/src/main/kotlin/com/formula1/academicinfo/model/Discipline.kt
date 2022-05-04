@@ -21,7 +21,7 @@ class Discipline()
     var isOptional: Boolean = false
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id", nullable = false)
+    @JoinColumn(name = "teacher_id")
     var teacherDiscipline: Teacher? = null
 
     @OneToOne(mappedBy = "optionalDiscipline", cascade = [CascadeType.ALL], fetch = FetchType.LAZY )
