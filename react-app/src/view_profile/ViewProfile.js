@@ -29,9 +29,6 @@ function ViewProfile() {
 			.then((data) => {
 				setProfile({ fullName: data.fullName, cnp: data.cnp, dateOfBirth: data.dateOfBirth, email: data.email, phoneNumber: data.phoneNumber });
 			});
-
-		// Example data
-		// setProfile({full_name: "Bretan Cezar-Alexandru", cnp: "5020110125775", dob: "2002-01-10", email: "cezar.bretan@gmail.com", phone_no: "+40734584843"});
 	}, [userData]);
 
 	return (
