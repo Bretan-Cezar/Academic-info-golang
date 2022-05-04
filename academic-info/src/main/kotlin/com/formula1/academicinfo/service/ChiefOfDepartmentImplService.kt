@@ -41,6 +41,21 @@ class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: Op
 
         return optionals
     }
+
+    override fun approveOptional(optionalId: Int, maxAttendants: Int): String {
+
+        if(maxAttendants <= 20){
+            return "The number of maximum attendants must be at least 20"
+        }
+
+        val rowsAffected = this.optionalsDisciplineRepository.update(optionalId, true, maxAttendants)
+
+        if(rowsAffected > 0){
+            return "Optional approved successfully!"
+        }
+
+        return "Error while approving the optional!"
+    }
 }
 
 
