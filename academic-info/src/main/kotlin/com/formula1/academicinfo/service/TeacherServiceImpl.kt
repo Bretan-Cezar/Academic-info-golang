@@ -93,6 +93,10 @@ class TeacherServiceImpl(
 
     override fun addGrade(disciplineId: Int, studentId: Int, value: Int): String {
 
+        val discipline = this.disciplineRepository.findDisciplineByDisciplineId(disciplineId)
+
+        val student = this.studentRepository.getStudentByStudentId(studentId)
+
         if(value >= 4){
             if(value <= 10){
 
@@ -103,6 +107,8 @@ class TeacherServiceImpl(
                     val grade = Grade()
                     grade.gradeId = GradeId(studentId, disciplineId)
                     grade.value = value
+                    grade.gradeDiscipline = discipline
+                    grade.gradeStudent = student
                     this.gradeRepository.save(grade)
 
                     "Grade added successfully!"

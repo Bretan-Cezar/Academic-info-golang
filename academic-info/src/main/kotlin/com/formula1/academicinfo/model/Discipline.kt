@@ -22,8 +22,8 @@ class Discipline()
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "teacher_id")
-    var teacherDiscipline: Teacher? = null
+    @JoinColumn(name = "teacher_id", nullable = false)
+    var teacherDiscipline: Teacher = Teacher()
 
     @OneToOne(mappedBy = "optionalDiscipline", cascade = [CascadeType.ALL], fetch = FetchType.LAZY )
     @JsonIgnore
