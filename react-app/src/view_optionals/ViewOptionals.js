@@ -8,7 +8,7 @@ function OptionalsList({ optionals_array }) {
 			{optionals_array.map((optional) => (
 				<tr>
 					<td className="Optionals-table-body-item">{optional.disciplineName}</td>
-					<td className="Optionals-table-body-item">{optional.teacherDiscipline.teacherId}</td>
+					<td className="Optionals-table-body-item">{optional.teacherName}</td>
 					<td className="Optionals-table-body-item">{optional.creditCount}</td>
 					<td className="Optionals-table-body-item">{optional.maxAttendants}</td>
 				</tr>
@@ -59,6 +59,7 @@ function ViewOptionals() {
 			fetch(oRequest)
 				.then((response) => response.json())
 				.then((data) => {
+					// console.log(data);
 					setOptionalsList(data);
 				});
 		} else {

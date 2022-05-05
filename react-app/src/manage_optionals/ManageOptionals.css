@@ -1,0 +1,79 @@
+.Optionals-selector {
+	position: relative;
+	top: 4%;
+	left: 10%;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 16px;
+
+	width: 50%;
+	height: 5%;
+}
+
+.Optional-form {
+	display: flex;
+	flex-direction: column;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 1.5rem;
+	position: relative;
+	top: 10%;
+	left: 6%;
+	margin-bottom: auto;
+	margin-right: auto;
+	border-style: solid;
+	border-color: blueviolet;
+	border-width: 2px;
+	width: 90%;
+	height: 45%;
+}
+
+.Optional-form > form {
+	position: relative;
+	top: 0%;
+	left: 0%;
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+.Optional-form > form > button {
+	display: flex;
+	flex-direction: row;
+	margin: 16px;
+	width: 20%;
+	align-self: end;
+}
+
+.Optional-form > form > button > p {
+	margin: auto;
+}
+
+.Optional-f {
+	display: flex;
+	flex-direction: row;
+	margin: 16px;
+}
+
+.Optional-f > p {
+	margin: 20px;
+}
+
+.Optional-f > span {
+	margin: 8px;
+	padding: 10px;
+	border-style: solid;
+	border-color: #576f9b;
+	border-width: 2px;
+	border-radius: 10px;
+}
+
+.Optional-f > input {
+	font-size: 1.5rem;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: 8px;
+	padding: 10px;
+	border-style: solid;
+	border-color: #576f9b;
+	border-width: 2px;
+	border-radius: 10px;
+}

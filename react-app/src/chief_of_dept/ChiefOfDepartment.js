@@ -2,6 +2,7 @@ import React from "react";
 import "./ChiefOfDepartment.css";
 import ViewProfile from "../view_profile/ViewProfile";
 import ModifyProfile from "../modify_profile/ModifyProfile";
+import ManageOptionals from "../manage_optionals/ManageOptionals";
 import { UserContext } from "../App";
 
 function ChiefFeatureSelector({ feature_name }) {
@@ -14,6 +15,9 @@ function ChiefFeatureSelector({ feature_name }) {
 			return <ModifyProfile />;
 		}
 
+		case "manage_optionals": {
+			return <ManageOptionals />;
+		}
 		default: {
 		}
 	}
@@ -40,7 +44,7 @@ function ChiefOfDepartment({ setUserData }) {
 					<div className="Sidebar-item">
 						<p>Manage Grades</p>
 					</div>
-					<div className="Sidebar-item">
+					<div className="Sidebar-item" onClick={() => setFeature("manage_optionals")}>
 						<p>Manage Optionals</p>
 					</div>
 					<div className="Sidebar-item">
