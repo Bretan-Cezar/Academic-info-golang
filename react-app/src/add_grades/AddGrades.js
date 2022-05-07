@@ -5,7 +5,7 @@ import { UserContext } from "../App";
 
 let baseUrl = "http://localhost:1337/http://localhost:8090/teacher/";
 
-function handlePutGrade(event, userData, discipline, student) {
+function handlePutGrade(event, userData, discipline, student, grade, set, setMsg) {
 	event.preventDefault();
 
 	const gReqOptions = {
@@ -18,7 +18,7 @@ function handlePutGrade(event, userData, discipline, student) {
 		body: JSON.stringify({
 			disciplineId: discipline,
 			studentId: student,
-			value: event.target.value,
+			value: grade,
 		}),
 	};
 
@@ -26,44 +26,53 @@ function handlePutGrade(event, userData, discipline, student) {
 
 	fetch(gRequest)
 		.then((response) => {
-			response.json();
+			return response.text();
 		})
 		.then((data) => {
-			console.log(data);
+			setMsg(data);
+			set(-1);
 		});
 }
 
-function IdForm({ discipline, set }) {
+function IdForm({ discipline, set, msg }) {
+	let [localStudent, setLocalStudent] = React.useState("");
+
 	if (discipline != -1) {
 		return (
-			<form
-				className="Id-input"
-				onSubmit={(event) => {
-					event.preventDefault();
-				}}
-			>
-				<input
-					type="text"
-					placeholder="Student ID"
-					onChange={(event) => {
-						set(event.target.value);
+			<>
+				<form
+					className="Id-input"
+					onSubmit={(event) => {
+						event.preventDefault();
+						set(localStudent);
 					}}
-				></input>
-				<button type="submit">Select</button>
-			</form>
+				>
+					<input
+						type="text"
+						placeholder="Student ID"
+						onChange={(event) => {
+							setLocalStudent(event.target.value);
+						}}
+					></input>
+					<button type="submit">Select</button>
+				</form>
+				<p>{msg}</p>
+			</>
 		);
 	}
 }
 
-function GradeForm({ user, discipline, student, set }) {
+function GradeForm({ user, discipline, student, set, setMsg }) {
+	let [localGrade, setLocalGrade] = React.useState("");
+
 	if (student != -1) {
 		return (
-			<form className="Grade-input" onSubmit={(e) => handlePutGrade(e, user, discipline, student)}>
+			<form className="Grade-input" onSubmit={(e) => handlePutGrade(e, user, discipline, student, localGrade, set, setMsg)}>
 				<input
 					type="text"
 					placeholder="Grade"
-					onChange={() => {
-						set(-1);
+					onChange={(event) => {
+						setLocalGrade(event.target.value);
 					}}
 				></input>
 				<button type="submit">Put grade</button>
@@ -99,6 +108,7 @@ function AddGrades() {
 	let [selectedDiscipline, setSelectedDiscipline] = React.useState(-1);
 	let [dataTableModel, setDataTableModel] = React.useState({ columns: dataTableColumns, rows: [] });
 	let [selectedStudent, setSelectedStudent] = React.useState(-1);
+	let [message, setMessage] = React.useState("");
 
 	React.useEffect(() => {
 		let disciplinesListUrl = baseUrl + "getDisciplines/" + userData.username;
@@ -151,8 +161,8 @@ function AddGrades() {
 	}, [userData, selectedDiscipline]);
 
 	React.useEffect(() => {
-		if (selectedDiscipline != -1 && selectedStudent != -1) {
-			let addGradeUrl = baseUrl + "addGrade";
+		if (selectedStudent != -1) {
+			setMessage("");
 		}
 	}, [userData, selectedStudent]);
 
@@ -179,8 +189,8 @@ function AddGrades() {
 					<MDBDataTable scrollX striped bordered maxHeight="50%" data={dataTableModel} />
 				</div>
 				<div className="Grades-form">
-					<IdForm discipline={selectedDiscipline} set={setSelectedStudent} />
-					<GradeForm user={userData} discipline={selectedDiscipline} student={selectedStudent} set={setSelectedStudent} />
+					<IdForm discipline={selectedDiscipline} set={setSelectedStudent} msg={message} />
+					<GradeForm user={userData} discipline={selectedDiscipline} student={selectedStudent} set={setSelectedStudent} setMsg={setMessage} />
 				</div>
 			</div>
 		</>
