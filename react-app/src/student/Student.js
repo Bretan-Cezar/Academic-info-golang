@@ -28,6 +28,9 @@ function StudentFeatureSelector({ feature_name }) {
 		case "view_grades": {
 			return <ViewGrades />;
 		}
+		case "choose_optionals": {
+			return;
+		}
 		default: {
 		}
 	}
@@ -58,11 +61,14 @@ function Student({ setUserData }) {
 					<div className="Sidebar-item" onClick={() => setFeature("view_optionals")}>
 						<p>View Optionals</p>
 					</div>
-					<div className="Sidebar-item">
-						<p>View Contract</p>
+					<div className="Sidebar-item" onClick={() => setFeature("choose_optionals")}>
+						<p>Choose Optionals</p>
 					</div>
 					<div className="Sidebar-item" onClick={() => setFeature("view_grades")}>
 						<p>View Grades</p>
+					</div>
+					<div className="Sidebar-item">
+						<p>View Contract</p>
 					</div>
 					<div className="Sidebar-logout-item" onClick={() => setUserData("")}>
 						<p>Logout</p>
