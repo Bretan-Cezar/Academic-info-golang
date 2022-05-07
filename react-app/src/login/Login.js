@@ -41,8 +41,8 @@ function LoginForm({ set }) {
 	return (
 		<>
 			<form onSubmit={submitHandler}>
-				<input placeholder="Username" onChange={(event) => setUsername(event.target.value)} />
-				<input type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)} />
+				<input className="login-input" placeholder="Username" onChange={(event) => setUsername(event.target.value)} />
+				<input className="login-input" type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)} />
 				<button type="submit">Submit</button>
 			</form>
 		</>

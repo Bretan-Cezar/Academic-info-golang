@@ -12,7 +12,6 @@ form {
 
 input {
 	height: 24%;
-	font-size: 24px;
 	color: white;
 	background-color: #282c34;
 }
@@ -26,4 +25,8 @@ button {
 
 button:active {
 	background-color: #576072;
+}
+
+.login-input {
+	font-size: 1.5rem;
 }

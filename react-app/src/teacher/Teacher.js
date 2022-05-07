@@ -3,6 +3,7 @@ import "./Teacher.css";
 import ViewProfile from "../view_profile/ViewProfile";
 import ModifyProfile from "../modify_profile/ModifyProfile";
 import ProposeOptional from "../propose_optional/ProposeOptional";
+import AddGrades from "../add_grades/AddGrades";
 
 function TeacherFeatureSelector({ feature_name }) {
 	switch (feature_name) {
@@ -16,6 +17,9 @@ function TeacherFeatureSelector({ feature_name }) {
 
 		case "propose_optional": {
 			return <ProposeOptional />;
+		}
+		case "add_grades": {
+			return <AddGrades />;
 		}
 		default: {
 		}
@@ -43,7 +47,7 @@ function Teacher({ setUserData }) {
 					<div className="Sidebar-item" onClick={() => setFeature("propose_optional")}>
 						<p>Propose Optional</p>
 					</div>
-					<div className="Sidebar-item">
+					<div className="Sidebar-item" onClick={() => setFeature("add_grades")}>
 						<p>Manage Grades</p>
 					</div>
 					<div className="Sidebar-logout-item" onClick={() => setUserData("")}>

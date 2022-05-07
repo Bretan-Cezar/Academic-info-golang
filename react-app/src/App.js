@@ -35,7 +35,7 @@ function App() {
 	}
 
 	// let userType = userData.user_type
-	let userType = "chief";
+	let userType = "teacher";
 
 	switch (userType) {
 		case "student":
