@@ -20,47 +20,66 @@ function DisciplineList({ discipline_array }) {
 function ViewCurriculum() {
 	const userData = React.useContext(UserContext);
 
-	let curriculumsList;
+	let [curriculumsList, setCurriculumsList] = React.useState([]);
 
-	curriculumsList = [
-		{ id: 120, specialisation: "Computer Science in English", yearOfStudy: 1 },
-		{ id: 121, specialisation: "Computer Science in English", yearOfStudy: 2 },
-	];
+	// curriculumsList = [
+	// 	{ cid: 120, specialisation: "Computer Science in English", yearNo: 1 },
+	// 	{ cid: 121, specialisation: "Computer Science in English", yearNo: 2 },
+	// ];
 
 	let [selectedCurriculum, setSelectedCurriculum] = React.useState(-1);
 	let [disciplines, setDisciplines] = React.useState([]);
 
 	React.useEffect(() => {
-		let url = "http://localhost:1337/http://localhost:8090/user/getCurriculum/";
-		url += userData.user_id;
+		let cListUrl = "http://localhost:1337/http://localhost:8090/user/getYears/" + userData.username;
 
-		// data = [{discipline_type: mandatory/optional, discipline_name: ..., teacher_name: ..., credit_count: ...}, ...]
+		const cListReqOptions = {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "origin",
+				Authorization: "Bearer " + userData.auth_token,
+			},
+		};
 
-		/*
-      	url += "/" + { selectedCurriculum };
-      	fetch(url)
-      	.then(response => response.json())
-      	.then(data => setDisciplines(data))
-        */
+		const cListReq = new Request(cListUrl, cListReqOptions);
 
-		console.log(selectedCurriculum);
+		fetch(cListReq)
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				console.log(data);
+				setCurriculumsList(data);
+			});
+	}, [userData]);
 
-		if (selectedCurriculum == 120) {
-			console.log("120");
-			setDisciplines([
-				{ discipline_type: "mandatory", discipline_name: "Systems For Design & Implementation", teacher_name: "Dr. Gaceanu", credit_count: 6 },
-				{ discipline_type: "optional", discipline_name: "A/V Data Processing", teacher_name: "Forest", credit_count: 4 },
-			]);
-		} else if (selectedCurriculum == 121) {
-			console.log("121");
-			setDisciplines([
-				{ discipline_type: "mandatory", discipline_name: "Data Structures & Algorithms", teacher_name: "Zsu", credit_count: 5 },
-				{ discipline_type: "optional", discipline_name: "C Programming", teacher_name: "Grebla", credit_count: 3 },
-			]);
-		} else {
-			setDisciplines([]);
+	React.useEffect(() => {
+		if (selectedCurriculum != -1) {
+			let dListUrl = "http://localhost:1337/http://localhost:8090/user/getCurriculum/" + userData.username + "/" + selectedCurriculum;
+
+			// data = [{discipline_type: mandatory/optional, discipline_name: ..., teacher_name: ..., credit_count: ...}, ...]
+
+			const dListReqOptions = {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					"Access-Control-Allow-Origin": "origin",
+					Authorization: "Bearer " + userData.auth_token,
+				},
+			};
+
+			const dListReq = new Request(dListUrl, dListReqOptions);
+
+			fetch(dListReq)
+				.then((response) => {
+					return response.json();
+				})
+				.then((data) => {
+					setDisciplines(data);
+				});
 		}
-	}, [userData.user_id, userData.full_name, selectedCurriculum]);
+	}, [userData, selectedCurriculum]);
 
 	return (
 		<>
@@ -73,8 +92,8 @@ function ViewCurriculum() {
 			>
 				<option value="-1">--Select--</option>
 				{curriculumsList.map((curriculum) => (
-					<option key={curriculum.id} value={curriculum.id}>
-						{curriculum.specialisation + " - year " + curriculum.yearOfStudy}
+					<option key={curriculum.curriculumId} value={curriculum.curriculumId}>
+						{curriculum.specialization + " - year " + curriculum.year_number}
 					</option>
 				))}
 			</select>
