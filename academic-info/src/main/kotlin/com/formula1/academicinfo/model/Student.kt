@@ -30,4 +30,16 @@ class Student(){
     @JsonIgnore
     var yearsOfStudyStudent: MutableSet<YearOfStudy> = mutableSetOf()
 
+    fun addOptional(optional: OptionalDiscipline, priority: Int) {
+        val selection = OptionalsSelection()
+        selection.optionalsSelectionId?. let()
+        {
+            it.studentId = this.studentId
+            it.oDisciplineId = optional.oDisciplineId
+        }
+        selection.priority = priority
+        optionalsSelections.add(selection)
+        optional.optionalsSelections.add(selection)
+    }
+
 }

@@ -7,7 +7,6 @@ import javax.persistence.*
 @Entity
 @Table(name = "optionals_selection")
 class OptionalsSelection(){
-
     @EmbeddedId
     var optionalsSelectionId: OptionalsSelectionId? = null
 
