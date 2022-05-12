@@ -22,11 +22,6 @@ function ViewCurriculum() {
 
 	let [curriculumsList, setCurriculumsList] = React.useState([]);
 
-	// curriculumsList = [
-	// 	{ cid: 120, specialisation: "Computer Science in English", yearNo: 1 },
-	// 	{ cid: 121, specialisation: "Computer Science in English", yearNo: 2 },
-	// ];
-
 	let [selectedCurriculum, setSelectedCurriculum] = React.useState(-1);
 	let [disciplines, setDisciplines] = React.useState([]);
 

@@ -6,6 +6,7 @@ import ViewProfile from "../view_profile/ViewProfile";
 import ModifyProfile from "../modify_profile/ModifyProfile";
 import ViewOptionals from "../view_optionals/ViewOptionals";
 import ViewGrades from "../view_grades/ViewGrades";
+import ChooseOptionals from "../choose_optionals/ChooseOptionals";
 
 function StudentFeatureSelector({ feature_name }) {
 	switch (feature_name) {
@@ -28,9 +29,11 @@ function StudentFeatureSelector({ feature_name }) {
 		case "view_grades": {
 			return <ViewGrades />;
 		}
+
 		case "choose_optionals": {
-			return;
+			return <ChooseOptionals />;
 		}
+
 		default: {
 		}
 	}
