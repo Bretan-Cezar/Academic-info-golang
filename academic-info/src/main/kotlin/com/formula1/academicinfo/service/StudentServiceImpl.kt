@@ -3,8 +3,10 @@ package com.formula1.academicinfo.service
 import com.formula1.academicinfo.dtos.FacultyandSpecializationDto
 import com.formula1.academicinfo.dtos.GradeDto
 import com.formula1.academicinfo.dtos.OptionalDisciplineDto
-import com.formula1.academicinfo.model.*
-import com.formula1.academicinfo.model.composite.GradeId
+import com.formula1.academicinfo.model.Faculty
+import com.formula1.academicinfo.model.OptionalsSelection
+import com.formula1.academicinfo.model.Teacher
+import com.formula1.academicinfo.model.YearOfStudy
 import com.formula1.academicinfo.repository.*
 import org.springframework.stereotype.Service
 
@@ -15,7 +17,8 @@ class StudentServiceImpl (
     private val optionalDisciplineRepository: OptionalDisciplineRepository,
     private val teacherRepository: TeacherRepository,
     private val curriculumRepository: CurriculumRepository,
-    private val gradeRepository: GradeRepository
+    private val gradeRepository: GradeRepository,
+    private val optionalsSelectionRepository: OptionalsSelectionRepository
 
         ): StudentService{
     //    override fun getMandatoryDisciplinesByStudentId(id: Int): List<MandatoryDiscipline> {
@@ -74,13 +77,13 @@ class StudentServiceImpl (
     override fun getSpecializations(username: String, facultyId: Int): MutableSet<YearOfStudy> {
         val user = this.userRepository.findUserByUsername(username)
 
-        val student = this.studentRepository.getStudentByStudentId(user.userId)
+        val student = user.let { this.studentRepository.getStudentByStudentId(it.userId) }
 
         val yearsOfStudy = mutableSetOf<YearOfStudy>()
         for(yos in student.yearsOfStudyStudent)
-            if(yos.facultyYos.facultyId == facultyId){
-                yearsOfStudy.add(yos)
-            }
+                if(yos.facultyYos.facultyId == facultyId){
+                    yearsOfStudy.add(yos)
+                }
 
         return yearsOfStudy
     }
@@ -88,11 +91,11 @@ class StudentServiceImpl (
     override fun getFaculties(username: String): MutableSet<Faculty> {
         val user = this.userRepository.findUserByUsername(username)
 
-        val student = this.studentRepository.getStudentByStudentId(user.userId)
+        val student = user.let { this.studentRepository.getStudentByStudentId(it.userId) }
 
         val faculties = mutableSetOf<Faculty>()
         for(yos in student.yearsOfStudyStudent)
-            faculties.add(yos.facultyYos)
+                faculties.add(yos.facultyYos)
 
         return faculties
     }
@@ -100,24 +103,24 @@ class StudentServiceImpl (
     override fun getFacultiesAndSpecializations(username: String): MutableSet<FacultyandSpecializationDto> {
         val user = this.userRepository.findUserByUsername(username)
 
-        val student = this.studentRepository.getStudentByStudentId(user.userId)
+        val student = user.let { this.studentRepository.getStudentByStudentId(it.userId) }
 
         val yearsOfStudy = student.yearsOfStudyStudent
 
         val result = mutableSetOf<FacultyandSpecializationDto>()
 
         for(year in yearsOfStudy){
-            val options = FacultyandSpecializationDto()
+                val options = FacultyandSpecializationDto()
 
-            options.studentId = student.studentId
-            options.facultyName = year.facultyYos.facultyName
-            options.yosId = year.yosId
-            options.specialization = year.specialization
-            options.yearNo = year.yearNo
+                options.studentId = student.studentId
+                options.facultyName = year.facultyYos.facultyName
+                options.yosId = year.yosId
+                options.specialization = year.specialization
+                options.yearNo = year.yearNo
 
-            result.add(options)
+                result.add(options)
 
-        }
+            }
 
         return result
     }
@@ -126,31 +129,43 @@ class StudentServiceImpl (
 
         val user = this.userRepository.findUserByUsername(username)
 
-        val student = this.studentRepository.getStudentByStudentId(user.userId)
+        val student = user.let { this.studentRepository.getStudentByStudentId(it.userId) }
 
         val curriculum = this.curriculumRepository.findCurriculumByCurriculumYos(yosId)
 
         val result = mutableSetOf<GradeDto>()
 
         for(discipline in curriculum.disciplines){
-            for(grade in student.grades)
-            {
-                if(grade.gradeDiscipline.disciplineId == discipline.disciplineId){
-                    val g = GradeDto()
+            for(grade in student.grades) {
+                    if(grade.gradeDiscipline.disciplineId == discipline.disciplineId){
+                        val g = GradeDto()
 
-                    g.isOptional = discipline.isOptional
-                    g.creditCount = discipline.creditCount
-                    g.disciplineName = discipline.disciplineName
-                    g.value = grade.value.toString()
+                        g.isOptional = discipline.isOptional
+                        g.creditCount = discipline.creditCount
+                        g.disciplineName = discipline.disciplineName
+                        g.value = grade.value.toString()
 
-                    result.add(g)
+                        result.add(g)
+                    }
                 }
-            }
 
         }
 
         return result
 
+    }
+
+    override fun addOptionalDiscipline(username: String, disciplineName: String, priority: Int) : String {
+        val discipline = optionalDisciplineRepository.getOptionalDisciplineByName(disciplineName)
+        val user = userRepository.findUserByUsername(username)
+        val student = studentRepository.getStudentByStudentId(user.userId)
+
+        optionalsSelectionRepository.save(student.createOptional(discipline, priority))
+        return "Added"
+    }
+
+    override fun getOptionals(): MutableList<OptionalsSelection> {
+        return optionalsSelectionRepository.findAll();
     }
 
 }

@@ -1,11 +1,10 @@
 package com.formula1.academicinfo.model
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.formula1.academicinfo.model.Curriculum
 import javax.persistence.*
 
 @Entity
 @Table(name = "student")
-class Student(){
+class Student{
     @Id
     @Column(name = "student_id", nullable = false)
     var studentId: Int = 0
@@ -19,7 +18,7 @@ class Student(){
     @Column(name = "group", nullable = false)
     var group: String = ""
 
-    @OneToMany(mappedBy = "optionalsSelectionStudent")
+    @OneToMany(mappedBy = "optionalsSelectionStudent", cascade = [CascadeType.ALL])
     var optionalsSelections: MutableSet<OptionalsSelection> = mutableSetOf()
 
     @OneToMany(mappedBy = "gradeStudent")
@@ -30,16 +29,24 @@ class Student(){
     @JsonIgnore
     var yearsOfStudyStudent: MutableSet<YearOfStudy> = mutableSetOf()
 
-    fun addOptional(optional: OptionalDiscipline, priority: Int) {
-        val selection = OptionalsSelection()
-        selection.optionalsSelectionId?. let()
-        {
-            it.studentId = this.studentId
-            it.oDisciplineId = optional.oDisciplineId
-        }
+    fun createOptional(optional: OptionalDiscipline, priority: Int) : OptionalsSelection {
+        val selection = OptionalsSelection(this, optional)
         selection.priority = priority
-        optionalsSelections.add(selection)
-        optional.optionalsSelections.add(selection)
+
+        return selection
+    }
+
+    fun removeOptional(optional: OptionalDiscipline) {
+        optionalsSelections.forEach()
+        {
+            if (it.optionalsSelectionStudent == this && it.optionalsSelectionDiscipline == optional)
+            {
+                optionalsSelections.remove(it)
+                it.optionalsSelectionDiscipline!!.optionalsSelections.remove(it)
+                it.optionalsSelectionStudent = null
+                it.optionalsSelectionDiscipline = null
+            }
+        }
     }
 
 }

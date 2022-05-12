@@ -3,9 +3,8 @@ package com.formula1.academicinfo.service
 import com.formula1.academicinfo.dtos.FacultyandSpecializationDto
 import com.formula1.academicinfo.dtos.GradeDto
 import com.formula1.academicinfo.dtos.OptionalDisciplineDto
-import com.formula1.academicinfo.model.Discipline
 import com.formula1.academicinfo.model.Faculty
-import com.formula1.academicinfo.model.OptionalDiscipline
+import com.formula1.academicinfo.model.OptionalsSelection
 import com.formula1.academicinfo.model.YearOfStudy
 import org.springframework.stereotype.Service
 
@@ -23,4 +22,8 @@ interface StudentService {
       fun getFaculties(username: String): MutableSet<Faculty>
 
       fun getGrades(username: String, yosId: Int): MutableSet<GradeDto>
+
+      fun addOptionalDiscipline(username: String, disciplineName: String, priority: Int) : String
+
+      fun getOptionals(): MutableList<OptionalsSelection>
 }

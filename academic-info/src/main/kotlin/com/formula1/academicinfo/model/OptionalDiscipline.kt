@@ -20,7 +20,7 @@ class OptionalDiscipline() {
     @JoinColumn(name = "optional_discipline_id")
     var optionalDiscipline: Discipline? = null
 
-    @OneToMany(mappedBy = "optionalsSelectionDiscipline")
+    @OneToMany(mappedBy = "optionalsSelectionDiscipline", cascade = [CascadeType.PERSIST])
     var optionalsSelections: MutableSet<OptionalsSelection> = mutableSetOf()
 
 }
