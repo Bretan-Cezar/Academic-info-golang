@@ -1,4 +1,5 @@
 package com.formula1.academicinfo.repository
+import com.formula1.academicinfo.model.Curriculum
 import com.formula1.academicinfo.model.Discipline
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
@@ -15,4 +16,6 @@ interface DisciplineRepository: JpaRepository<Discipline, Int> {
     @Query("SELECT d FROM Discipline d WHERE d.disciplineId=:id")
     fun findDisciplineByDisciplineId(@Param("id") id: Int): Discipline
 
+    @Query("SELECT d FROM Discipline d WHERE :curriculum IN (d.curriculums)")
+    fun findDisciplinesByCurriculum(@Param("curriculum") curriculum: Curriculum) :MutableSet<Discipline>
 }
