@@ -25,7 +25,7 @@ class TeacherServiceImpl(
 
         val teacher = this.teacherRepository.findTeacherByTeacherId(user.userId)
 
-        if(disciplineRepository.findDisciplineByDisciplineName(disciplineName) == null) {
+//        if(disciplineRepository.findDisciplineByDisciplineName(disciplineName) == null) {
             if (teacher.degree == "lecturer") {
                 val discipline = Discipline()
                 discipline.isOptional = true
@@ -45,10 +45,10 @@ class TeacherServiceImpl(
             else {
                 return "You don't have permission to propose optionals!"
             }
-        }
-        else {
-            return "There already exists an optional with the given name!"
-        }
+//        }
+//        else {
+//            return "There already exists an optional with the given name!"
+//        }
         return "Optional added successfully!"
     }
 
