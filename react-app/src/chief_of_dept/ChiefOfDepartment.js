@@ -3,7 +3,8 @@ import "./ChiefOfDepartment.css";
 import ViewProfile from "../view_profile/ViewProfile";
 import ModifyProfile from "../modify_profile/ModifyProfile";
 import ManageOptionals from "../manage_optionals/ManageOptionals";
-import { UserContext } from "../App";
+import AddGrades from "../add_grades/AddGrades";
+import FilterDisciplines from "../filter_disciplines/FilterDisciplines";
 
 function ChiefFeatureSelector({ feature_name }) {
 	switch (feature_name) {
@@ -17,6 +18,14 @@ function ChiefFeatureSelector({ feature_name }) {
 
 		case "manage_optionals": {
 			return <ManageOptionals />;
+		}
+
+		case "manage_grades": {
+			return <AddGrades />;
+		}
+
+		case "filter_disciplines": {
+			return <FilterDisciplines />;
 		}
 		default: {
 		}
@@ -41,7 +50,7 @@ function ChiefOfDepartment({ setUserData }) {
 					<div className="Sidebar-item" onClick={() => setFeature("modify_profile")}>
 						<p>Modify Profile</p>
 					</div>
-					<div className="Sidebar-item">
+					<div className="Sidebar-item" onClick={() => setFeature("manage_grades")}>
 						<p>Manage Grades</p>
 					</div>
 					<div className="Sidebar-item" onClick={() => setFeature("manage_optionals")}>
@@ -49,6 +58,9 @@ function ChiefOfDepartment({ setUserData }) {
 					</div>
 					<div className="Sidebar-item">
 						<p>View (Filter/Sort) Disciplines</p>
+					</div>
+					<div className="Sidebar-item">
+						<p>View (Filter/Sort) Teachers</p>
 					</div>
 					<div className="Sidebar-logout-item" onClick={() => setUserData("")}>
 						<p>Logout</p>

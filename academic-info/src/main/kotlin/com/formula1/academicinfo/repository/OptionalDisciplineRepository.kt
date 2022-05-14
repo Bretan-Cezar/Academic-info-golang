@@ -13,6 +13,11 @@ interface OptionalDisciplineRepository: JpaRepository<OptionalDiscipline, Int> {
     @Query("SELECT d From OptionalDiscipline d WHERE d.oDisciplineId=:id")
     fun getOptionalDisciplineByODisciplineId(@Param ("id") id: Int): OptionalDiscipline
 
+    @Query("select od " +
+            "from OptionalDiscipline od join Discipline d on od.oDisciplineId = d.disciplineId " +
+            "where d.disciplineName = :name")
+    fun getOptionalDisciplineByName(@Param("name") name: String) : OptionalDiscipline
+
 
     @Modifying(clearAutomatically = true)
     @Transactional

@@ -24,7 +24,8 @@ class OptionalDiscipline() {
     var optionalDiscipline: Discipline? = null
 
     @OneToMany(mappedBy = "optionalsSelectionDiscipline",
-        fetch = FetchType.LAZY)
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.PERSIST])
     var optionalsSelections: MutableSet<OptionalsSelection> = mutableSetOf()
 
 }
