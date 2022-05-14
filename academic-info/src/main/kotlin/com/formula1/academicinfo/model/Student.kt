@@ -19,7 +19,8 @@ class Student(){
     @Column(name = "group", nullable = false)
     var group: String = ""
 
-    @OneToMany(mappedBy = "optionalsSelectionStudent")
+    @OneToMany(mappedBy = "optionalsSelectionStudent",
+        fetch = FetchType.LAZY)
     var optionalsSelections: MutableSet<OptionalsSelection> = mutableSetOf()
 
     @OneToMany(mappedBy = "gradeStudent")

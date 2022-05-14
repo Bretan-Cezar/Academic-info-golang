@@ -18,4 +18,9 @@ interface OptionalDisciplineRepository: JpaRepository<OptionalDiscipline, Int> {
     @Transactional
     @Query("Update OptionalDiscipline o set o.approved=:approved, o.maxAttendants=:maxAttendants WHERE o.oDisciplineId=:oid")
     fun update(@Param("oid") oid: Int, @Param("approved") approved: Boolean, @Param("maxAttendants") maxAttendants: Int): Int
+
+    @Modifying(clearAutomatically = false)
+    @Transactional
+    @Query("update OptionalDiscipline o set o.currentAttendants = o.currentAttendants + 1 where o.oDisciplineId = :oid")
+    fun increaseCurrentAttendants(@Param("oid") oid: Int)
 }

@@ -45,7 +45,7 @@ class StudentServiceImpl (
 
     override fun getOptionalDisciplines(username: String, facultyId: Int): MutableSet<OptionalDisciplineDto> {
 
-        val teacherList: MutableSet<Teacher> = teacherRepository.findTeachersByFacultyId(facultyId)
+        val teacherList: Set<Teacher> = teacherRepository.findTeachersByFacultyId(facultyId)
 
         val optionals = mutableSetOf<OptionalDisciplineDto>()
         for(teacher in teacherList)

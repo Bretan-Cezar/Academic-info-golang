@@ -20,14 +20,15 @@ class Teacher(){
     var degree: String = ""
 
     @OneToOne(mappedBy = "teacherFaculty", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @JsonIgnore
     var faculty: Faculty = Faculty()
 
     @ManyToOne
     @JoinColumn(name="faculty_id", nullable=false)
+    @JsonIgnore
     var facultyTeacher: Faculty? = null
 
     @OneToMany(mappedBy = "teacherDiscipline")
-    // ??
     @JsonIgnore
     var disciplines: MutableSet<Discipline> = mutableSetOf()
 

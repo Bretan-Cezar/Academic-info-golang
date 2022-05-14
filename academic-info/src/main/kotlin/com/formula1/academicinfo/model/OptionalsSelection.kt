@@ -13,12 +13,16 @@ class OptionalsSelection(){
     @Column(name = "priority", nullable = false)
     var priority: Int = 0
 
-    @ManyToOne
+    @ManyToOne(
+        fetch = FetchType.LAZY
+    )
     @MapsId("studentId")
     @JoinColumn(name = "student_id")
     var optionalsSelectionStudent: Student? = null
 
-    @ManyToOne
+    @ManyToOne(
+        fetch = FetchType.LAZY
+    )
     @MapsId("oDisciplineId")
     @JoinColumn(name = "optional_discipline_id")
     var optionalsSelectionDiscipline: OptionalDiscipline? = null

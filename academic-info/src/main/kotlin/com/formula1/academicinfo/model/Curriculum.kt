@@ -3,8 +3,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "curriculum")
-class Curriculum(){
-
+class Curriculum{
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name = "curriculum_id", nullable = false)
@@ -14,7 +13,28 @@ class Curriculum(){
     @JoinColumn(name = "year_of_study_id")
     var curriculumYos: YearOfStudy = YearOfStudy()
 
-    @ManyToMany(mappedBy = "curriculums")
+    @ManyToMany(
+        fetch = FetchType.EAGER,
+        cascade = [CascadeType.PERSIST,
+            CascadeType.MERGE])
+    @JoinTable(name = "curriculum_discipline_distribution",
+        joinColumns = [JoinColumn(name = "curriculum_id")],
+        inverseJoinColumns = [JoinColumn(name = "discipline_id")])
     var disciplines: MutableSet<Discipline> = mutableSetOf()
 
+    fun addDiscipline(discipline: Discipline) {
+        this.disciplines.add(discipline)
+        discipline.curriculums.add(this)
+    }
+
+    fun removeDiscipline(disciplineId: Int) {
+        val discipline = disciplines.stream().filter {
+            it.disciplineId == disciplineId
+        }.findFirst().orElse(null)
+
+        discipline ?. let {
+            disciplines.remove(it)
+            it.curriculums.remove(this)
+        }
+    }
 }

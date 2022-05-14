@@ -5,9 +5,8 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
 interface DisciplineRepository: JpaRepository<Discipline, Int> {
-
-    @Query("SELECT count(d) > 0 FROM Discipline d WHERE d.disciplineId=:did")
-    fun existsDisciplineByDisciplineId(@Param("did") id: Int): Boolean
+//    @Query("SELECT count(d) > 0 FROM Discipline d WHERE d.disciplineId=:did")
+//    fun existsDisciplineByDisciplineId(@Param("did") id: Int): Boolean
 
     @Query("SELECT d FROM Discipline d WHERE d.disciplineName=:uName")
     fun findDisciplineByDisciplineName(@Param("uName") name: String): Discipline?
@@ -15,4 +14,11 @@ interface DisciplineRepository: JpaRepository<Discipline, Int> {
     @Query("SELECT d FROM Discipline d WHERE d.disciplineId=:id")
     fun findDisciplineByDisciplineId(@Param("id") id: Int): Discipline
 
+    @Query("select d " +
+            "from Discipline d join Teacher t on d.teacherDiscipline.teacherId = t.teacherId " +
+            "join Faculty f on t.facultyTeacher.facultyId = f.facultyId " +
+            "join YearOfStudy yos on f.facultyId = yos.facultyYos.facultyId " +
+            "where t.teacherId = :teacherId and yos.yosId = :yosId")
+    fun findDisciplinesByTeacherIdAndYear(@Param("teacherId") teacherId: Int,
+                                            @Param("yosId") yosId: Int) : List<Discipline>
 }

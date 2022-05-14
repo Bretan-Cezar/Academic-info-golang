@@ -13,6 +13,9 @@ class OptionalDiscipline() {
     @Column(name = "max_attendants")
     var maxAttendants: Int = 0
 
+    @Column(name = "current_attendants")
+    var currentAttendants: Int = 0
+
     @Column(name = "approved")
     var approved: Boolean = false
 
@@ -20,7 +23,8 @@ class OptionalDiscipline() {
     @JoinColumn(name = "optional_discipline_id")
     var optionalDiscipline: Discipline? = null
 
-    @OneToMany(mappedBy = "optionalsSelectionDiscipline")
+    @OneToMany(mappedBy = "optionalsSelectionDiscipline",
+        fetch = FetchType.LAZY)
     var optionalsSelections: MutableSet<OptionalsSelection> = mutableSetOf()
 
 }
