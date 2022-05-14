@@ -31,6 +31,8 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
+	implementation("com.github.librepdf:openpdf:1.3.28")
+
 }
 
 tasks.withType<KotlinCompile> {

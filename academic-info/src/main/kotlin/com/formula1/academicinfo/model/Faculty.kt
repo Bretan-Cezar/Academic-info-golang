@@ -39,4 +39,7 @@ class Faculty(){
     @JsonIgnore
     var yos: MutableSet<YearOfStudy> = mutableSetOf()
 
+    @OneToMany(mappedBy = "facultyAdmin")
+    @JsonIgnore
+    var admins: MutableSet<Admin> = mutableSetOf()
 }
