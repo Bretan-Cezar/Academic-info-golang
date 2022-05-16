@@ -13,4 +13,6 @@ interface ChiefOfDepartmentService {
     fun getDisciplinesGivenByTeacherInAYear(teacherId: Int, yearId: Int) : List<Discipline>
 
     fun getTeachers(facultyId: Int) : Set<Teacher>
+
+    fun checkIfUserIsChiefOfDepartment(username: String) : Boolean
 }

@@ -168,6 +168,10 @@ class StudentServiceImpl (
         return optionalsSelectionRepository.findAll();
     }
 
+    override fun checkIfUserIsStudent(username: String): Boolean {
+        return studentRepository.getStudentByUsername(username) != null
+    }
+
 }
 
 

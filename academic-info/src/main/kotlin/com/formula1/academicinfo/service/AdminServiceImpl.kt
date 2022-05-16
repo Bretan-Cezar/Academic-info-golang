@@ -20,4 +20,9 @@ class AdminServiceImpl(
             return@map StudentResultDto(user.fullName, student.group, it.gradeAverage)
         }.toList()
     }
+
+    override fun checkIfUserIsAdmin(username: String): Boolean {
+        val a = adminRepository.findAdminByUsername(username)
+        return a != null
+    }
 }

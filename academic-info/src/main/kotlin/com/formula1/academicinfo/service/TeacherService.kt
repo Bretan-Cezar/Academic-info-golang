@@ -11,4 +11,6 @@ interface TeacherService {
     fun getStudentsForDiscipline(username: String, disciplineId: Int): MutableSet<StudentDto>
 
     fun addGrade(disciplineId: Int, studentId: Int, value: Int): String
+
+    fun checkIfUserIsTeacher(username: String) : Boolean
 }

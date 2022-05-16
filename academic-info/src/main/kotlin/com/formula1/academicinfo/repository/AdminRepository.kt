@@ -19,4 +19,11 @@ interface AdminRepository : JpaRepository<Admin, Int> {
                 "order by avg(g.value)"
     )
     fun getStudentsByResults(@Param("adminId") adminId: Int) : Set<GetStudentByGradeDto>
+
+    @Query(
+        "select a " +
+        "from Admin a join User u on a.adminId = u.userId " +
+        "where u.username = :username"
+    )
+    fun findAdminByUsername(@Param("username") username: String) : Admin?
 }

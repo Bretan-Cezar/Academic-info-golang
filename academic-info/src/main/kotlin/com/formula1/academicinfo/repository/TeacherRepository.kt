@@ -13,4 +13,11 @@ interface TeacherRepository: JpaRepository<Teacher, Int> {
 
     @Query("SELECT t FROM Teacher t where t.facultyTeacher.facultyId=:fid")
     fun findTeachersByFacultyId(@Param("fid") id: Int): Set<Teacher>
+
+    @Query(
+        "select t " +
+        "from Teacher t join User u on t.teacherId = u.userId " +
+        "where u.username = :username"
+    )
+    fun findTeacherByUsername(@Param("username") username: String): Teacher?
 }

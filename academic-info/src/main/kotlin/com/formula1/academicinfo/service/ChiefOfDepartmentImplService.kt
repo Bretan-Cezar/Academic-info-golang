@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service
 class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: OptionalDisciplineRepository,
                                    private val disciplineRepository: DisciplineRepository,
                                    private val teacherRepository: TeacherRepository,
-                                   private val userRepository: UserRepository
+                                   private val userRepository: UserRepository,
+                                   private val facultyRepository: FacultyRepository
 ): ChiefOfDepartmentService {
 
     override fun getOptionals(username: String): MutableSet<OptionalDisciplineChiefDto> {
@@ -66,6 +67,14 @@ class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: Op
 
     override fun getTeachers(facultyId: Int): Set<Teacher> {
         return teacherRepository.findTeachersByFacultyId(facultyId)
+    }
+
+    override fun checkIfUserIsChiefOfDepartment(username: String): Boolean {
+        val teacherId = teacherRepository.findTeacherByUsername(username)?.teacherId
+        teacherId?.let {
+            return facultyRepository.findFacultyByChiefOfDepartmentId(it) != null
+        }
+        return false
     }
 }
 
