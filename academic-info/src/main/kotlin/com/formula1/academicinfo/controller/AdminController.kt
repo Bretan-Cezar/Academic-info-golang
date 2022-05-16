@@ -20,9 +20,6 @@ class AdminController(
                             @PathVariable("type") type: String,
                             httpServletResponse: HttpServletResponse) {
         val exporter = studentResultExporterFactoryInterface.createFromType(type)
-        httpServletResponse.contentType = "application/pdf"
-
-        httpServletResponse.setHeader("Content-Disposition", "attachment; filename=grades.pdf")
 
         exporter.export(adminService.getStudentsByResults(adminId), httpServletResponse)
     }

@@ -7,6 +7,7 @@ object StudentResultExporterFactory : StudentResultExporterFactoryInterface {
     override fun createFromType(type: String): StudentResultExporter =
         when(type) {
             "pdf" -> StudentResultPdfExporter.getInstance()
+            "excel" -> StudentResultExcelExporter.getInstance()
             else -> throw Exception("Exporter type not supported!")
         }
 }

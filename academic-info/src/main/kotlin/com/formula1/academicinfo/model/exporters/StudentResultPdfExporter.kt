@@ -14,6 +14,10 @@ class StudentResultPdfExporter private constructor() : StudentResultExporter {
         }
     }
     override fun export(objects: List<StudentResultDto>, httpServletResponse: HttpServletResponse) {
+        httpServletResponse.contentType = "application/pdf"
+
+        httpServletResponse.setHeader("Content-Disposition", "attachment; filename=grades.pdf")
+
         val document = Document(PageSize.A4)
         PdfWriter.getInstance(document, httpServletResponse.outputStream)
 
