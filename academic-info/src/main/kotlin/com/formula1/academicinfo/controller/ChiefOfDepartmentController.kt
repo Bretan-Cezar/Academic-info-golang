@@ -43,4 +43,14 @@ class ChiefOfDepartmentController(
     fun getTeachersFromFaculty(@PathVariable("facultyId") facultyId: Int) : ResponseEntity<Any> {
         return ResponseEntity.ok(chiefOfDepartmentService.getTeachers(facultyId))
     }
+
+    @GetMapping("getBestTeacher/{chiefId}")
+    fun getBestTeacher(@PathVariable("chiefId") chiefId: Int) : ResponseEntity<Any> {
+        return ResponseEntity.ok(chiefOfDepartmentService.getBestTeacher(chiefId))
+    }
+
+    @GetMapping("getWorstTeacher/{chiefId}")
+    fun getWorstTeacher(@PathVariable("chiefId") chiefId: Int) : ResponseEntity<Any> {
+        return ResponseEntity.ok(chiefOfDepartmentService.getWorstTeacher(chiefId))
+    }
 }

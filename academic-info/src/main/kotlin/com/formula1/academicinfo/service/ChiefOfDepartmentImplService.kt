@@ -1,6 +1,8 @@
 package com.formula1.academicinfo.service
 
 import com.formula1.academicinfo.dtos.OptionalDisciplineChiefDto
+import com.formula1.academicinfo.dtos.TeacherPerfDto
+import com.formula1.academicinfo.dtos.TeacherPerformanceDto
 import com.formula1.academicinfo.model.Discipline
 import com.formula1.academicinfo.model.Teacher
 import com.formula1.academicinfo.repository.*
@@ -69,12 +71,23 @@ class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: Op
         return teacherRepository.findTeachersByFacultyId(facultyId)
     }
 
+<<<<<<< Updated upstream
     override fun checkIfUserIsChiefOfDepartment(username: String): Boolean {
         val teacherId = teacherRepository.findTeacherByUsername(username)?.teacherId
         teacherId?.let {
             return facultyRepository.findFacultyByChiefOfDepartmentId(it) != null
         }
         return false
+=======
+    override fun getBestTeacher(chiefId: Int): TeacherPerformanceDto {
+        val dto = teacherRepository.findBestTeachers(chiefId).first()
+        return TeacherPerformanceDto(userRepository.findUserById(dto.teacherId).fullName, dto.performance)
+    }
+
+    override fun getWorstTeacher(chiefId: Int): TeacherPerformanceDto {
+        val dto = teacherRepository.findBestTeachers(chiefId).last()
+        return TeacherPerformanceDto(userRepository.findUserById(dto.teacherId).fullName, dto.performance)
+>>>>>>> Stashed changes
     }
 }
 

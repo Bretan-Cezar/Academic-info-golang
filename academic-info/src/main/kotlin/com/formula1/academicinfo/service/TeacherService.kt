@@ -12,5 +12,8 @@ interface TeacherService {
 
     fun addGrade(disciplineId: Int, studentId: Int, value: Int): String
 
+<<<<<<< Updated upstream
     fun checkIfUserIsTeacher(username: String) : Boolean
+=======
+>>>>>>> Stashed changes
 }
