@@ -24,11 +24,11 @@ class AdminServiceImpl(
         }.toList()
     }
 
-<<<<<<< Updated upstream
     override fun checkIfUserIsAdmin(username: String): Boolean {
         val a = adminRepository.findAdminByUsername(username)
         return a != null
-=======
+    }
+
     override fun getAllStudentsByResults(adminId: Int): List<AllStudentsResultDto> {
         val initial = adminRepository.getStudentsByResultsDecreasing(adminId)
         return initial.stream().map {
@@ -42,6 +42,5 @@ class AdminServiceImpl(
             val user = userRepository.findUserById(it.student_id)
             return@map YearStudentsDto(user.fullName, it.year_number, it.grade)
         }.toList()
->>>>>>> Stashed changes
     }
 }

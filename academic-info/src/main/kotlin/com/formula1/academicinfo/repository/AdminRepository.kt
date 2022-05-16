@@ -20,7 +20,6 @@ interface AdminRepository : JpaRepository<Admin, Int> {
                 "order by avg(g.value)"
     )
     fun getStudentsByResults(@Param("adminId") adminId: Int) : Set<GetStudentByGradeDto>
-<<<<<<< Updated upstream
 
     @Query(
         "select a " +
@@ -28,7 +27,7 @@ interface AdminRepository : JpaRepository<Admin, Int> {
         "where u.username = :username"
     )
     fun findAdminByUsername(@Param("username") username: String) : Admin?
-=======
+
     @Query(
         "select new com.formula1.academicinfo.dtos.GetStudentByGradeDto(g.gradeStudent.studentId, avg(g.value)) " +
                 "from Admin a join Faculty f on a.facultyAdmin.facultyId = f.facultyId " +
@@ -54,5 +53,4 @@ interface AdminRepository : JpaRepository<Admin, Int> {
                 "order by ys.yearNo, avg(g.value) desc"
     )
     fun getStudentsForEachYearByResults(@Param("adminId") adminId: Int) : Set<YearStudentsResultDto>
->>>>>>> Stashed changes
 }

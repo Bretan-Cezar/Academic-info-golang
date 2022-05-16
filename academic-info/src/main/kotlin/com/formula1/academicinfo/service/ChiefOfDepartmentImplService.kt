@@ -71,14 +71,14 @@ class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: Op
         return teacherRepository.findTeachersByFacultyId(facultyId)
     }
 
-<<<<<<< Updated upstream
     override fun checkIfUserIsChiefOfDepartment(username: String): Boolean {
         val teacherId = teacherRepository.findTeacherByUsername(username)?.teacherId
         teacherId?.let {
             return facultyRepository.findFacultyByChiefOfDepartmentId(it) != null
         }
         return false
-=======
+    }
+
     override fun getBestTeacher(chiefId: Int): TeacherPerformanceDto {
         val dto = teacherRepository.findBestTeachers(chiefId).first()
         return TeacherPerformanceDto(userRepository.findUserById(dto.teacherId).fullName, dto.performance)
@@ -87,7 +87,6 @@ class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: Op
     override fun getWorstTeacher(chiefId: Int): TeacherPerformanceDto {
         val dto = teacherRepository.findBestTeachers(chiefId).last()
         return TeacherPerformanceDto(userRepository.findUserById(dto.teacherId).fullName, dto.performance)
->>>>>>> Stashed changes
     }
 }
 
