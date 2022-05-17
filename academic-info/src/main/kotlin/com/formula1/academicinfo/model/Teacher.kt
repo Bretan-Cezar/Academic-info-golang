@@ -19,6 +19,9 @@ class Teacher(){
     @Column(name = "degree", nullable = false)
     var degree: String = ""
 
+
+    ///TODO
+    ///daca vrem sa fie unidirectional, lasam doar cascade = [CascadeType.ALL], ar ajuta la timpul de executie??
     @OneToOne(mappedBy = "teacherFaculty", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var faculty: Faculty = Faculty()
 
