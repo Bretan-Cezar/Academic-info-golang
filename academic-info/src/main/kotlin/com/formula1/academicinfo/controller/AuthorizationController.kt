@@ -38,9 +38,10 @@ class AuthorizationController(
             val userDetails = userService.loadUserByUsername(request.username)
             val token = tokenManager.generateJwtToken(userDetails)
             ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, token).body(LoginMessageDto("Successful",
-                getUserType(userDetails.username).type))
+                userDetails.username, getUserType(userDetails.username).type))
         } catch (ex : BadCredentialsException) {
-            ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(LoginMessageDto("Unauthorized user", ""))
+            ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(LoginMessageDto("Unauthorized user",
+                "", "none"))
         }
     }
 
