@@ -1,5 +1,6 @@
 package com.formula1.academicinfo.model
 import com.fasterxml.jackson.annotation.JsonIgnore
+import org.hibernate.annotations.Cascade
 import javax.persistence.*
 
 @Entity
@@ -33,8 +34,10 @@ class Discipline()
     @JsonIgnore
     var grades: MutableSet<Grade> = mutableSetOf()
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "disciplines",
+        cascade = [CascadeType.PERSIST,
+                    CascadeType.MERGE]
+    )
     @JsonIgnore
-    @JoinTable(name = "curriculum_discipline_distribution", joinColumns = [JoinColumn(name = "discipline_id")], inverseJoinColumns = [JoinColumn(name = "curriculum_id")])
     var curriculums: MutableSet<Curriculum> = mutableSetOf()
 }

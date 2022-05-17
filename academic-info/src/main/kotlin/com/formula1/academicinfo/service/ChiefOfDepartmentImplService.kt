@@ -1,6 +1,10 @@
 package com.formula1.academicinfo.service
 
 import com.formula1.academicinfo.dtos.OptionalDisciplineChiefDto
+import com.formula1.academicinfo.dtos.TeacherPerfDto
+import com.formula1.academicinfo.dtos.TeacherPerformanceDto
+import com.formula1.academicinfo.model.Discipline
+import com.formula1.academicinfo.model.Teacher
 import com.formula1.academicinfo.repository.*
 import org.springframework.stereotype.Service
 
@@ -13,7 +17,6 @@ class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: Op
 ): ChiefOfDepartmentService {
 
     override fun getOptionals(username: String): MutableSet<OptionalDisciplineChiefDto> {
-
         val user = this.userRepository.findUserByUsername(username)
         val teacher = this.teacherRepository.findTeacherByTeacherId(user.userId)
         val facultyId = teacher.faculty.facultyId
@@ -58,6 +61,32 @@ class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: Op
         }
 
         return "Error while approving the optional!"
+    }
+
+    override fun getDisciplinesGivenByTeacherInAYear(teacherId: Int, yearId: Int) : List<Discipline> {
+        return disciplineRepository.findDisciplinesByTeacherIdAndYear(teacherId, yearId)
+    }
+
+    override fun getTeachers(facultyId: Int): Set<Teacher> {
+        return teacherRepository.findTeachersByFacultyId(facultyId)
+    }
+
+    override fun checkIfUserIsChiefOfDepartment(username: String): Boolean {
+        val teacherId = teacherRepository.findTeacherByUsername(username)?.teacherId
+        teacherId?.let {
+            return facultyRepository.findFacultyByChiefOfDepartmentId(it) != null
+        }
+        return false
+    }
+
+    override fun getBestTeacher(chiefId: Int): TeacherPerformanceDto {
+        val dto = teacherRepository.findBestTeachers(chiefId).first()
+        return TeacherPerformanceDto(userRepository.findUserById(dto.teacherId).fullName, dto.performance)
+    }
+
+    override fun getWorstTeacher(chiefId: Int): TeacherPerformanceDto {
+        val dto = teacherRepository.findBestTeachers(chiefId).last()
+        return TeacherPerformanceDto(userRepository.findUserById(dto.teacherId).fullName, dto.performance)
     }
 }
 

@@ -121,4 +121,8 @@ class TeacherServiceImpl(
         }
     }
 
+    override fun checkIfUserIsTeacher(username: String): Boolean {
+        return teacherRepository.findTeacherByUsername(username) != null
+    }
+
 }

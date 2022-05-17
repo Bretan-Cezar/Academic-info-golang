@@ -26,4 +26,6 @@ interface StudentService {
       fun addOptionalDiscipline(username: String, disciplineName: String, priority: Int) : String
 
       fun getOptionals(): MutableList<OptionalsSelection>
+
+      fun checkIfUserIsStudent(username: String): Boolean
 }
