@@ -21,31 +21,6 @@ class StudentServiceImpl (
     private val optionalsSelectionRepository: OptionalsSelectionRepository
 
         ): StudentService{
-    //    override fun getMandatoryDisciplinesByStudentId(id: Int): List<MandatoryDiscipline> {
-//        val curriculums : MutableSet<Curriculum>
-//        curriculums = studentRepository.getCurriculumsByStudentId(id)
-//
-//        val disciplines: MutableList<MandatoryDiscipline> = arrayListOf()
-//
-//        for (curriculum in curriculums){
-//            disciplines.addAll(mandatoryDisciplineRepository.getMandatoryDisciplinesByCurriculumId(curriculum.curriculumId))
-//        }
-//
-//        return disciplines
-//    }
-//    override fun getOptionalDisciplinesByStudentId(id: Int): List<OptionalDiscipline> {
-//        val curriculums : MutableSet<Curriculum>
-//        curriculums = studentRepository.getCurriculumsByStudentId(id)
-//
-//        val disciplines: MutableList<OptionalDiscipline> = arrayListOf()
-//
-//        for (curriculum in curriculums){
-//            disciplines.addAll(optionalDisciplineRepository.getOptionalDisciplinesByCurriculumId(curriculum.curriculumId))
-//        }
-//
-//        return disciplines
-//    }
-
     override fun getOptionalDisciplines(username: String, facultyId: Int): MutableSet<OptionalDisciplineDto> {
 
         val teacherList: Set<Teacher> = teacherRepository.findTeachersByFacultyId(facultyId)
