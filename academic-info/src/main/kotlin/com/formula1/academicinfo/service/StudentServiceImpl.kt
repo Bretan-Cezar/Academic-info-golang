@@ -56,15 +56,16 @@ class StudentServiceImpl (
                 if(optional.isOptional){
                     val optionalDiscipline = optionalDisciplineRepository.getOptionalDisciplineByODisciplineId(optional.disciplineId)
                     if(optionalDiscipline.approved){
-                        val o = OptionalDisciplineDto()
                         val u = this.userRepository.findUserById(teacher.teacherId)
                         val opt = this.optionalDisciplineRepository.getOptionalDisciplineByODisciplineId(optional.disciplineId)
 
-                        o.disciplineName = optional.disciplineName
-                        o.oDisciplineId = optional.disciplineId
-                        o.creditCount = optional.creditCount
-                        o.teacherName = u.fullName
-                        o.maxAttendants = opt.maxAttendants
+                        val o = OptionalDisciplineDto(optional.disciplineId, optional.disciplineName, opt.maxAttendants, optional.creditCount, u.fullName)
+
+//                        o.disciplineName = optional.disciplineName
+//                        o.oDisciplineId = optional.disciplineId
+//                        o.creditCount = optional.creditCount
+//                        o.teacherName = u.fullName
+//                        o.maxAttendants = opt.maxAttendants
 
                         optionals.add(o)
                     }
