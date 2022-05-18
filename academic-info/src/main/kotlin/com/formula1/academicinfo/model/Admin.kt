@@ -10,13 +10,14 @@ class Admin {
     @Column(name = "admin_id", nullable = false)
     var adminId: Int = 0
 
+//    @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
 //    @MapsId
     @JoinColumn(name = "admin_id")
     @JsonIgnore
     var adminUser: User = User()
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id", nullable = false)
     var facultyAdmin: Faculty? = null
 }

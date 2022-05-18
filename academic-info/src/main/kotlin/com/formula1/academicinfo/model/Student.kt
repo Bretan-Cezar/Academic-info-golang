@@ -9,6 +9,7 @@ class Student{
     @Column(name = "student_id", nullable = false)
     var studentId: Int = 0
 
+//    @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "student_id")
@@ -18,16 +19,19 @@ class Student{
     @Column(name = "group", nullable = false)
     var group: String = ""
 
+//    @OneToMany(mappedBy = "optionalsSelectionStudent",
+//        fetch = FetchType.LAZY,
+//        cascade = [CascadeType.ALL])
     @OneToMany(mappedBy = "optionalsSelectionStudent",
         fetch = FetchType.LAZY,
         cascade = [CascadeType.ALL])
     var optionalsSelections: MutableSet<OptionalsSelection> = mutableSetOf()
 
-    @OneToMany(mappedBy = "gradeStudent")
+    @OneToMany(mappedBy = "gradeStudent", fetch = FetchType.LAZY)
     @JsonIgnore
     var grades: MutableSet<Grade> = mutableSetOf()
 
-    @OneToMany(mappedBy = "studentYos")
+    @OneToMany(mappedBy = "studentYos", fetch = FetchType.LAZY)
     @JsonIgnore
     var yearsOfStudyStudent: MutableSet<YearOfStudy> = mutableSetOf()
 

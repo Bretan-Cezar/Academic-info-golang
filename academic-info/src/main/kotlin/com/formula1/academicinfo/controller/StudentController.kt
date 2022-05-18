@@ -15,38 +15,44 @@ class StudentController(
     private val tokenManager: TokenManager
 ) {
 
-    @GetMapping("getOptionals/{username}/{facultyId}")
-    fun getOptionals(@PathVariable("username") username: String, @PathVariable("facultyId") facultyId: Int): ResponseEntity<Any>{
+    @GetMapping("getOptionals/{facultyId}")
+    fun getOptionals(@RequestHeader("Authorization") token : String, @PathVariable("facultyId") facultyId: Int): ResponseEntity<Any>{
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         return ResponseEntity.ok(studentService.getOptionalDisciplines(username, facultyId))
     }
 
-    @GetMapping("getSpecializations/{username}/{facultyId}")
-    fun getSpecializations(@PathVariable("username") username: String, @PathVariable("facultyId") facultyId: Int): ResponseEntity<Any>{
+    @GetMapping("getSpecializations/{facultyId}")
+    fun getSpecializations(@RequestHeader("Authorization") token : String, @PathVariable("facultyId") facultyId: Int): ResponseEntity<Any>{
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         return ResponseEntity.ok(studentService.getSpecializations(username, facultyId))
     }
 
-    @GetMapping("getFaculties/{username}")
-    fun getFaculties(@PathVariable("username") username: String): ResponseEntity<Any>{
+    @GetMapping("getFaculties")
+    fun getFaculties(@RequestHeader("Authorization") token : String): ResponseEntity<Any>{
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         return ResponseEntity.ok(studentService.getFaculties(username))
     }
 
-    @GetMapping("getFacultiesAndSpecializations/{username}")
-    fun getFacultiesAndSpecializations(@PathVariable("username") username: String): ResponseEntity<Any>{
+    @GetMapping("getFacultiesAndSpecializations")
+    fun getFacultiesAndSpecializations(@RequestHeader("Authorization") token : String): ResponseEntity<Any>{
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         return ResponseEntity.ok(studentService.getFacultiesAndSpecializations(username))
     }
 
-    @GetMapping("getGrades/{username}/{yosId}")
-    fun getGrades(@PathVariable("username") username: String, @PathVariable("yosId") yosId: Int): ResponseEntity<Any>{
+    @GetMapping("getGrades/{yosId}")
+    fun getGrades(@RequestHeader("Authorization") token : String, @PathVariable("yosId") yosId: Int): ResponseEntity<Any>{
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         return ResponseEntity.ok(studentService.getGrades(username, yosId))
     }
 
-    @PostMapping("addOptional/{username}")
-    fun addOptional(@PathVariable("username") username: String,
+    @PostMapping("addOptional")
+    fun addOptional(@RequestHeader("Authorization") token : String,
                     @RequestBody addOptionalDto: AddOptionalDto) : ResponseEntity<Any> {
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         return ResponseEntity.ok(studentService.addOptionalDiscipline(username, addOptionalDto.disciplineName, addOptionalDto.priority))
     }
 
-    @GetMapping("getOptionals/")
+    @GetMapping("getOptionals")
     fun getOptionals() : ResponseEntity<Any> {
         return ResponseEntity.ok(studentService.getOptionals())
     }

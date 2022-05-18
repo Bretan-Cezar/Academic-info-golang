@@ -9,12 +9,13 @@ class Curriculum{
     @Column(name = "curriculum_id", nullable = false)
     var curriculumId: Int = 0
 
+//    @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinColumn(name = "year_of_study_id")
     var curriculumYos: YearOfStudy = YearOfStudy()
 
     @ManyToMany(
-        fetch = FetchType.EAGER,
+        fetch = FetchType.LAZY,
         cascade = [CascadeType.PERSIST,
             CascadeType.MERGE])
     @JoinTable(name = "curriculum_discipline_distribution",

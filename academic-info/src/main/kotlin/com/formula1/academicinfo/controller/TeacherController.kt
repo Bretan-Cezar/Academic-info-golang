@@ -23,13 +23,15 @@ class TeacherController(
         return ResponseEntity.ok(teacherService.proposeOptional(proposeOptionalDto.disciplineName, proposeOptionalDto.creditCount, username))
     }
 
-    @GetMapping("getDisciplines/{username}")
-    fun getDisciplines(@PathVariable("username") username: String): ResponseEntity<Any>{
+    @GetMapping("getDisciplines")
+    fun getDisciplines(@RequestHeader("Authorization") token : String): ResponseEntity<Any>{
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         return ResponseEntity.ok(teacherService.getDisciplines(username))
     }
 
-    @GetMapping("getStudentsForDiscipline/{username}/{disciplineId}")
-    fun getStudentsForDiscipline(@PathVariable("username") username: String, @PathVariable("disciplineId") disciplineId: Int): ResponseEntity<Any>{
+    @GetMapping("getStudentsForDiscipline/{disciplineId}")
+    fun getStudentsForDiscipline(@RequestHeader("Authorization") token : String, @PathVariable("disciplineId") disciplineId: Int): ResponseEntity<Any>{
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         return ResponseEntity.ok(teacherService.getStudentsForDiscipline(username, disciplineId))
     }
 

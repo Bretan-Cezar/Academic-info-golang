@@ -14,6 +14,9 @@ data class OptionalsSelection(
     @Column(name = "priority", nullable = false)
     var priority: Int = 0,
 
+//    @ManyToOne(
+//        fetch = FetchType.LAZY
+//    )
     @ManyToOne(
         fetch = FetchType.LAZY
     )
@@ -22,6 +25,9 @@ data class OptionalsSelection(
     @JsonIgnore
     var optionalsSelectionStudent: Student? = null,
 
+//    @ManyToOne(
+//        fetch = FetchType.LAZY
+//    )
     @ManyToOne(
         fetch = FetchType.LAZY
     )

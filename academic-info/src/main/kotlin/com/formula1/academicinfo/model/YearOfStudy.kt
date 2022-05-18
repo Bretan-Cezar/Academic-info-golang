@@ -26,15 +26,16 @@ class YearOfStudy(){
     @Column(name = "funding_level", nullable = false)
     var fundingLevel: String  = ""
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id", nullable = false)
     var facultyYos: Faculty = Faculty()
 
+//    @OneToOne(mappedBy = "curriculumYos", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @OneToOne(mappedBy = "curriculumYos", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JsonIgnore
     var curriculum: Curriculum? = null
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
     var studentYos: Student = Student()
 

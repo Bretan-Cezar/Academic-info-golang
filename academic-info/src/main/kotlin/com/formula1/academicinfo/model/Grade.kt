@@ -24,12 +24,12 @@ class Grade(){
     var value: Int = 0
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
     @MapsId("studentId")
     var gradeStudent: Student = Student()
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("disciplineId")
     @JoinColumn(name = "discipline_id", nullable = false)
     var gradeDiscipline: Discipline = Discipline()

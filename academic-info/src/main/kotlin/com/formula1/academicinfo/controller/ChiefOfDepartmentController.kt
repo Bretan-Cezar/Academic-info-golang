@@ -14,8 +14,9 @@ class ChiefOfDepartmentController(
     private val chiefOfDepartmentService: ChiefOfDepartmentService,
     private val tokenManager: TokenManager
 ) {
-    @GetMapping("getOptionals/{username}")
-    fun getOptionals(@PathVariable("username") username: String): ResponseEntity<Any>{
+    @GetMapping("getOptionals")
+    fun getOptionals(@RequestHeader("Authorization") token : String): ResponseEntity<Any>{
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         return ResponseEntity.ok(chiefOfDepartmentService.getOptionals(username))
     }
 

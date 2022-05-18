@@ -39,10 +39,12 @@ class User : UserDetails {
     @Column(name = "username")
     private var username: String = ""
 
+//    @OneToOne(mappedBy = "teacherUser", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @OneToOne(mappedBy = "teacherUser", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     var teacher: Teacher? = null
 
+//    @OneToOne(mappedBy = "studentUser", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @OneToOne(mappedBy = "studentUser", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     var student: Student? = null

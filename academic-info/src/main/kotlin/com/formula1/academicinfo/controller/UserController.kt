@@ -23,18 +23,21 @@ class UserController(
         return ResponseEntity.ok(userService.update(updateDTO.email, updateDTO.phone, username))
     }
 
-    @GetMapping("getUser/{username}")
-    fun getUser(@PathVariable("username") username: String): ResponseEntity<Any> {
+    @GetMapping("getUser")
+    fun getUser(@RequestHeader("Authorization") token: String): ResponseEntity<Any> {
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         return ResponseEntity.ok(userService.loadUserByUsername(username))
     }
 
-    @GetMapping("getYears/{username}")
-    fun getYears(@PathVariable("username") username: String): ResponseEntity<Any> {
+    @GetMapping("getYears")
+    fun getYears(@RequestHeader("Authorization") token: String): ResponseEntity<Any> {
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         return ResponseEntity.ok(yearsService.getYearsOfStudyByUsername(username))
     }
 
-    @GetMapping("getCurriculum/{username}/{curriculumId}")
-    fun getCurriculum(@PathVariable("curriculumId") curriculumId: Int): ResponseEntity<Any> {
+    @GetMapping("getCurriculum/{curriculumId}")
+    fun getCurriculum(@RequestHeader("Authorization") token: String, @PathVariable("curriculumId") curriculumId: Int): ResponseEntity<Any> {
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         return ResponseEntity.ok(curriculumService.getDisciplinesByCurriculumId(curriculumId))
     }
 }

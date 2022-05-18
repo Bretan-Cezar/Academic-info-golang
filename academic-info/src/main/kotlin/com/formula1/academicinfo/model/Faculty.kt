@@ -24,22 +24,23 @@ class Faculty(){
     @Column(name = "phone_number", nullable = false)
     var phoneNumber: String = ""
 
+//    @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "chief_teacher_id")
     var teacherFaculty: Teacher? = null
 
-    @OneToMany(mappedBy = "facultyTeacher")
+    @OneToMany(mappedBy = "facultyTeacher", fetch = FetchType.LAZY)
     // ??
     @JsonIgnore
     var teachers: MutableSet<Teacher> = mutableSetOf()
 
-    @OneToMany(mappedBy = "facultyYos")
+    @OneToMany(mappedBy = "facultyYos", fetch = FetchType.LAZY)
     // ??
     @JsonIgnore
     var yos: MutableSet<YearOfStudy> = mutableSetOf()
 
-    @OneToMany(mappedBy = "facultyAdmin")
+    @OneToMany(mappedBy = "facultyAdmin", fetch = FetchType.LAZY)
     @JsonIgnore
     var admins: MutableSet<Admin> = mutableSetOf()
 }

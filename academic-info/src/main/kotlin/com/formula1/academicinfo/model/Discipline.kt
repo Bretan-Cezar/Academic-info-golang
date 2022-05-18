@@ -21,22 +21,24 @@ class Discipline()
     @Column(name = "is_optional")
     var isOptional: Boolean = false
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "teacher_id", nullable = false)
     var teacherDiscipline: Teacher = Teacher()
 
+//    @OneToOne(mappedBy = "optionalDiscipline", cascade = [CascadeType.ALL], fetch = FetchType.LAZY )
     @OneToOne(mappedBy = "optionalDiscipline", cascade = [CascadeType.ALL], fetch = FetchType.LAZY )
     @JsonIgnore
     var optionalDiscipline: OptionalDiscipline? = null
 
-    @OneToMany(mappedBy = "gradeDiscipline")
+    @OneToMany(mappedBy = "gradeDiscipline", fetch = FetchType.LAZY)
     @JsonIgnore
     var grades: MutableSet<Grade> = mutableSetOf()
 
     @ManyToMany(mappedBy = "disciplines",
         cascade = [CascadeType.PERSIST,
-                    CascadeType.MERGE]
+                    CascadeType.MERGE],
+                fetch = FetchType.LAZY
     )
     @JsonIgnore
     var curriculums: MutableSet<Curriculum> = mutableSetOf()
