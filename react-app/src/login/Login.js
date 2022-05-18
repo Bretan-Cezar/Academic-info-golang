@@ -31,7 +31,7 @@ function LoginForm({ set }) {
 			})
 			.then((data) => {
 				if (data.message === "Successful") {
-					set({ status: data.message, username: data.username, auth_token: token });
+					set({ status: data.message, username: data.username, auth_token: token, userType: data.userType });
 				} else {
 					set({ status: data.message, username: "", auth_token: "" });
 				}

@@ -34,8 +34,7 @@ function App() {
 		);
 	}
 
-	// let userType = userData.user_type
-	let userType = "student";
+	let userType = userData.userType;
 
 	switch (userType) {
 		case "student":
@@ -54,7 +53,7 @@ function App() {
 				</UserContext.Provider>
 			);
 
-		case "chief":
+		case "chiefOfDepartment":
 			document.title = "AcademicInfo - Chief of Dept.";
 			return (
 				<UserContext.Provider value={userData}>
