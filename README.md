@@ -61,5 +61,10 @@
 https://drive.google.com/file/d/1luYLJ36TUAQqThg3JoIl2ew9tt8QqMT5/view?usp=sharing
 
 # Approve optional
+![Untitled Diagram drawio(2)](https://user-images.githubusercontent.com/72063091/169078374-1ae4be64-ac51-4a8a-8ec6-93e01f62f879.png)
 https://app.diagrams.net/#G1dpLBTi-C2zmXj7c2BPCI9AK5O4km-Dra
+
+# Add grade
+![Untitled Diagram drawio(1)](https://user-images.githubusercontent.com/72063091/169078518-0866de1c-72aa-4eff-843b-e2c33569a8df.png)
+https://app.diagrams.net/#G1F_a2nhJ5y-32FJkasINDzFW7-HMrMnIg
 -----
