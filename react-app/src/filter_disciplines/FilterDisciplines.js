@@ -32,7 +32,7 @@ function FilterDisciplines() {
 	let [disciplinesList, setDisciplinesList] = React.useState([]);
 
 	React.useEffect(() => {
-		let tUrl = "http://localhost:1337/http://localhost:8090/chiefOfDepartment/getTeachers/" + userData.username;
+		let tUrl = "http://localhost:1337/http://localhost:8090/chiefOfDepartment/getTeachers/";
 
 		const tRequestOptions = {
 			method: "GET",
@@ -43,7 +43,7 @@ function FilterDisciplines() {
 			},
 		};
 
-		const tRequest = new Request(tUrl);
+		const tRequest = new Request(tUrl, tRequestOptions);
 
 		fetch(tRequest)
 			.then((response) => {
@@ -56,7 +56,7 @@ function FilterDisciplines() {
 
 	React.useEffect(() => {
 		if (selectedTeacher != -1) {
-			let dUrl = "http://localhost:1337/http://localhost:8090/chiefOfDepartment/getDisciplinesByTeacher/" + selectedTeacher;
+			let dUrl = "http://localhost:1337/http://localhost:8090/chiefOfDepartment/getDisciplines/" + selectedTeacher;
 
 			const dRequestOptions = {
 				method: "GET",
@@ -67,7 +67,7 @@ function FilterDisciplines() {
 				},
 			};
 
-			const dRequest = new Request(dUrl);
+			const dRequest = new Request(dUrl, dRequestOptions);
 
 			fetch(dRequest)
 				.then((response) => {

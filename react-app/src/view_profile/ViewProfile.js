@@ -9,7 +9,6 @@ function ViewProfile() {
 
 	React.useEffect(() => {
 		let url = "http://localhost:1337/http://localhost:8090/user/getUser/";
-		url += userData.username;
 
 		const requestOptions = {
 			method: "GET",

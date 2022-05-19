@@ -23,7 +23,7 @@ function ViewGrades() {
 	let [selectedYear, setSelectedYear] = React.useState(-1);
 	let [gradesList, setGradesList] = React.useState([]);
 
-	let yearUrl = "http://localhost:1337/http://localhost:8090/student/getFacultiesAndSpecializations/" + userData.username;
+	let yearUrl = "http://localhost:1337/http://localhost:8090/student/getFacultiesAndSpecializations/";
 
 	React.useEffect(() => {
 		const yearRequestOptions = {
@@ -45,7 +45,7 @@ function ViewGrades() {
 			});
 
 		if (selectedYear != -1) {
-			let gradesUrl = "http://localhost:1337/http://localhost:8090/student/getGrades/" + userData.username + "/" + selectedYear;
+			let gradesUrl = "http://localhost:1337/http://localhost:8090/student/getGrades/" + selectedYear;
 
 			const gradesRequestOptions = {
 				method: "GET",

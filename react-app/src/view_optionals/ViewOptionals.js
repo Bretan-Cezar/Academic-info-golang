@@ -25,7 +25,7 @@ function ViewOptionals() {
 	let [optionalsList, setOptionalsList] = React.useState([]);
 
 	React.useEffect(() => {
-		let urlF = "http://localhost:1337/http://localhost:8090/student/getFaculties/" + userData.username;
+		let urlF = "http://localhost:1337/http://localhost:8090/student/getFaculties/";
 
 		const fRequestOptions = {
 			method: "GET",
@@ -44,7 +44,7 @@ function ViewOptionals() {
 			});
 
 		if (selectedFaculty != -1) {
-			let urlO = "http://localhost:1337/http://localhost:8090/student/getOptionals/" + userData.username + "/" + selectedFaculty;
+			let urlO = "http://localhost:1337/http://localhost:8090/student/getOptionals/" + selectedFaculty;
 
 			const oRequestOptions = {
 				method: "GET",

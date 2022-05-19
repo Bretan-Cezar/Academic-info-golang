@@ -26,7 +26,7 @@ function ViewCurriculum() {
 	let [disciplines, setDisciplines] = React.useState([]);
 
 	React.useEffect(() => {
-		let cListUrl = "http://localhost:1337/http://localhost:8090/user/getYears/" + userData.username;
+		let cListUrl = "http://localhost:1337/http://localhost:8090/user/getYears/";
 
 		const cListReqOptions = {
 			method: "GET",
@@ -51,7 +51,7 @@ function ViewCurriculum() {
 
 	React.useEffect(() => {
 		if (selectedCurriculum != -1) {
-			let dListUrl = "http://localhost:1337/http://localhost:8090/user/getCurriculum/" + userData.username + "/" + selectedCurriculum;
+			let dListUrl = "http://localhost:1337/http://localhost:8090/user/getCurriculum/" + selectedCurriculum;
 
 			// data = [{discipline_type: mandatory/optional, discipline_name: ..., teacher_name: ..., credit_count: ...}, ...]
 

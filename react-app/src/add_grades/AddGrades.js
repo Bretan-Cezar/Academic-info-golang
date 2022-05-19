@@ -111,7 +111,7 @@ function AddGrades() {
 	let [message, setMessage] = React.useState("");
 
 	React.useEffect(() => {
-		let disciplinesListUrl = baseUrl + "getDisciplines/" + userData.username;
+		let disciplinesListUrl = baseUrl + "getDisciplines/";
 
 		const dListReqOptions = {
 			method: "GET",
@@ -135,7 +135,7 @@ function AddGrades() {
 
 	React.useEffect(() => {
 		if (selectedDiscipline != -1) {
-			let studentsListUrl = baseUrl + "getStudentsForDiscipline/" + userData.username + "/" + selectedDiscipline;
+			let studentsListUrl = baseUrl + "getStudentsForDiscipline/" + selectedDiscipline;
 
 			const sListReqOptions = {
 				method: "GET",

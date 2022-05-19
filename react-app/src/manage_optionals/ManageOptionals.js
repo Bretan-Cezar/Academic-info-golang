@@ -65,7 +65,7 @@ function ApproveForm({ id, att, setAtt, msg, setMsg, selected, userData }) {
 function ManageOptionals() {
 	const userData = React.useContext(UserContext);
 
-	let getUrl = "http://localhost:1337/http://localhost:8090/chiefOfDepartment/getOptionals/" + userData.username;
+	let getUrl = "http://localhost:1337/http://localhost:8090/chiefOfDepartment/getOptionals/";
 	let [optionalsList, setOptionalsList] = React.useState([]);
 	let [selectedOptional, setSelectedOptional] = React.useState(-1);
 	let [attendants, setAttendants] = React.useState(-1);

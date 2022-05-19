@@ -64,7 +64,7 @@ async function removeOptional(optional, selected, setSelected, available, setAva
 
 function submitHandler(userData, options_list, setMessage) {
 	options_list.map((option) => {
-		let sUrl = "http://localhost:1337/http://localhost:8090/student/addOptional/" + userData.username;
+		let sUrl = "http://localhost:1337/http://localhost:8090/student/addOptional/";
 
 		const sReqOptions = {
 			method: "POST",
@@ -170,7 +170,7 @@ function ChooseOptionals() {
 	let [selectedOptionalsList, setSelectedOptionalsList] = React.useState([]);
 
 	React.useEffect(() => {
-		let urlF = "http://localhost:1337/http://localhost:8090/student/getFaculties/" + userData.username;
+		let urlF = "http://localhost:1337/http://localhost:8090/student/getFaculties/";
 
 		const fRequestOptions = {
 			method: "GET",
@@ -194,7 +194,7 @@ function ChooseOptionals() {
 
 	React.useEffect(() => {
 		if (selectedFaculty != -1) {
-			let urlO = "http://localhost:1337/http://localhost:8090/student/getOptionals/" + userData.username + "/" + selectedFaculty;
+			let urlO = "http://localhost:1337/http://localhost:8090/student/getOptionals/" + selectedFaculty;
 
 			const oRequestOptions = {
 				method: "GET",
