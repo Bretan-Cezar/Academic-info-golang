@@ -1,41 +1,50 @@
 package com.formula1.academicinfo.controller
 
+import com.formula1.academicinfo.model.exporters.AllStudentsResultExporterFactoryInterface
 import com.formula1.academicinfo.model.exporters.StudentResultExporterFactoryInterface
+import com.formula1.academicinfo.model.exporters.YearStudentExporterFactoryInterface
+import com.formula1.academicinfo.security.jwtutils.TokenManager
 import com.formula1.academicinfo.service.AdminService
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletResponse
 
 @RestController
 @RequestMapping("admin")
 class AdminController(
     val adminService: AdminService,
-    val studentResultExporterFactoryInterface: StudentResultExporterFactoryInterface
+    val studentResultExporterFactoryInterface: StudentResultExporterFactoryInterface,
+    val allStudentsResultExporterFactoryInterface: AllStudentsResultExporterFactoryInterface,
+    val yearStudentsResultExporterFactoryInterface: YearStudentExporterFactoryInterface,
+    val tokenManager: TokenManager
 ) {
 
-    @GetMapping("getStudentsOrderedByGrades/{adminId}/{type}")
-    fun getStudentsByGrades(@PathVariable("adminId") adminId: Int,
+    // Get students and groups
+    @GetMapping("getStudentsOrderedByGrades/{type}")
+    fun getStudentsByGrades(@RequestHeader("Authorization") token : String,
                             @PathVariable("type") type: String,
                             httpServletResponse: HttpServletResponse) {
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
         val exporter = studentResultExporterFactoryInterface.createFromType(type)
 
-        exporter.export(adminService.getStudentsByResults(adminId), httpServletResponse)
+        exporter.export(adminService.getStudentsByResults(username), httpServletResponse)
     }
-
-    @GetMapping("getAllStudentsOrderedByGrades/{adminId}/{type}")
-    fun getAllStudentsByGrades(@PathVariable("adminId") adminId: Int,
+    // Get students without groups
+    @GetMapping("getAllStudentsOrderedByGrades/{type}")
+    fun getAllStudentsByGrades(@RequestHeader("Authorization") token : String,
                                @PathVariable("type") type: String,
-                               httpServletResponse: HttpServletResponse) : ResponseEntity<Any> {
-        return ResponseEntity.ok(adminService.getAllStudentsByResults(adminId));
+                               httpServletResponse: HttpServletResponse){
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
+        val exporter = allStudentsResultExporterFactoryInterface.createFromType(type);
+        exporter.export(adminService.getAllStudentsByResults(username), httpServletResponse);
     }
 
-    @GetMapping("getStudentsForEachYearByResult/{adminId}/{type}")
-    fun getStudentsForYearByGrades(@PathVariable("adminId") adminId: Int,
+    @GetMapping("getStudentsForYearByGrades/{type}")
+    fun getStudentsForYearByGrades(@RequestHeader("Authorization") token : String,
                                    @PathVariable("type") type: String,
-                                   httpServletResponse: HttpServletResponse) : ResponseEntity<Any> {
-        return ResponseEntity.ok(adminService.getStudentsForEachYearByResult(adminId));
+                                   httpServletResponse: HttpServletResponse){
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
+        val exporter = yearStudentsResultExporterFactoryInterface.createFromType(type);
+        exporter.export(adminService.getStudentsForEachYearByResult(username), httpServletResponse);
     }
 }

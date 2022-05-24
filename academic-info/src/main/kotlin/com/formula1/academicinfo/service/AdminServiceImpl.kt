@@ -15,7 +15,8 @@ class AdminServiceImpl(
     val adminRepository: AdminRepository,
     val studentRepository: StudentRepository,
     val userRepository: UserRepository) : AdminService {
-    override fun getStudentsByResults(adminId: Int) : List<StudentResultDto> {
+    override fun getStudentsByResults(username: String) : List<StudentResultDto> {
+        val adminId = adminRepository.findAdminByUsername(username)!!.adminId;
         val initial = adminRepository.getStudentsByResults(adminId)
         return initial.stream().map {
             val student = studentRepository.getStudentByStudentId(it.studentId)
@@ -29,14 +30,16 @@ class AdminServiceImpl(
         return a != null
     }
 
-    override fun getAllStudentsByResults(adminId: Int): List<AllStudentsResultDto> {
+    override fun getAllStudentsByResults(username: String): List<AllStudentsResultDto> {
+        val adminId = adminRepository.findAdminByUsername(username)!!.adminId;
         val initial = adminRepository.getStudentsByResultsDecreasing(adminId)
         return initial.stream().map {
             val user = userRepository.findUserById(it.studentId)
             return@map AllStudentsResultDto(user.fullName, it.gradeAverage)
         }.toList()
     }
-    override fun getStudentsForEachYearByResult(adminId: Int): List<YearStudentsDto> {
+    override fun getStudentsForEachYearByResult(username: String): List<YearStudentsDto> {
+        val adminId = adminRepository.findAdminByUsername(username)!!.adminId;
         val initial = adminRepository.getStudentsForEachYearByResults(adminId)
         return initial.stream().map {
             val user = userRepository.findUserById(it.student_id)
