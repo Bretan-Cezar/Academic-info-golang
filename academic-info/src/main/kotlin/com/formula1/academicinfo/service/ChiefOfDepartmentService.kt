@@ -17,7 +17,7 @@ interface ChiefOfDepartmentService {
 
     fun checkIfUserIsChiefOfDepartment(username: String) : Boolean
 
-    fun getBestTeacher(chiefId: Int): TeacherPerformanceDto
+    fun getBestTeacher(username: String): TeacherPerformanceDto
 
-    fun getWorstTeacher(chiefId: Int): TeacherPerformanceDto
+    fun getWorstTeacher(username: String): TeacherPerformanceDto
 }

@@ -79,13 +79,15 @@ class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: Op
         return false
     }
 
-    override fun getBestTeacher(chiefId: Int): TeacherPerformanceDto {
-        val dto = teacherRepository.findBestTeachers(chiefId).first()
+    override fun getBestTeacher(username: String): TeacherPerformanceDto {
+        val chief = teacherRepository.findTeacherByUsername(username)
+        val dto = teacherRepository.findBestTeachers(chief!!.teacherId).first()
         return TeacherPerformanceDto(userRepository.findUserById(dto.teacherId).fullName, dto.performance)
     }
 
-    override fun getWorstTeacher(chiefId: Int): TeacherPerformanceDto {
-        val dto = teacherRepository.findBestTeachers(chiefId).last()
+    override fun getWorstTeacher(username: String): TeacherPerformanceDto {
+        val chief = teacherRepository.findTeacherByUsername(username)
+        val dto = teacherRepository.findBestTeachers(chief!!.teacherId).last()
         return TeacherPerformanceDto(userRepository.findUserById(dto.teacherId).fullName, dto.performance)
     }
 }

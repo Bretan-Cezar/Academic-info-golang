@@ -45,13 +45,15 @@ class ChiefOfDepartmentController(
         return ResponseEntity.ok(chiefOfDepartmentService.getTeachers(facultyId))
     }
 
-    @GetMapping("getBestTeacher/{chiefId}")
-    fun getBestTeacher(@PathVariable("chiefId") chiefId: Int) : ResponseEntity<Any> {
-        return ResponseEntity.ok(chiefOfDepartmentService.getBestTeacher(chiefId))
+    @GetMapping("getBestTeacher")
+    fun getBestTeacher(@RequestHeader("Authorization") token : String) : ResponseEntity<Any> {
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
+        return ResponseEntity.ok(chiefOfDepartmentService.getBestTeacher(username))
     }
 
-    @GetMapping("getWorstTeacher/{chiefId}")
-    fun getWorstTeacher(@PathVariable("chiefId") chiefId: Int) : ResponseEntity<Any> {
-        return ResponseEntity.ok(chiefOfDepartmentService.getWorstTeacher(chiefId))
+    @GetMapping("getWorstTeacher")
+    fun getWorstTeacher(@RequestHeader("Authorization") token : String) : ResponseEntity<Any> {
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
+        return ResponseEntity.ok(chiefOfDepartmentService.getWorstTeacher(username))
     }
 }

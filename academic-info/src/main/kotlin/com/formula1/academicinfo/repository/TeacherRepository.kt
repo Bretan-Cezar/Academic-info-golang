@@ -25,9 +25,11 @@ interface TeacherRepository: JpaRepository<Teacher, Int> {
 
     @Query("SELECT new com.formula1.academicinfo.dtos.TeacherPerfDto(t.teacherId, avg(g.value)) " +
             "FROM Teacher t " +
+            "JOIN Faculty f on t.facultyTeacher.facultyId = f.facultyId " +
             "JOIN Discipline d ON t.teacherId = d.teacherDiscipline.teacherId " +
             "JOIN Grade g ON d.disciplineId = g.gradeDiscipline.disciplineId " +
+            "WHERE f.teacherFaculty.teacherId = :chiefId " +
             "GROUP BY t.teacherId " +
             "ORDER BY avg(g.value) DESC")
-    fun findBestTeachers(@Param("chiefId") adminId: Int): Set<TeacherPerfDto>
+    fun findBestTeachers(@Param("chiefId") chiefId: Int): Set<TeacherPerfDto>
 }
