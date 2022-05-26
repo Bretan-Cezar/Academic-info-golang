@@ -29,7 +29,7 @@ function viewStudentsGroups(userData) {
 }
 
 function viewStudentsSorted(userData) {
-	let url = "http://localhost:1337/http://localhost:8090/admin/...";
+	let url = "http://localhost:1337/http://localhost:8090/admin/getAllStudentsOrderedByGrades/pdf";
 
 	const docRequestOptions = {
 		method: "GET",
@@ -55,7 +55,7 @@ function viewStudentsSorted(userData) {
 }
 
 function viewStudentsYears(userData) {
-	let url = "http://localhost:1337/http://localhost:8090/admin/...";
+	let url = "http://localhost:1337/http://localhost:8090/admin/getStudentsForYearByGrades/pdf";
 
 	const docRequestOptions = {
 		method: "GET",
