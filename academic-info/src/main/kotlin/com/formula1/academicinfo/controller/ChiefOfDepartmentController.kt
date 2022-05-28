@@ -26,10 +26,9 @@ class ChiefOfDepartmentController(
         return ResponseEntity.ok(chiefOfDepartmentService.approveOptional(approvedOptionalDto.oDisciplineId, approvedOptionalDto.maxAttendants))
     }
 
-    @GetMapping("getDisciplines/{teacherId}&{yosId}")
-    fun getDisciplinesGivenByTeacherInYear(@PathVariable("teacherId") teacherId: Int,
-                                            @PathVariable("yosId") yosId: Int) : ResponseEntity<Any> {
-        val disciplines = chiefOfDepartmentService.getDisciplinesGivenByTeacherInAYear(teacherId, yosId)
+    @GetMapping("getDisciplines/{teacherId}")
+    fun getDisciplinesGivenByTeacherInYear(@PathVariable("teacherId") teacherId: Int) : ResponseEntity<Any> {
+        val disciplines = chiefOfDepartmentService.getDisciplinesGivenByTeacher(teacherId)
 
         val dtoList = mutableListOf<GetDisciplineByTeacherAndYearDto>()
 

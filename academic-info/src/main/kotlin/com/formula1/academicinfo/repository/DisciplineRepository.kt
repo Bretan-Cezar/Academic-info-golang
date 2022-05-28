@@ -17,11 +17,8 @@ interface DisciplineRepository: JpaRepository<Discipline, Int> {
 
     @Query("select d " +
             "from Discipline d join Teacher t on d.teacherDiscipline.teacherId = t.teacherId " +
-            "join Faculty f on t.facultyTeacher.facultyId = f.facultyId " +
-            "join YearOfStudy yos on f.facultyId = yos.facultyYos.facultyId " +
-            "where t.teacherId = :teacherId and yos.yosId = :yosId")
-    fun findDisciplinesByTeacherIdAndYear(@Param("teacherId") teacherId: Int,
-                                            @Param("yosId") yosId: Int) : List<Discipline>
+            "where t.teacherId = :teacherId")
+    fun findDisciplinesByTeacherId(@Param("teacherId") teacherId: Int) : List<Discipline>
 
     @Query("SELECT d FROM Discipline d WHERE :curriculum IN (d.curriculums)")
     fun findDisciplinesByCurriculum(@Param("curriculum") curriculum: Curriculum) :MutableSet<Discipline>

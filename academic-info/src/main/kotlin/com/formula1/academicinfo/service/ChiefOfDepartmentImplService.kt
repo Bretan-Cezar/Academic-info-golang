@@ -63,8 +63,8 @@ class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: Op
         return "Error while approving the optional!"
     }
 
-    override fun getDisciplinesGivenByTeacherInAYear(teacherId: Int, yearId: Int) : List<Discipline> {
-        return disciplineRepository.findDisciplinesByTeacherIdAndYear(teacherId, yearId)
+    override fun getDisciplinesGivenByTeacher(teacherId: Int) : List<Discipline> {
+        return disciplineRepository.findDisciplinesByTeacherId(teacherId)
     }
 
     override fun getTeachers(facultyId: Int): Set<Teacher> {

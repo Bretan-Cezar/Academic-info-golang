@@ -11,7 +11,7 @@ interface ChiefOfDepartmentService {
 
     fun approveOptional(optionalId: Int, maxAttendants: Int): String
 
-    fun getDisciplinesGivenByTeacherInAYear(teacherId: Int, yearId: Int) : List<Discipline>
+    fun getDisciplinesGivenByTeacher(teacherId: Int) : List<Discipline>
 
     fun getTeachers(facultyId: Int) : Set<Teacher>
 

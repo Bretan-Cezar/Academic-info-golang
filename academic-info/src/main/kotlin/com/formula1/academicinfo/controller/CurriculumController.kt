@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("curriculum")
 class CurriculumController(
-    private val curriculumService: CurriculumService,
-    private val optionalsSelectionService: OptionalsSelectionService
+    private val curriculumService: CurriculumService
 ) {
     @GetMapping("getDisciplineDistribution")
     fun getDisciplineDistribution(@RequestBody getDisciplineDto: GetDisciplineDto) : ResponseEntity<Any> {
