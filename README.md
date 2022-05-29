@@ -67,4 +67,12 @@ https://app.diagrams.net/#G1dpLBTi-C2zmXj7c2BPCI9AK5O4km-Dra
 # Add grade
 ![Untitled Diagram drawio(1)](https://user-images.githubusercontent.com/72063091/169078518-0866de1c-72aa-4eff-843b-e2c33569a8df.png)
 https://app.diagrams.net/#G1F_a2nhJ5y-32FJkasINDzFW7-HMrMnIg
+
+# View grades
+![Untitled Diagram drawio (3)](https://user-images.githubusercontent.com/72062992/170885862-850e1bd3-3849-497c-a197-713bd9f18cc1.png)
+https://app.diagrams.net/#G1DCZ2cto5Y-pk0TZGZnhBlfCk8DXCI6sP
+
+# Print all students descending by results
+![Untitled Diagram drawio (2)](https://user-images.githubusercontent.com/72062992/170885850-12a4f1fc-241d-481a-bcf0-9239a9da4909.png)
+https://app.diagrams.net/#G1KDepoZqgewGtXhn9ytj03KUWKqU5YRnv
 -----
