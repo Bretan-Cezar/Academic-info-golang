@@ -16,8 +16,8 @@ interface AdminRepository : JpaRepository<Admin, Int> {
                 "join Grade g on g.gradeDiscipline.disciplineId = d.disciplineId " +
                 "join Student s on s.studentId = g.gradeStudent.studentId " +
                 "where a.adminId = :adminId " +
-                "group by g.gradeStudent.studentId " +
-                "order by avg(g.value)"
+                "group by g.gradeStudent.studentId, g.gradeStudent.group " +
+                "order by g.gradeStudent.group asc, avg(g.value) asc"
     )
     fun getStudentsByResults(@Param("adminId") adminId: Int) : Set<GetStudentByGradeDto>
 
@@ -50,7 +50,7 @@ interface AdminRepository : JpaRepository<Admin, Int> {
                 "join YearOfStudy ys on ys.studentYos.studentId = s.studentId " +
                 "where a.adminId = :adminId " +
                 "group by g.gradeStudent.studentId, ys.yearNo " +
-                "order by ys.yearNo, avg(g.value) desc"
+                "order by ys.yearNo, avg(g.value)"
     )
     fun getStudentsForEachYearByResults(@Param("adminId") adminId: Int) : Set<YearStudentsResultDto>
 }

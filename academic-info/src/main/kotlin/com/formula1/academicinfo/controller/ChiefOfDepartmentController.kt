@@ -41,7 +41,7 @@ class ChiefOfDepartmentController(
 
     @GetMapping("getTeachers/{facultyId}")
     fun getTeachersFromFaculty(@PathVariable("facultyId") facultyId: Int) : ResponseEntity<Any> {
-        return ResponseEntity.ok(chiefOfDepartmentService.getTeachers(facultyId))
+        return ResponseEntity.ok(chiefOfDepartmentService.getTeachersWithName(facultyId))
     }
 
     @GetMapping("getBestTeacher")

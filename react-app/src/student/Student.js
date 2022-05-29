@@ -70,9 +70,6 @@ function Student({ setUserData }) {
 					<div className="Sidebar-item" onClick={() => setFeature("view_grades")}>
 						<p>View Grades</p>
 					</div>
-					<div className="Sidebar-item">
-						<p>View Contract</p>
-					</div>
 					<div className="Sidebar-logout-item" onClick={() => setUserData("")}>
 						<p>Logout</p>
 					</div>

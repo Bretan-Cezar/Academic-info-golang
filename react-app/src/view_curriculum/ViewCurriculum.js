@@ -17,6 +17,32 @@ function DisciplineList({ discipline_array }) {
 	);
 }
 
+function downloadContract(userData, selectedCurriculum) {
+	let url = "http://localhost:1337/http://localhost:8090/user/getCurriculumDoc/" + selectedCurriculum + "/pdf";
+
+	const docRequestOptions = {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/pdf",
+			"Access-Control-Allow-Origin": "origin",
+			Authorization: "Bearer " + userData.auth_token,
+		},
+	};
+
+	const docRequest = new Request(url, docRequestOptions);
+
+	fetch(docRequest)
+		.then((response) => {
+			return response.blob();
+		})
+		.then((data) => {
+			var link = document.createElement("a");
+			link.href = window.URL.createObjectURL(data);
+			link.download = "contract" + selectedCurriculum + ".pdf";
+			link.click();
+		});
+}
+
 function ViewCurriculum() {
 	const userData = React.useContext(UserContext);
 
@@ -52,8 +78,6 @@ function ViewCurriculum() {
 	React.useEffect(() => {
 		if (selectedCurriculum != -1) {
 			let dListUrl = "http://localhost:1337/http://localhost:8090/user/getCurriculum/" + selectedCurriculum;
-
-			// data = [{discipline_type: mandatory/optional, discipline_name: ..., teacher_name: ..., credit_count: ...}, ...]
 
 			const dListReqOptions = {
 				method: "GET",
@@ -105,6 +129,9 @@ function ViewCurriculum() {
 					<DisciplineList discipline_array={disciplines} />
 				</tbody>
 			</table>
+			<button className="contract-btn" onClick={() => downloadContract(userData, selectedCurriculum)}>
+				Download Contract Page
+			</button>
 		</>
 	);
 }

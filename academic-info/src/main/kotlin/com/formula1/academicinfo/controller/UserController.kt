@@ -38,11 +38,18 @@ class UserController(
         return ResponseEntity.ok(yearsService.getYearsOfStudyByUsername(username))
     }
 
-    @GetMapping("getCurriculum/{curriculumId}/{type}")
-    fun getCurriculum(@RequestHeader("Authorization") token: String,
+    @GetMapping("getCurriculum/{curriculumId}")
+    fun getCurriculum(@RequestHeader("Authorization") token: String, @PathVariable("curriculumId") curriculumId: Int): ResponseEntity<Any> {
+        val username = tokenManager.getUsernameFromToken(token.substring(7))
+        return ResponseEntity.ok(curriculumService.getDisciplinesByCurriculumId(curriculumId))
+    }
+
+    @GetMapping("getCurriculumDoc/{curriculumId}/{type}")
+    fun getCurriculumDoc(@RequestHeader("Authorization") token: String,
                       @PathVariable("curriculumId") curriculumId: Int,
                       @PathVariable("type") type: String,
                       response: HttpServletResponse) {
+
         val username = tokenManager.getUsernameFromToken(token.substring(7))
         val exporter = curriculumExporterFactory.createFromType(type)
         exporter.export(curriculumService.getDisciplinesByCurriculumId(curriculumId).toList(), response)

@@ -4,6 +4,7 @@ import com.formula1.academicinfo.dtos.OptionalDisciplineChiefDto
 import com.formula1.academicinfo.dtos.TeacherPerformanceDto
 import com.formula1.academicinfo.model.Discipline
 import com.formula1.academicinfo.model.Teacher
+import com.formula1.academicinfo.model.User
 
 
 interface ChiefOfDepartmentService {
@@ -14,6 +15,8 @@ interface ChiefOfDepartmentService {
     fun getDisciplinesGivenByTeacher(teacherId: Int) : List<Discipline>
 
     fun getTeachers(facultyId: Int) : Set<Teacher>
+
+    fun getTeachersWithName(facultyId: Int) : Set<User>
 
     fun checkIfUserIsChiefOfDepartment(username: String) : Boolean
 

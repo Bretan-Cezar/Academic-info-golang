@@ -1,19 +1,18 @@
 import React from "react";
+import "./FilterDisciplines.css";
 import { UserContext } from "../App";
 
 function DisciplinesList({ disciplines_array }) {
 	return (
 		<>
-			<table>
+			<table className="Disciplines-table">
 				<thead>
-					<td className="Disciplines-table-head-item">Discipline Type</td>
 					<td className="Disciplines-table-head-item">Discipline Name</td>
 					<td className="Disciplines-table-head-item">Credits</td>
 				</thead>
 				<tbody>
 					{disciplines_array.map((discipline) => (
 						<tr>
-							<td className="Disciplines-table-body-item">{discipline.disciplineType}</td>
 							<td className="Disciplines-table-body-item">{discipline.disciplineName}</td>
 							<td className="Disciplines-table-body-item">{discipline.creditCount}</td>
 						</tr>
@@ -32,7 +31,7 @@ function FilterDisciplines() {
 	let [disciplinesList, setDisciplinesList] = React.useState([]);
 
 	React.useEffect(() => {
-		let tUrl = "http://localhost:1337/http://localhost:8090/chiefOfDepartment/getTeachers/";
+		let tUrl = "http://localhost:1337/http://localhost:8090/chiefOfDepartment/getTeachers/" + "1";
 
 		const tRequestOptions = {
 			method: "GET",
@@ -82,7 +81,7 @@ function FilterDisciplines() {
 	return (
 		<>
 			<select
-				className="Teachers-selector"
+				className="Teacher-selector"
 				onChange={(e) => {
 					setSelectedTeacher(e.target.value);
 				}}
@@ -91,8 +90,8 @@ function FilterDisciplines() {
 				<option value="-1">--Select--</option>
 				{teachersList.map((t) => {
 					return (
-						<option key={t.teacherId} value={t.teacherId}>
-							{t.teacherId + " - " + t.teacherName}
+						<option key={t.teacher.teacherId} value={t.teacher.teacherId}>
+							{t.teacher.teacherId + " - " + t.fullName}
 						</option>
 					);
 				})}

@@ -5,6 +5,7 @@ import com.formula1.academicinfo.dtos.TeacherPerfDto
 import com.formula1.academicinfo.dtos.TeacherPerformanceDto
 import com.formula1.academicinfo.model.Discipline
 import com.formula1.academicinfo.model.Teacher
+import com.formula1.academicinfo.model.User
 import com.formula1.academicinfo.repository.*
 import org.springframework.stereotype.Service
 
@@ -69,6 +70,10 @@ class ChiefOfDepartmentImplService(private val optionalsDisciplineRepository: Op
 
     override fun getTeachers(facultyId: Int): Set<Teacher> {
         return teacherRepository.findTeachersByFacultyId(facultyId)
+    }
+
+    override fun getTeachersWithName(facultyId: Int): Set<User> {
+        return teacherRepository.findTeachersWithName(facultyId)
     }
 
     override fun checkIfUserIsChiefOfDepartment(username: String): Boolean {

@@ -92,3 +92,9 @@
 	border-right-width: 0;
 	border-bottom-width: 0;
 }
+
+.contract-btn {
+	margin: auto;
+	width: max-content;
+	height: 10%;
+}
