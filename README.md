@@ -55,6 +55,10 @@
 [Academic App Architecture Diagram](https://github.com/AlexandraBledea/Formula1/files/8469737/ArchitectureDiagram.drawio.pdf)
 - https://drive.google.com/file/d/1O8OLDIsi9P-aoy68qjzI0iJphpd3xXf4/view
 
+# Class diagram
+[Academic App Class Diagram](https://github.com/AlexandraBledea/Formula1/files/8800781/Class.Diagram.drawio.pdf)
+- https://drive.google.com/file/d/1PXMbXBU-5DM-b-FH9kTcBkPTprQHMUQC/view?usp=sharing
+
 # Sequence diagrams
 # Propose optional
 ![proposeOptionalsSequenceDiagram](https://user-images.githubusercontent.com/72063091/168632392-e3423f6f-6dcf-40f9-af2d-e69e6c403b24.png)
