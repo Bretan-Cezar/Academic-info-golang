@@ -2,19 +2,16 @@ package controller
 
 import (
 	"encoding/json"
-	"errors"
 	"example/academic-info-golang/auth"
 	"example/academic-info-golang/database"
 	"example/academic-info-golang/model"
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 	"io/ioutil"
 	"net/http"
 )
 
 func LoginUser(context *gin.Context) {
 
-	var user model.User
 	rawLoginData, err := ioutil.ReadAll(context.Request.Body)
 
 	if err != nil {
@@ -33,24 +30,23 @@ func LoginUser(context *gin.Context) {
 		return
 	}
 
-	record := database.Instance.Table("users").Where("username = ?", loginData.Username).First(&user)
+	var userRecord model.User
 
-	if errors.Is(record.Error, gorm.ErrRecordNotFound) {
+	for _, user := range database.UserRepository {
+
+		if user.Username == loginData.Username {
+			userRecord = user
+			break
+		}
+	}
+
+	if userRecord.Username == "" {
 		context.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized user"})
 		context.Abort()
 		return
 	}
 
-	// TODO: figure out how to use mapped structs instead of queries
-
-	//var admins []model.Admin
-	//err = database.Instance.Model(&user).Preload("Admin").Find(&admins).Error
-
-	adminRecord := database.Instance.Table("admin").Where("admin_id = ?", user.UserId).First(&user.Admin)
-	studentRecord := database.Instance.Table("student").Where("student_id = ?", user.UserId).First(&user.Student)
-	teacherRecord := database.Instance.Table("teacher").Where("teacher_id = ?", user.UserId).First(&user.Teacher)
-
-	credentialError := user.CheckPassword(loginData.Password)
+	credentialError := userRecord.CheckPassword(loginData.Password)
 
 	if credentialError != nil {
 		context.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized user"})
@@ -64,20 +60,29 @@ func LoginUser(context *gin.Context) {
 
 	responseBody := gin.H{"message": "Successful", "username": loginData.Username}
 
-	if adminRecord.RowsAffected != 0 {
+	if userRecord.Admin.AdminId == userRecord.UserId {
 
 		responseBody["userType"] = "admin"
 
-	} else
-
-	if studentRecord.RowsAffected != 0 {
+	} else if userRecord.Student.StudentId == userRecord.UserId {
 
 		responseBody["userType"] = "student"
-	} else
 
-	if teacherRecord.RowsAffected != 0 {
+	} else if userRecord.Teacher.TeacherId == userRecord.UserId {
 
 		responseBody["userType"] = "teacher"
+
+		for _, faculty := range database.FacultyRepository {
+
+			if faculty.Teacher != nil {
+
+				if faculty.Teacher.TeacherId == userRecord.Teacher.TeacherId {
+
+					responseBody["userType"] = "chiefOfDepartment"
+					break
+				}
+			}
+		}
 	}
 
 	context.JSON(http.StatusOK, responseBody)

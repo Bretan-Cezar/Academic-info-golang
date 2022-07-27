@@ -27,6 +27,7 @@ func main() {
 			"TimeZone=GMT")
 
 	database.Migrate()
+	database.Preload()
 
 	router := gin.Default()
 

@@ -19,6 +19,10 @@ type User struct {
 	Student     Student   `gorm:"foreignKey:StudentId;references:UserId"`
 }
 
+func (User) TableName() string {
+	return "users"
+}
+
 func (user *User) HashPassword(password string) error {
 
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
