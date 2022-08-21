@@ -20,7 +20,7 @@ func Auth() gin.HandlerFunc {
 		err := ValidateToken(tokenString)
 
 		if err != nil {
-			context.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+			context.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
 			context.Abort()
 			return
 		}

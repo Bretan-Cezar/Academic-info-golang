@@ -7,7 +7,10 @@ type Faculty struct {
 	PhoneNumber    string `gorm:"column:phone_number;type:string"`
 	Address        string `gorm:"column:address;type:string"`
 	ChiefTeacherId int
-	Teacher        *Teacher `gorm:"foreignKey:ChiefTeacherId;references:TeacherId;"`
+
+	// This is actually the chief teacher of the faculty,
+	// but GORM has a naming convention that prevents me from naming it ChiefTeacher.
+	Teacher *Teacher `gorm:"foreignKey:ChiefTeacherId;references:TeacherId;"`
 }
 
 func (Faculty) TableName() string {

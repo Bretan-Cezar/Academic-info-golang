@@ -7,19 +7,19 @@ import (
 
 type User struct {
 	UserId      int       `gorm:"primaryKey;column:user_id;autoIncrement;type:int"`
-	fullName    string    `gorm:"column:full_name;type:string"`
+	FullName    string    `gorm:"column:full_name;type:string"`
 	Password    string    `gorm:"column:password;type:string"`
-	cnp         string    `gorm:"column:cnp;type:string"`
-	dateOfBirth time.Time `gorm:"column:date_of_birth;type:time"`
+	CNP         string    `gorm:"column:cnp;type:string"`
+	DateOfBirth time.Time `gorm:"column:date_of_birth;type:time"`
 	Email       string    `gorm:"column:email;type:string"`
-	phoneNumber string    `gorm:"column:phone_number;type:string"`
+	PhoneNumber string    `gorm:"column:phone_number;type:string"`
 	Username    string    `gorm:"column:username;type:string"`
 	Admin       Admin     `gorm:"foreignKey:AdminId;references:UserId"`
 	Teacher     Teacher   `gorm:"foreignKey:TeacherId;references:UserId"`
 	Student     Student   `gorm:"foreignKey:StudentId;references:UserId"`
 }
 
-func (User) TableName() string {
+func (*User) TableName() string {
 	return "users"
 }
 

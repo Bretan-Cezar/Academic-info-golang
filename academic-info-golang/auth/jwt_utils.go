@@ -3,27 +3,29 @@ package auth
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/magiconair/properties"
 	"time"
 )
 
-var jwtKey = []byte("academic_info")
+var jwtKey = []byte(
+	properties.MustLoadFile("application.properties", properties.UTF8).
+		MustGetString("secret"))
 
 type JWTClaim struct {
+	UserId   int    `json:"userId"`
 	Username string `json:"username"`
+	UserType string `json:"userType"`
 	jwt.StandardClaims
 }
 
-type TokenRequest struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
+func GenerateJWT(id int, username string, userType string) (tokenString string, err error) {
 
-func GenerateJWT(username string) (tokenString string, err error) {
-
-	expirationTime := time.Now().Add(1 * time.Hour)
+	expirationTime := time.Now().Add(24 * time.Hour)
 
 	claims := &JWTClaim{
+		UserId:   id,
 		Username: username,
+		UserType: userType,
 		StandardClaims: jwt.StandardClaims{
 			IssuedAt:  time.Now().Unix(),
 			ExpiresAt: expirationTime.Unix(),
@@ -38,6 +40,14 @@ func GenerateJWT(username string) (tokenString string, err error) {
 
 func ValidateToken(signedToken string) (err error) {
 
+	if signedToken[:7] != "Bearer " {
+
+		err = errors.New("invalid token")
+		return
+	}
+
+	signedToken = signedToken[7:]
+
 	token, err := jwt.ParseWithClaims(
 		signedToken,
 		&JWTClaim{},
@@ -48,6 +58,7 @@ func ValidateToken(signedToken string) (err error) {
 	if err != nil {
 		return
 	}
+
 	claims, ok := token.Claims.(*JWTClaim)
 
 	if !ok {
@@ -58,6 +69,26 @@ func ValidateToken(signedToken string) (err error) {
 		err = errors.New("token expired")
 		return
 	}
+
+	return
+}
+
+func GetTokenClaims(signedToken string) (claims *JWTClaim, err error) {
+
+	signedToken = signedToken[7:]
+
+	token, err := jwt.ParseWithClaims(
+		signedToken,
+		&JWTClaim{},
+		func(token *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
+		},
+	)
+	if err != nil {
+		return
+	}
+
+	claims, _ = token.Claims.(*JWTClaim)
 
 	return
 }
