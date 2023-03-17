@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "secret",
-      "type": "java.lang.String",
-      "description": "JWT Secret."
-  }
-] }
