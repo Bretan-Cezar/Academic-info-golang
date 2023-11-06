@@ -1,5 +1,7 @@
 # System for Managing Academic Information
 
+Forked from the original project with the Kotlin back-end: https://github.com/AlexandraBledea/Kotlin-React-Team-Project
+
 -----
 
 # Requirements
